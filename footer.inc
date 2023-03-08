@@ -3,7 +3,7 @@
 <div align="center">
     <div align="center" style="border:dashed 1px #999; width:80%;">
 
-        <a href='https://www.facebook.com/angelsonwheelscharity/' target='_blank'"><img alt="facebook icon" src="tutorial/screenshots/facebook.png" style="width:2em; padding-bottom:0.5em"></a>
+        <a href='https://www.facebook.com/angelsonwheelscharity/' target='_blank'"><img alt="facebook icon" src="images/facebook.png" style="width:2em; padding-bottom:0.5em"></a>
 
         <p style="font-size:xx-small">Copyright &copy; 2008-2015 by Jerrick Hoang, Ivy Xing, Sam Roberts, James Cook, 
         Johnny Coster, Judy Yang, Jackson Moniaga, Oliver Radwan, Maxwell Palmer, Nolan McNair, Taylor Talmage, and <a href="mailto:allen@npfi.org>">Allen Tucker</a>.  
