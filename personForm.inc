@@ -22,7 +22,18 @@ echo('<link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/c
 if ($_SESSION['access_level'] == 0) {
     echo('<p><strong>Volunteer Service Application</strong><br />');
     echo('Please provide as much information as you can. ' . 
-       '<br>When finished, hit <b>Submit</b> at the bottom of this page, and then <b>logout</b>.');
+       '<br>When finished, hit <b>Submit</b> at the bottom of this page, and then <b>logout</b>. <br>');
+         echo('<p> <strong> Recruiter Contact Information </strong> </p>');
+         echo('<ul> 
+            <li><strong>ANGELS ON WHEELS CHARITY ORGANIZATION</strong></li>
+            <li><strong>Address: </strong></li>
+            <p>3102 Plank Rd Ste. 425<br>
+            P.O. Box 41237<br>
+            Fredericksburg, VA 22407</p>
+            <li><strong>Email:</strong> angelsonnwheels@gmail.com</li>
+            <li><a href="https://www.angelsonwheelscharity.org"><strong>Website</strong></a></li>
+            <li><strong>Phone: </strong>(540)-735-7887</li>
+            </ul>');
 } else if ($_SESSION['access_level'] == 1)
     if ($_SESSION['_id'] != $person->get_id()) {
         echo("<p id=\"error\">You do not have sufficient permissions to edit this user.</p>");
