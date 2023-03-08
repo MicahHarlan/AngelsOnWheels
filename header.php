@@ -85,7 +85,7 @@
             echo('<nav class="navbar navbar-custom navbar-expand-lg bg-light">');
             echo('<div class="container-fluid">');
             echo('<a class="navbar-brand" href="' . $path . 'index.php">
-            <img src="images\gwynethsgift.png" alt="Gwyneth\'s Gift" width="203" height="63">
+            <img src="images\angelsIcon.png" alt="Angles on Wheels Icon" width="203" height="63">
           </a>');
             echo('<a class="navbar-brand">Homebase</a>');
             echo('<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>');
