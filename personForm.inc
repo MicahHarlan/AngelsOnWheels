@@ -25,8 +25,14 @@ if ($_SESSION['access_level'] == 0) {
        '<br>When finished, hit <b>Submit</b> at the bottom of this page, and then <b>logout</b>. <br>');
          echo('<p> <strong> Recruiter Contact Information </strong> </p>');
          echo('<ul> 
-            <lh><strong>Tonya Modlin </strong></lh> 
+            <li><strong>ANGELS ON WHEELS CHARITY ORGANIZATION</strong></li>
+            <li><strong>Address: </strong></li>
+            <p>3102 Plank Rd Ste. 425<br>
+            P.O. Box 41237<br>
+            Fredericksburg, VA 22407</p>
             <li><strong>Email:</strong> angelsonnwheels@gmail.com</li>
+            <li><a href="https://www.angelsonwheelscharity.org"><strong>Website</strong></a></li>
+            <li><strong>Phone: </strong>(540)-735-7887</li>
             </ul>');
 } else if ($_SESSION['access_level'] == 1)
     if ($_SESSION['_id'] != $person->get_id()) {
