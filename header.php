@@ -115,6 +115,7 @@
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search</a></li>
 			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="personEdit.php?id=' . 'new' . '">Add</a></li>'); 
 	            echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="'. $path . 'createCampaign.php">Add Campaign</a></li>');
 	        }
 	        echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'logout.php">Logout</a></li><br>');
             echo('</div></div></nav>');
