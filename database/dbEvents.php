@@ -130,4 +130,19 @@ function getonlythose_dbEvents($name, $day, $venue) {
    return $theEvents;
 }
 
+//get future events
+function get_future_events(){
+    $con=connect();
+    $query = "SELECT * FROM dbEvents WHERE 
+        (
+            (DATE = CONVERT(date, SYSDATETIME() 
+            AND STARTTIME > CONVERT(time, SYSDATETIME()
+            )
+        ) 
+        OR Date > sysdatetime()
+        )";
+    $result = mysqli_query($con,$query);
+    return $result;
+}
+
 ?>

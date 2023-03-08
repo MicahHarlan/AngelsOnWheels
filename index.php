@@ -36,6 +36,7 @@ session_cache_expire(30);
             include_once('database/dbLog.php');
             include_once('domain/Shift.php');
             include_once('database/dbShifts.php');
+            include_once('database/dbEvents.php');
             date_default_timezone_set('America/New_York');
             //    fix_all_birthdays();
             if ($_SESSION['_id'] != "guest") {
@@ -217,6 +218,28 @@ session_cache_expire(30);
                                 '<td class="searchResults">' . $lo[2] . '</td></tr>');
                         }
                         echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
+                    
+                        //code for upcoming events
+                        echo ('<div class="container-fluid" id="upcomingEventBox"><p><strong>Upcoming Events:</strong><br/>');
+                        echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
+                        echo ('
+                            <theadx>
+                            <tr>
+                            <th scope="col">
+                            <u>Date</u>
+                            </th>
+                            <th scope="col"><u>Event</u></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            ');
+                        $events = get_future_events();
+                        foreach ($events as $event) {
+                            echo ('<tr><td class="searchResults">' . $event[1] . '</td>' .
+                                '<td class="searchResults">' . $event[2] . '</td></tr>');
+                        }
+
+
                     }
                     
                 ?>
