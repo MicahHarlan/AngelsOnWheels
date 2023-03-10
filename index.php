@@ -5,8 +5,8 @@
  * modify it under the terms of the GNU General Public License as published by the 
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
  */
-session_start();
 session_cache_expire(30);
+session_start();
 ?>
 <html>
 
@@ -217,8 +217,14 @@ session_cache_expire(30);
                                 '<td class="searchResults">' . $lo[2] . '</td></tr>');
                         }
                         echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
+
+                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
                     }
                     
+
+
+
+
                 ?>
         </div>
         <?PHP include('footer.inc'); ?>
