@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 13, 2023 at 05:36 PM
+-- Host: 127.0.0.1
+-- Generation Time: Mar 10, 2023 at 06:49 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -178,7 +178,29 @@ CREATE TABLE `dbevents` (
 --
 
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
-('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4');
+('638553e3173c4', '22-11-05', 'portland', 'One Event', 'The event table has been completely cleared, here is one event though.', '638553e3173c4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbfeedback`
+--
+
+CREATE TABLE `dbfeedback` (
+  `id` int(10) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `feedback` text NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dbfeedback`
+--
+
+INSERT INTO `dbfeedback` (`id`, `name`, `feedback`, `date`) VALUES
+(3, 'Saira', 'I love Angels on Wheels!', '2023-03-09'),
+(4, 'Charlie', 'They need more vegan and paleo snacks at events', '2023-03-03'),
+(5, 'Drew', 'It feels good to help my community!', '2022-12-25');
 
 -- --------------------------------------------------------
 
@@ -1165,6 +1187,12 @@ ALTER TABLE `dbdates`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dbfeedback`
+--
+ALTER TABLE `dbfeedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dblog`
 --
 ALTER TABLE `dblog`
@@ -1193,10 +1221,10 @@ ALTER TABLE `dbweeks`
 --
 
 --
--- AUTO_INCREMENT for table `dbCampaigns`
+-- AUTO_INCREMENT for table `dbfeedback`
 --
-ALTER TABLE `dbCampaigns`
-  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `dbfeedback`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dblog`
