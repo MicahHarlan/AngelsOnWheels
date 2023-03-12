@@ -22,7 +22,7 @@
 	private $campaign_name;  // campaign name as a string
 	private $description;   // description of the campaign
 	private $campaign_id;		// the unique id that is attached to each campaign, is then copied into id, used for editing campaign
-
+	
 
 	function __construct($en ,$description, $ev) {
 		$this->campaign_name = $en;

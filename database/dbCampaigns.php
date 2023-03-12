@@ -23,6 +23,7 @@
 include_once('dbinfo.php');
 include_once(dirname(__FILE__).'/../domain/Campaign.php');
 
+
 /*
  * add an event to dbEvents table: if already there, return false
  */
@@ -31,17 +32,17 @@ function add_campaign($campaign) {
     if (!$campaign instanceof Campaign)
         die("Error: add_campaign type mismatch");
     $con=connect();
-    $query = "SELECT * FROM dbCampaigns WHERE id = '" . $campaign->get_campaign_id() . "'";
+    $query = "SELECT * FROM dbCampaigns WHERE campaign_id = '" . $campaign->get_campaign_id() . "'";
     $result = mysqli_query($con,$query);
+    
+    $desc = "description";
+    $camp_name = "campaign_name";
+
     //if there's no entry for this id, add it
     if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_query($con,'INSERT INTO dbCampaigns VALUES("' .              
-               // $campaign->get_event_date() . '","' .
-              //  $campaign->get_venue() . '","' .
-                $campaign->get_campaign_name() . '","' . 
-                $campaign->get_description() . '","' .
-                $campaign->get_campaign_id() .            
-                '");');							
+        $sql = "INSERT INTO `dbCampaigns` (`description`, `campaign_name`) VALUES 
+        ( '" . $campaign->get_description() . "','" . $campaign->get_campaign_name() ."')";
+        mysqli_query($con,$sql);
         mysqli_close($con);
         return true;
     }
@@ -50,18 +51,18 @@ function add_campaign($campaign) {
 }
 
 /*
- * remove an event from dbEvents table.  If already there, return false
+ * remove an event from dbCampaign table.  If already there, return false
  */
 
 function remove_campaign($id) {
     $con=connect();
-    $query = 'SELECT * FROM dbEvents WHERE id = "' . $id . '"';
+    $query = 'SELECT * FROM dbCampaigns WHERE campaign_id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    $query = 'DELETE FROM dbEvents WHERE id = "' . $id . '"';
+    $query = 'DELETE FROM dbCampaigns WHERE campaign_id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
@@ -73,7 +74,7 @@ function remove_campaign($id) {
  */
 function retrieve_campaign($id) {
     $con=connect();
-    $query = "SELECT * FROM dbCampaigns WHERE id = '" . $id . "'";
+    $query = "SELECT * FROM dbCampaigns WHERE campaign_id = '" . $id . "'";
     $result = mysqli_query($con,$query);
     if (mysqli_num_rows($result) !== 1) {
         mysqli_close($con);
@@ -97,6 +98,7 @@ function update_campaign_date($id, $new_event_date) {
 	mysqli_close($con);
 	return $result;
 }
+
 
 function make_a_campaign($result_row) {
 	/*
