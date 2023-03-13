@@ -220,11 +220,6 @@ session_start();
 
                         echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
                     }
-                    
-
-
-
-
                 ?>
         </div>
         <?PHP include('footer.inc'); ?>
