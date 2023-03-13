@@ -42,6 +42,7 @@ error_reporting(E_ERROR | E_PARSE);
         $permission_array['help.php'] = 1;
         $permission_array['calendar.php'] = 1;
         $permission_array['feedback.php'] = 1;
+        $permission_array['feedback.php'] = 1;
         //pages only managers can view
         $permission_array['personsearch.php'] = 2;
         $permission_array['personedit.php'] = 0; // changed to 0 so that applicants can apply
