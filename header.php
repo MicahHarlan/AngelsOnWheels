@@ -11,17 +11,50 @@ error_reporting(E_ERROR | E_PARSE);
 ?>
 <!-- Begin Header -->
 
-<style type="text/css">
-        /* Modify the background color */
-        .navbar-custom {
-            background-color: rgb(250, 249, 246);
-        }
-        /* Modify brand and text color */
-         
-        .navbar-custom .navbar-brand,
-        .navbar-custom .navbar-text {
-            background-color: rgb(250, 249, 246);
-        }
+<style>
+    /* Modify the background color */
+    .navbar-custom {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* Modify brand and text color */
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text {
+        color: #333;
+    }
+
+    /* Add padding to links */
+    .navbar-custom .navbar-nav li a {
+        margin-left: 3px;
+        margin-right: 3px;
+        padding: 18px;
+        font-size: 14px;
+    }
+
+    /* Add hover style to links */
+    .navbar-custom .navbar-nav li a:hover {
+        background-color: #870287;
+        color: white;
+    }
+
+    /* Remove fade effect when not hovered */
+    .navbar-custom .navbar-nav li a {
+        transition: none;
+    }
+
+    /* Center image in navbar */
+    .navbar-custom .navbar-brand img {
+        height: 40px;
+        width: auto;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        margin-right: 10px;
+    }
 </style>
 
 <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>
@@ -89,7 +122,7 @@ error_reporting(E_ERROR | E_PARSE);
             echo('<a class="navbar-brand" href="' . $path . 'index.php">
             <img src="images\angelsIcon.png" alt="Angles on Wheels Icon" width="203" height="63">
           </a>');
-            echo('<a class="navbar-brand">Homebase</a>');
+//            echo('<a class="navbar-brand">Homebase</a>');
             echo('<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>');
         	echo('<div class="collapse navbar-collapse" id="navbarSupportedContent">');
             echo('<ul class="navbar-nav me-auto mb-2 mb-lg-0">');
@@ -99,12 +132,12 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'about.php">About</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">Help</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'calendar.php?venue=portland'.''.'">Calendar</a></li>');
-                echo('<a class="navbar-brand">|</a>');
-                echo('<a class="navbar-brand">Events</a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Search</a></li>');
-                echo('<a class="navbar-brand">|</a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'feedback.php">Send Feedback</a></li>');
-                echo('<a class="navbar-brand">|</a>');
+                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+//                echo('<a class="navbar-brand">Events</a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Search Event</a></li>');
+//                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+//                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'feedback.php">Send Feedback</a></li>');
+//                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 
                 //echo('<button type="button" class="btn btn-link"><a href="' . $path . 'index.php" class="link-primary">home</a></button>');
 	        	//echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'about.php">about</a></button>');
@@ -115,12 +148,13 @@ error_reporting(E_ERROR | E_PARSE);
 	        if ($_SESSION['access_level'] >= 2) {
 	            //echo('<br>master schedules: <a href="' . $path . 'viewSchedule.php?venue=portland'."".'">Portland, </a>');
 	            //echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
-	            echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventEdit.php?id=new">Add</a></li>');
-	            echo('<a class="navbar-brand">|</a>');
-	            echo('<a class="navbar-brand">Volunteers</a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search</a></li>
-			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="personEdit.php?id=' . 'new' . '">Add</a></li>'); 
-	            echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
+	            echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventEdit.php?id=new">Add Event</a></li>');
+                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+//	            echo('<a class="navbar-brand">Volunteers</a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search Volunteer</a></li>
+			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="personEdit.php?id=' . 'new' . '">Add Volunteer</a></li>');
+                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
 	        }
 	        echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'logout.php">Logout</a></li><br>');
             echo('</div></div></nav>');
