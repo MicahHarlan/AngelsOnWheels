@@ -1,33 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Dec 02, 2022 at 08:31 PM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `homebasedb`
---
-
--- --------------------------------------------------------
--- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 13, 2023 at 05:15 PM
+-- Generation Time: Mar 13, 2023 at 05:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -63,42 +39,20 @@ CREATE TABLE `dbCampaigns` (
 
 INSERT INTO `dbCampaigns` (`campaign_id`, `description`, `campaign_name`) VALUES
 (12, 'Campaign description!! ', 'Campaign'),
+(13, 'JEfffff', 'JEfff'),
+(14, 'JEfffff', 'JEfff');
 
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `dbCampaigns`
---
-ALTER TABLE `dbCampaigns`
-  ADD PRIMARY KEY (`campaign_id`);
+-- --------------------------------------------------------
 
 --
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `dbCampaigns`
---
-ALTER TABLE `dbCampaigns`
-  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
---
--- Table structure for table `dbCampaigns`
+-- Table structure for table `dbdates`
 --
 
 CREATE TABLE `dbdates` (
   `id` char(20) NOT NULL,
-  `shifts` text,
-  `mgr_notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `shifts` text DEFAULT NULL,
+  `mgr_notes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbdates`
@@ -212,19 +166,19 @@ INSERT INTO `dbdates` (`id`, `shifts`, `mgr_notes`) VALUES
 
 CREATE TABLE `dbevents` (
   `id` text NOT NULL,
-  `event_date` text,
-  `venue` text,
-  `event_name` text,
-  `description` text,
-  `event_id` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `event_date` text DEFAULT NULL,
+  `venue` text DEFAULT NULL,
+  `event_name` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `event_id` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbevents`
 --
 
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
-('638553e3173c4', '22-11-05', 'portland', 'One Event', 'The event table has been completely cleared, here is one event though.', '638553e3173c4');
+('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4');
 
 -- --------------------------------------------------------
 
@@ -234,17 +188,18 @@ INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`
 
 CREATE TABLE `dblog` (
   `id` int(3) NOT NULL,
-  `time` text,
-  `message` text,
-  `venue` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `time` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `venue` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dblog`
 --
 
 INSERT INTO `dblog` (`id`, `time`, `message`, `venue`) VALUES
-(173, '1670011289', '<a href=\"personEdit.php?id=GwynethsGiftAdmin4678931290\">GwynethsGiftAdmin SiteAdmin</a>\'s Personnel Edit Form has been changed.', 'portland');
+(173, '1670011289', '<a href=\"personEdit.php?id=GwynethsGiftAdmin4678931290\">GwynethsGiftAdmin SiteAdmin</a>\'s Personnel Edit Form has been changed.', 'portland'),
+(179, '1678126009', '<a href=\"personEdit.php?id=Admin7037806282\">Admin Jones</a>\'s Personnel Edit Form has been changed.', 'portland');
 
 -- --------------------------------------------------------
 
@@ -253,15 +208,15 @@ INSERT INTO `dblog` (`id`, `time`, `message`, `venue`) VALUES
 --
 
 CREATE TABLE `dbmasterschedule` (
-  `venue` text,
+  `venue` text DEFAULT NULL,
   `day` text NOT NULL,
   `week_no` text NOT NULL,
-  `hours` text,
+  `hours` text DEFAULT NULL,
   `slots` int(11) DEFAULT NULL,
-  `persons` text,
-  `notes` text,
-  `id` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `persons` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `id` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbmasterschedule`
@@ -409,20 +364,20 @@ INSERT INTO `dbmasterschedule` (`venue`, `day`, `week_no`, `hours`, `slots`, `pe
 
 CREATE TABLE `dbpersons` (
   `id` text NOT NULL,
-  `start_date` text,
-  `venue` text,
+  `start_date` text DEFAULT NULL,
+  `venue` text DEFAULT NULL,
   `first_name` text NOT NULL,
-  `last_name` text,
-  `address` text,
-  `city` text,
+  `last_name` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `city` text DEFAULT NULL,
   `state` varchar(2) DEFAULT NULL,
-  `zip` text,
+  `zip` text DEFAULT NULL,
   `phone1` varchar(12) NOT NULL,
-  `phone1type` text,
+  `phone1type` text DEFAULT NULL,
   `phone2` varchar(12) DEFAULT NULL,
-  `phone2type` text,
-  `birthday` text,
-  `email` text,
+  `phone2type` text DEFAULT NULL,
+  `birthday` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
   `shirt_size` varchar(3) DEFAULT NULL,
   `computer` varchar(3) DEFAULT NULL,
   `camera` varchar(3) NOT NULL,
@@ -431,22 +386,22 @@ CREATE TABLE `dbpersons` (
   `contact_num` varchar(12) NOT NULL,
   `relation` text NOT NULL,
   `contact_time` text NOT NULL,
-  `cMethod` text,
-  `position` text,
-  `credithours` text,
-  `howdidyouhear` text,
-  `commitment` text,
-  `motivation` text,
-  `specialties` text,
-  `convictions` text,
-  `type` text,
-  `status` text,
-  `availability` text,
-  `schedule` text,
-  `hours` text,
-  `notes` text,
-  `password` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cMethod` text DEFAULT NULL,
+  `position` text DEFAULT NULL,
+  `credithours` text DEFAULT NULL,
+  `howdidyouhear` text DEFAULT NULL,
+  `commitment` text DEFAULT NULL,
+  `motivation` text DEFAULT NULL,
+  `specialties` text DEFAULT NULL,
+  `convictions` text DEFAULT NULL,
+  `type` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `availability` text DEFAULT NULL,
+  `schedule` text DEFAULT NULL,
+  `hours` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `password` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbpersons`
@@ -745,9 +700,9 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('Zach7035385885', '16-07-20', 'bangor', 'Zach', 'Jones', '83 Longwood Drive', 'Ashburn', 'VA', '20147', '7035385885', 'cell', '', '', '92-10-21', 'jonesey@yahoo.com', NULL, NULL, '', '', '', '', '', '', 'University of Southern Maine', 'student', '', 'family', '', 'Great opportunity to get involved in an awesome cause.', '', 'no', 'volunteer', 'active', 'Thu:3-6:bangor,Thu:6-9:bangor', '', '', '', '67af3bba5a67ac2c89552583140c0b73'),
 ('Carly7039654835', '16-06-28', 'portland', 'Carly', 'Jones', '66 Wells Road', 'Ashburn', 'VA', '20147', '7039654835', 'cell', '', '', '', 'jonesey@yahoo.com', NULL, NULL, '', '', '', '', '', '', '', '', '', 'family', '', 'I am very interested in getting involved with the Ronald McDonald House because I am very passionate about helping others. My background is in social work, as well as fundraising, so in addition to giving back to my community, I am interested in connecting with folks professionally since I am new to the area.', '', 'no', 'volunteer,sub,events', 'active', 'Sat:10-1:portland,Sun:9-12:portland,Sat:1-4:portland,Sun:2-5:portland,Mon:6-9:portland', '', '', 'called on 7/7/16 to set up a time to meet.', '90b2be79aa734a005a9420580a5820a7'),
 ('April7038075431', '16-06-06', 'portland', 'April', 'Jones', '189 Spring St', 'Ashburn', 'VA', '20147', '7038075431', 'cell', '', '', '08-31-73', 'jonesey@yahoo.com', NULL, NULL, '', '', '', '', '', '', 'ASG Risk Management', 'Claims Manager', '16-06-01:1800-2100:3,16-05-27:1200-1500:3,16-06-07:1800-2100:3,16-06-15:1230-1330:1,16-06-21:1800-2100:3,16-06-22:1200-1300:1,16-07-05:1800-2100:3,16-07-15:1700-1800:1,16-07-17:1700-1830:1.5,16-07-19:1800-2030:2.5,16-07-20:1230-1330:1,16-07-27:1630-1800:1.5,16-07-31:1330-1830:5,16-08-02:1800-2100:3,16-08-07:1600-1800:2', 'volunteer', '', '', '', 'no', 'volunteer,sub,mealprep,events', 'active', 'Sat:10-1:portland,Sun:9-12:portland,Sun:2-5:portland,Mon:3-6:portland,Tue:3-6:portland,Fri:3-6:portland,Mon:6-9:portland,Tue:6-9:portland,Fri:6-9:portland,Sun:5-9:portland', ',even:Tue:6-9:portland', '16-06-01:1800-2100:3,16-05-27:1200-1500:3,16-06-07:1800-2100:3,16-06-15:1230-1330:1,16-06-21:1800-2100:3,16-06-22:1200-1300:1,16-07-05:1800-2100:3,16-07-15:1700-1800:1,16-07-17:1700-1830:1.5,16-07-19:1800-2030:2.5,16-07-20:1230-1330:1,16-07-27:1630-1800:1.5,16-07-31:1330-1830:5,16-08-02:1800-2100:3,16-08-07:1600-1800:2', '', '340392d4c35f1399b0056739a63606be'),
-('Admin7037806282', '17-07-26', 'portland', 'Admin', 'Jones', '1 Gum Tree Rd', 'Ashburn', 'VA', '22222', '7037806282', '', '', '', '', 'admin@yahoo.com', 'S', 'No', 'No', 'No', 'Admin', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'manager', 'active', '', '', '', '', 'be6bef2c7a57bead38826deed4077d03'),
 ('GwynethsGiftAdmin4678931290', '', 'portland', 'GwynethsGiftAdmin', 'SiteAdmin', 'Princess Anne St #101', 'Fredericksburg', 'VA', '22401', '4678931290', 'home', '', '', '', 'info@gwynethsgift.org', 'S', 'Yes', 'Yes', 'Yes', '-', '7777777777', 'Relative', '', 'Email', '', '', '', '', '', '', '', 'manager', 'active', 'Mon:9-12:portland,Mon:12-3:portland,Mon:3-6:portland,Mon:6-9:portland', '', '', '', 'e8f7e210dd29cb6729245a99b1b4d32c'),
-('GuestApplying4564563232', '22-12-02', 'portland', 'GuestApplying', 'hi', '56 street', 'Richmond', 'VA', '34567', '4564563232', 'home', '', '', '90-12-14', 'hi@outlook.com', 'S', 'Yes', 'Yes', 'Yes', 'Joe', '3453454545', 'Parent', 'Weekends', 'Email', '', '', 'family', '', '', '', '', 'volunteer', 'applicant', 'Tue:9-12:portland,Wed:9-12:portland,Tue:12-3:portland,Tue:3-6:portland,Tue:6-9:portland', '', '', '', '1a1dc91c907325c69271ddf0c944bc72');
+('GuestApplying4564563232', '22-12-02', 'portland', 'GuestApplying', 'hi', '56 street', 'Richmond', 'VA', '34567', '4564563232', 'home', '', '', '90-12-14', 'hi@outlook.com', 'S', 'Yes', 'Yes', 'Yes', 'Joe', '3453454545', 'Parent', 'Weekends', 'Email', '', '', 'family', '', '', '', '', 'volunteer', 'applicant', 'Tue:9-12:portland,Wed:9-12:portland,Tue:12-3:portland,Tue:3-6:portland,Tue:6-9:portland', '', '23-03-07:1200-0130:13.5', '', '1a1dc91c907325c69271ddf0c944bc72'),
+('Admin7037806282', '17-07-26', 'portland', 'Admin', 'Jones', '1 Gum Tree Rd', 'Ashburn', 'VA', '22222', '7037806282', '', '', '', '', 'admin@yahoo.com', 'S', 'No', 'No', 'No', 'Admin', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'manager', 'active', '', '', '', '', 'be6bef2c7a57bead38826deed4077d03');
 
 -- --------------------------------------------------------
 
@@ -757,11 +712,11 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 
 CREATE TABLE `dbscl` (
   `id` char(25) NOT NULL,
-  `persons` text,
-  `status` text,
-  `vacancies` text,
-  `time` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `persons` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `vacancies` text DEFAULT NULL,
+  `time` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbscl`
@@ -781,13 +736,13 @@ CREATE TABLE `dbshifts` (
   `id` char(25) NOT NULL,
   `start_time` int(11) DEFAULT NULL,
   `end_time` int(11) DEFAULT NULL,
-  `venue` text,
+  `venue` text DEFAULT NULL,
   `vacancies` int(11) DEFAULT NULL,
-  `persons` text,
-  `removed_persons` text,
-  `sub_call_list` text,
-  `notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `persons` text DEFAULT NULL,
+  `removed_persons` text DEFAULT NULL,
+  `sub_call_list` text DEFAULT NULL,
+  `notes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbshifts`
@@ -1166,12 +1121,12 @@ INSERT INTO `dbshifts` (`id`, `start_time`, `end_time`, `venue`, `vacancies`, `p
 
 CREATE TABLE `dbweeks` (
   `id` char(20) NOT NULL,
-  `dates` text,
-  `venue` text,
-  `status` text,
-  `name` text,
+  `dates` text DEFAULT NULL,
+  `venue` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
   `end` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbweeks`
@@ -1196,6 +1151,12 @@ INSERT INTO `dbweeks` (`id`, `dates`, `venue`, `status`, `name`, `end`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `dbCampaigns`
+--
+ALTER TABLE `dbCampaigns`
+  ADD PRIMARY KEY (`campaign_id`);
 
 --
 -- Indexes for table `dbdates`
@@ -1232,10 +1193,16 @@ ALTER TABLE `dbweeks`
 --
 
 --
+-- AUTO_INCREMENT for table `dbCampaigns`
+--
+ALTER TABLE `dbCampaigns`
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `dblog`
 --
 ALTER TABLE `dblog`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
