@@ -179,9 +179,13 @@
 </form>
 
 <?php
+//include_once('database/dbinfo.php');
+include_once('database/dbFeedback.php');
+
 // Check if form is submitted
 if(isset($_POST['submit'])) {
     // Store form data in variables
+    $id = 5;
     $satisfaction = $_POST['satisfaction'];
     $recommend = $_POST['recommend'];
     $volunteer = $_POST['volunteer'];
@@ -189,22 +193,9 @@ if(isset($_POST['submit'])) {
     $name = $_POST['name'];
     $date = date("Y-m-d");
 
-    // Display submitted data
-    echo "<h2>Thank you for your feedback!</h2>";
-    if (!empty($name)) {
-        echo "<p>Name: " . $name . "</p>";
-    }
-    echo "<p>Date: " . $date . "</p>";
-    echo "<p>Satisfaction: " . $satisfaction . "</p>";
-    echo "<p>Recommend: " . $recommend . "</p>";
-    echo "<p>Volunteer: " . $volunteer . "</p>";
-    echo "<p>Recommendations: " . $recommendations . "</p>";
+    $con = connect();
 
-    // Create alert box using JavaScript
-    echo "<script>alert('Thank you for your feedback! Your response has been recorded.');</script>";
-
-    // Redirect back to home page after a delay
-    echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 1);</script>";
+    insert_feedback($id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer);
 }
 ?>
 

@@ -1,6 +1,28 @@
 <?php
 
 include_once('dbinfo.php');
+function insert_feedback($id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer) {
+    global $con, $id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer;
+
+    // Prepare and bind SQL statement
+    $stmt = $con->prepare("INSERT INTO dbfeedback (id, name, feedback, date, satisfaction_rank, recommend_rank, volunteer_rank) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssss", $id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer);
+
+    // Execute statement and check if successful
+    if ($stmt->execute()) {
+        // Close statement and connection
+        $stmt->close();
+        $con->close();
+
+        // Create alert box using JavaScript
+        echo "<script>alert('Thank you for your feedback! Your response has been recorded.');</script>";
+
+        // Redirect back to home page after a delay
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 1000);</script>";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
 
 /**
  * Add dbFeedback
