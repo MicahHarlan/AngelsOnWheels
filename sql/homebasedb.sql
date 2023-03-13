@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 02, 2022 at 08:31 PM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 10, 2023 at 06:49 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dbdates` (
   `id` char(20) NOT NULL,
-  `shifts` text,
-  `mgr_notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `shifts` text DEFAULT NULL,
+  `mgr_notes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbdates`
@@ -145,12 +145,12 @@ INSERT INTO `dbdates` (`id`, `shifts`, `mgr_notes`) VALUES
 
 CREATE TABLE `dbevents` (
   `id` text NOT NULL,
-  `event_date` text,
-  `venue` text,
-  `event_name` text,
-  `description` text,
-  `event_id` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `event_date` text DEFAULT NULL,
+  `venue` text DEFAULT NULL,
+  `event_name` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `event_id` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbevents`
@@ -162,15 +162,37 @@ INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dbfeedback`
+--
+
+CREATE TABLE `dbfeedback` (
+  `id` int(10) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `feedback` text NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dbfeedback`
+--
+
+INSERT INTO `dbfeedback` (`id`, `name`, `feedback`, `date`) VALUES
+(3, 'Saira', 'I love Angels on Wheels!', '2023-03-09'),
+(4, 'Charlie', 'They need more vegan and paleo snacks at events', '2023-03-03'),
+(5, 'Drew', 'It feels good to help my community!', '2022-12-25');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `dblog`
 --
 
 CREATE TABLE `dblog` (
   `id` int(3) NOT NULL,
-  `time` text,
-  `message` text,
-  `venue` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `time` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `venue` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dblog`
@@ -186,15 +208,15 @@ INSERT INTO `dblog` (`id`, `time`, `message`, `venue`) VALUES
 --
 
 CREATE TABLE `dbmasterschedule` (
-  `venue` text,
+  `venue` text DEFAULT NULL,
   `day` text NOT NULL,
   `week_no` text NOT NULL,
-  `hours` text,
+  `hours` text DEFAULT NULL,
   `slots` int(11) DEFAULT NULL,
-  `persons` text,
-  `notes` text,
-  `id` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `persons` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `id` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbmasterschedule`
@@ -342,20 +364,20 @@ INSERT INTO `dbmasterschedule` (`venue`, `day`, `week_no`, `hours`, `slots`, `pe
 
 CREATE TABLE `dbpersons` (
   `id` text NOT NULL,
-  `start_date` text,
-  `venue` text,
+  `start_date` text DEFAULT NULL,
+  `venue` text DEFAULT NULL,
   `first_name` text NOT NULL,
-  `last_name` text,
-  `address` text,
-  `city` text,
+  `last_name` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `city` text DEFAULT NULL,
   `state` varchar(2) DEFAULT NULL,
-  `zip` text,
+  `zip` text DEFAULT NULL,
   `phone1` varchar(12) NOT NULL,
-  `phone1type` text,
+  `phone1type` text DEFAULT NULL,
   `phone2` varchar(12) DEFAULT NULL,
-  `phone2type` text,
-  `birthday` text,
-  `email` text,
+  `phone2type` text DEFAULT NULL,
+  `birthday` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
   `shirt_size` varchar(3) DEFAULT NULL,
   `computer` varchar(3) DEFAULT NULL,
   `camera` varchar(3) NOT NULL,
@@ -364,22 +386,22 @@ CREATE TABLE `dbpersons` (
   `contact_num` varchar(12) NOT NULL,
   `relation` text NOT NULL,
   `contact_time` text NOT NULL,
-  `cMethod` text,
-  `position` text,
-  `credithours` text,
-  `howdidyouhear` text,
-  `commitment` text,
-  `motivation` text,
-  `specialties` text,
-  `convictions` text,
-  `type` text,
-  `status` text,
-  `availability` text,
-  `schedule` text,
-  `hours` text,
-  `notes` text,
-  `password` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cMethod` text DEFAULT NULL,
+  `position` text DEFAULT NULL,
+  `credithours` text DEFAULT NULL,
+  `howdidyouhear` text DEFAULT NULL,
+  `commitment` text DEFAULT NULL,
+  `motivation` text DEFAULT NULL,
+  `specialties` text DEFAULT NULL,
+  `convictions` text DEFAULT NULL,
+  `type` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `availability` text DEFAULT NULL,
+  `schedule` text DEFAULT NULL,
+  `hours` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `password` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbpersons`
@@ -690,11 +712,11 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 
 CREATE TABLE `dbscl` (
   `id` char(25) NOT NULL,
-  `persons` text,
-  `status` text,
-  `vacancies` text,
-  `time` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `persons` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `vacancies` text DEFAULT NULL,
+  `time` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbscl`
@@ -714,13 +736,13 @@ CREATE TABLE `dbshifts` (
   `id` char(25) NOT NULL,
   `start_time` int(11) DEFAULT NULL,
   `end_time` int(11) DEFAULT NULL,
-  `venue` text,
+  `venue` text DEFAULT NULL,
   `vacancies` int(11) DEFAULT NULL,
-  `persons` text,
-  `removed_persons` text,
-  `sub_call_list` text,
-  `notes` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `persons` text DEFAULT NULL,
+  `removed_persons` text DEFAULT NULL,
+  `sub_call_list` text DEFAULT NULL,
+  `notes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbshifts`
@@ -1099,12 +1121,12 @@ INSERT INTO `dbshifts` (`id`, `start_time`, `end_time`, `venue`, `vacancies`, `p
 
 CREATE TABLE `dbweeks` (
   `id` char(20) NOT NULL,
-  `dates` text,
-  `venue` text,
-  `status` text,
-  `name` text,
+  `dates` text DEFAULT NULL,
+  `venue` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
   `end` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dbweeks`
@@ -1137,6 +1159,12 @@ ALTER TABLE `dbdates`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dbfeedback`
+--
+ALTER TABLE `dbfeedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dblog`
 --
 ALTER TABLE `dblog`
@@ -1163,6 +1191,12 @@ ALTER TABLE `dbweeks`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `dbfeedback`
+--
+ALTER TABLE `dbfeedback`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dblog`
