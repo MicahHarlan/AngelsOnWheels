@@ -53,6 +53,7 @@ error_reporting(E_ERROR | E_PARSE);
         //pages volunteers can view
         $permission_array['help.php'] = 1;
         $permission_array['calendar.php'] = 1;
+        $permission_array['feedback.php'] = 1;
         //pages only managers can view
         $permission_array['personsearch.php'] = 2;
         $permission_array['personedit.php'] = 0; // changed to 0 so that applicants can apply
@@ -101,6 +102,10 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<a class="navbar-brand">|</a>');
                 echo('<a class="navbar-brand">Events</a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Search</a></li>');
+                echo('<a class="navbar-brand">|</a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'feedback.php">Send Feedback</a></li>');
+                echo('<a class="navbar-brand">|</a>');
+
                 //echo('<button type="button" class="btn btn-link"><a href="' . $path . 'index.php" class="link-primary">home</a></button>');
 	        	//echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'about.php">about</a></button>');
 	            //echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">help</a></button>');

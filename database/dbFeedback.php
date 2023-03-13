@@ -18,7 +18,7 @@ function insert_feedback($id, $name, $recommendations, $date, $satisfaction, $re
         echo "<script>alert('Thank you for your feedback! Your response has been recorded.');</script>";
 
         // Redirect back to home page after a delay
-        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 1000);</script>";
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 5);</script>";
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -35,22 +35,6 @@ function create_dbFeedback() {
     $result = mysqli_query($con,"CREATE TABLE dbLog ( id int(10) NOT NULL AUTO_INCREMENT,name VARCHAR(20), feedback TEXT, date date, PRIMARY KEY(id))");
     if (!$result)
         echo mysqli_error($con);
-    mysqli_close($con);
-}
-
-/**NEED TO TEST
- * adds a new log entry, using the current date for the timestamp
- */
-
-function add_feedback_entry($name,$feedback) {
-
-    $date = date("Y-m-d");
-    $con=connect();
-    $query = "INSERT INTO dbFeedback ($name, $feedback, $date) VALUES (\"" . $name . "\",\"" . $feedback . "\",\"" . $date . "\")";
-    $result = mysqli_query($con,$query);
-    if (!$result) {
-        echo mysqli_error($con);
-    }
     mysqli_close($con);
 }
 
@@ -102,5 +86,4 @@ function get_feedback() {
     }
     return $fb;
 }
-
 ?>
