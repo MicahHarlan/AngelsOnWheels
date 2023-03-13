@@ -5,14 +5,14 @@
  * modify it under the terms of the GNU General Public License as published by the 
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
  */
-session_start();
 session_cache_expire(30);
+session_start();
 ?>
 <html>
 
 <head>
     <title>
-        Gwyneth's Gift
+        Angel's on Wheels
     </title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
     <style>
@@ -239,9 +239,12 @@ session_cache_expire(30);
                                 '<td class="searchResults">' . $event[2] . '</td></tr>');
                         }
 
-
                     }
                     
+
+
+
+
                 ?>
         </div>
         <?PHP include('footer.inc'); ?>
