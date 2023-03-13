@@ -204,7 +204,7 @@ if(isset($_POST['submit'])) {
     echo "<script>alert('Thank you for your feedback! Your response has been recorded.');</script>";
 
     // Redirect back to home page after a delay
-    echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 2000);</script>";
+    echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 1);</script>";
 }
 ?>
 
