@@ -7,6 +7,7 @@
     <!-- Include jQuery library for sliders -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="styling/feedbackForm.css">
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <!-- Add script to initialize sliders -->
     <script>
@@ -48,90 +49,6 @@
             $( "#volunteer" ).val( $( "#volunteer-slider" ).slider( "value" ) );
         });
     </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 30px;
-            color: #585858;
-        }
-        form {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        }
-        label, p {
-            font-size: 16px;
-            color: #585858;
-            margin-bottom: 10px;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-            font-size: 16px;
-            color: #585858;
-            box-sizing: border-box;
-        }
-        input[type="radio"] {
-            margin-right: 5px;
-        }
-        input[type="submit"] {
-            display: block;
-            margin: 0 auto;
-            background-color: #0099cc;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #0086b3;
-        }
-        .ui-slider-horizontal {
-            height: 8px;
-            background-color: #ccc;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-        .ui-slider-handle {
-            height: 20px;
-            width: 20px;
-            background-color: #0099cc;
-            border: none;
-            border-radius: 50%;
-            box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
-            top: -6px;
-            outline: none;
-        }
-        .ui-slider-range {
-            background-color: #0099cc;
-            border-radius: 10px;
-        }
-        .slider-labels {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            font-size: 14px;
-            color: #585858;
-            margin-top: -5px;
-            margin-bottom: 10px;
-        }
-        .slider-labels label {
-            flex: 1;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 <h1>Angels On Wheels Feedback Form</h1>
