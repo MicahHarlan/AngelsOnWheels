@@ -168,10 +168,10 @@
     <input type="text" id="volunteer" name="volunteer" readonly>
     <div id="volunteer-slider"></div>
 
-    <p style="padding-top: 15px;">Any recommendations you have for Angels On Wheels?</p>
+    <p style="padding-top: 15px;">Any recommendations you have for Angels On Wheels? (Optional)</p>
     <textarea name="recommendations" rows="9" cols="50" style="resize: none;"></textarea><br>
 
-    <p style="padding-top: 15px;">Your name (optional):</p>
+    <p style="padding-top: 15px;">Your name (Optional):</p>
     <input type="text" name="name">
     <div style="padding-top: 40px;">
         <input type="submit" name="submit" value="Submit">
@@ -199,6 +199,12 @@ if(isset($_POST['submit'])) {
     echo "<p>Recommend: " . $recommend . "</p>";
     echo "<p>Volunteer: " . $volunteer . "</p>";
     echo "<p>Recommendations: " . $recommendations . "</p>";
+
+    // Create alert box using JavaScript
+    echo "<script>alert('Thank you for your feedback! Your response has been recorded.');</script>";
+
+    // Redirect back to home page after a delay
+    echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 2000);</script>";
 }
 ?>
 
