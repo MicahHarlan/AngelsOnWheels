@@ -14,6 +14,14 @@
  * @version 3/28/2008, revised 7/1/2015
  */
 ?>
+<?php //include('loginHeader.php'); ?>
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <link rel="stylesheet" href="styling/login.css">
+    <title>Angels On Wheels Login</title>
+</head>
+<body>
 
 <div id="content">
     <?PHP
@@ -24,19 +32,20 @@
         echo "<script type=\"text/javascript\">window.location = \"index.php\";</script>";
     }
     if (!array_key_exists('_submit_check', $_POST)) {
-        echo('<div align="left"><p>Access to Homebase requires a Username and a Password. ' .
+        echo('<p><div align="center"><b>Access to Homebase requires a Username and a Password</b><br><br> ' .
         '<ul>'
         );
-        echo('<li>If you are applying for a volunteer position, enter the Username \'guest\' and a blank Password. ');
+        echo('<div align="left" style="font-size: 14px; padding-right: 32px;"><li>If you are applying for a volunteer position, select the "Create Account" option. ');
         echo('<li>If you are a volunteer logging in for the first time, both your Username and Password is your first name followed by your ten digit phone number. ');
         echo('<li>After you have logged in, you can change your password. ');
         /*echo('<li>(If you are having difficulty logging in or have forgotten your Password, please contact either the
         		<a href="mailto:allen@npfi.org"><i>Portland House Manager</i></a>
         		or the <a href="mailto:allen@npfi.org"><i>Bangor House Manager</i></a>.) ');*/
         echo '</ul>';
-        echo('<p><table><form method="post"><input type="hidden" name="_submit_check" value="true"><tr><td>Username:</td>
-        		<td><input type="text" name="user" tabindex="1"></td></tr>
-        		<tr><td>Password:</td><td><input type="password" name="pass" tabindex="2"></td></tr><tr><td colspan="2" align="center"><input type="submit" name="Login" value="Login"></td></tr></table>');
+        echo('<p><table><form method="post"><input type="hidden" name="_submit_check" value="true"><tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Username     </br></pre></td>
+        		<td><input type="text" name="user" tabindex="1" style="border: 1px solid black; margin-top: .2in;"></td></tr>
+        		<tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Password     </b></pre></br></td><td><input type="password" name="pass" tabindex="2" style="border: 1px solid black"></td></tr><tr><td colspan="2" align="center"><input type="submit" name="Login" value="Login" style="margin-top: .3in;"></td></tr></table>');
+                echo '<button type="button" style="background-color: blue; color: white; border: none; padding: 8px; border-radius: 5px; width: 298px;">Create Account</button>';
     } else {
         //check if they logged in as a guest:
         if ($_POST['user'] == "guest" && $_POST['pass'] == "") {
@@ -98,4 +107,3 @@
 </div>
 </div>
 </body>
-</html>
