@@ -1,15 +1,17 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 /*
  * Copyright 2015 by Allen Tucker. This program is part of RMHP-Homebase, which is free 
- * software.  It comes with absolutely no warranty. You can redistribute and/or 
- * modify it under the terms of the GNU General Public License as published by the 
+ * software.  It comes with absolutely no warranty. You can redistribute and/or
+ * modify it under the terms of the GNU General Public License as published by the
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
  */
 session_cache_expire(30);
 session_start();
 ?>
-<html>
-
+<html lang="">
 <head>
     <title>
         Angel's on Wheels
@@ -45,7 +47,7 @@ session_start();
                 echo "<p>Welcome!";
             echo "   Today is " . date('l F j, Y') . ".<p>";
             ?>
-            
+
             <!-- your main page data goes here. This is the place to enter content -->
             <p>
                 <?PHP
@@ -53,7 +55,7 @@ session_start();
                     echo('<p> To apply for volunteering '.
                         		'please select <b>apply</b>.');
                 if ($person) {
-                    /*    
+                    /*
                     * Check type of person, and display home page based on that.
                     * admin: password check
                     * guests: show link to application form
@@ -70,49 +72,49 @@ session_start();
 
                     //VOLUNTEER CHECK
                     if ($_SESSION['access_level'] == 1) {
-                        	
+
                         // link to personal profile for editing
-                        echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');  
+                        echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
                         echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
                         	     .'">here</a></strong> to view or edit your account.</p></div>');
                         echo('<br></br>');
 
-                        // display upcoming schedule
-                        $shifts = selectScheduled_dbShifts($person->get_id());
+//                        // display upcoming schedule
+//                        $shifts = selectScheduled_dbShifts($person->get_id());
+//
+//                        $scheduled_shifts = array();
+//                        foreach ($shifts as $shift) {
+//                            $shift_month = get_shift_month($shift);
+//                            $shift_day = get_shift_day($shift);
+//                            $shift_year = get_shift_year($shift);
+//
+//                            $shift_time_s = get_shift_start($shift);
+//                            $shift_time_e = get_shift_end($shift);
+//
+//                            $cur_month = date("m");
+//                            $cur_day = date("d");
+//                            $cur_year = date("y");
+//
+//                            if ($shift_year > $cur_year)
+//                                $upcoming_shifts[] = $shift;
+//                            else if ($shift_year == $cur_year) {
+//                                if ($cur_month < $shift_month)
+//                                    $upcoming_shifts[] = $shift;
+//                                else if ($shift_month == $cur_month) {
+//                                    if ($cur_day <= $shift_day) {
+//                                        $upcoming_shifts[] = $shift;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if ($upcoming_shifts) {
+//                            echo ('<div class="container-fluid"><p><strong>Your Upcoming Schedule:</strong><br/></p><ul>');
+//                            foreach ($upcoming_shifts as $tableId) {
+//                                echo ('<li type="circle">' . get_shift_name_from_id($tableId)) . '</li>';
+//                            }
+//                        }
 
-                        $scheduled_shifts = array();
-                        foreach ($shifts as $shift) {
-                            $shift_month = get_shift_month($shift);
-                            $shift_day = get_shift_day($shift);
-                            $shift_year = get_shift_year($shift);
 
-                            $shift_time_s = get_shift_start($shift);
-                            $shift_time_e = get_shift_end($shift);
-
-                            $cur_month = date("m");
-                            $cur_day = date("d");
-                            $cur_year = date("y");
-
-                            if ($shift_year > $cur_year)
-                                $upcoming_shifts[] = $shift;
-                            else if ($shift_year == $cur_year) {
-                                if ($cur_month < $shift_month)
-                                    $upcoming_shifts[] = $shift;
-                                else if ($shift_month == $cur_month) {
-                                    if ($cur_day <= $shift_day) {
-                                        $upcoming_shifts[] = $shift;
-                                    }
-                                }
-                            }
-                        }
-                        if ($upcoming_shifts) {
-                            echo ('<div class="container-fluid"><p><strong>Your Upcoming Schedule:</strong><br/></p><ul>');
-                            foreach ($upcoming_shifts as $tableId) {
-                                echo ('<li type="circle">' . get_shift_name_from_id($tableId)) . '</li>';
-                            }
-                        }
-
-                        
                         // link to personal log sheet
                         /*echo('<br><div class="scheduleBox"><p><strong>Your Log Sheet:</strong><br /></p><ul>');
                              echo('</ul><p>Go <strong><a href="volunteerLog.php?id='.$person->get_id()
@@ -121,7 +123,6 @@ session_start();
 
                     if ($_SESSION['access_level'] == 2) {
                         //We have a manager authenticated
-
                         //active applicants box
                         $con = connect();
                         $app_query = "SELECT first_name,last_name,id,start_date FROM dbPersons WHERE status LIKE '%applicant%'  AND venue='" .
@@ -138,9 +139,9 @@ session_start();
                         echo ('</ul></div>'); //<br>'
                         //    }
                         mysqli_close($con);
-                        
+
                         // link to personal profile for editing
-                        echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');  
+                        echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
                         echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
                         .'">here</a></strong> to view or edit your account.</p></div>');
                         //echo('<br></br>');
@@ -189,41 +190,42 @@ session_start();
                         }
                             // give admin ability to change password even if it is not default
                             if (md5($person->get_id()) != $person->get_password() && $_SESSION['access_level'] == 2) {
-                                echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Change Password:</strong><br /></p>');  
+                                echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Change Password:</strong><br /></p>');
                                 echo('<p>Click <strong><a href="changePassword.php">here</a></strong> to change your password</p>');
-                                //echo('<br></br>');                          
+                                //echo('<br></br>');
                                 echo('<br clear="all">');
                             }
-                        
+
                     }
-
-                        //log box                                             used to be Recent Schedule Changes
-                        echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
-                        echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
-                        echo ('
-                            <theadx>
-                            <tr>
-                            <th scope="col">
-                            <u>Time</u>
-                            </th>
-                            <th scope="col"><u>Message</u></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            ');
-                        $log = get_last_log_entries(5);
-                        foreach ($log as $lo) {
-                            echo ('<tr><td class="searchResults">' . $lo[1] . '</td>' .
-                                '<td class="searchResults">' . $lo[2] . '</td></tr>');
-                        }
-                        echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
-
-                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
+//                        //log box used to be Recent Schedule Changes
+//                        echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
+//                        echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
+//                        echo ('
+//                            <theadx>
+//                            <tr>
+//                            <th scope="col">
+//                            <u>Time</u>
+//                            </th>
+//                            <th scope="col"><u>Message</u></th>
+//                            </tr>
+//                            </thead>
+//                            <tbody>
+//                            ');
+//
+//                        $log = get_last_log_entries(5);
+//                        foreach ($log as $lo) {
+//                            echo ('<tr><td class="searchResults">' . $lo[1] . '</td>' .
+//                                '<td class="searchResults">' . $lo[2] . '</td></tr>');
+//                        }
+//                        echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
+//
+//                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
                     }
                 ?>
         </div>
-        <?PHP include('footer.inc'); ?>
     </div>
+    <?PHP
+    include('footer.inc');
+    ?>
 </body>
-
 </html>
