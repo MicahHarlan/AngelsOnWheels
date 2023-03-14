@@ -86,4 +86,20 @@ function get_feedback() {
     }
     return $fb;
 }
+
+/**
+ * returns max id
+ */
+function get_max_id() {
+    $con = connect();
+    $query = "SELECT MAX(id) FROM dbFeedback";
+    $result = mysqli_query($con, $query);
+    mysqli_close($con);
+    if (!$result) {
+        die("error getting max id");
+    } else {
+        $row = mysqli_fetch_row($result);
+        return (int) $row[0];
+    }
+}
 ?>

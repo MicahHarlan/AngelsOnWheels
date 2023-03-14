@@ -112,6 +112,9 @@ if(isset($_POST['submit'])) {
 
     $con = connect();
 
+    $maxID = get_max_id();
+    $id = $maxID + 1;
+
     insert_feedback($id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer);
 }
 ?>
