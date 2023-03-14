@@ -159,29 +159,15 @@ CREATE TABLE `dbevents` (
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
 ('638553e3173c4', '22-11-05', 'portland', 'One Event', 'The event table has been completely cleared, here is one event though.', '638553e3173c4');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `dbfeedback`
---
-
 CREATE TABLE `dbfeedback` (
-  `id` int(10) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `feedback` text NOT NULL,
-  `date` date NOT NULL
+                              `id` int(11) NOT NULL,
+                              `name` varchar(30) DEFAULT NULL,
+                              `feedback` text DEFAULT NULL,
+                              `date` varchar(20) NOT NULL,
+                              `satisfaction_rank` int(11) NOT NULL,
+                              `recommend_rank` int(11) NOT NULL,
+                              `volunteer_rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `dbfeedback`
---
-
-INSERT INTO `dbfeedback` (`id`, `name`, `feedback`, `date`) VALUES
-(3, 'Saira', 'I love Angels on Wheels!', '2023-03-09'),
-(4, 'Charlie', 'They need more vegan and paleo snacks at events', '2023-03-03'),
-(5, 'Drew', 'It feels good to help my community!', '2022-12-25');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `dblog`
