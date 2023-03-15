@@ -223,7 +223,7 @@ if ($person->get_relation() == 'Other')
 echo('</select>');
 
 
-echo "<p><b>How did you hear about Gwyneth's Gift? </b>";
+echo "<p><b>How did you hear about Angels on Wheels? </b>";
 echo '<p><input class="form-check-input" type="radio" name="howdidyouhear" value="internet" '.($person->get_howdidyouhear()=="internet"?"checked":"").'>Internet search or website'.
 		'&nbsp;&nbsp;<input class="form-check-input" type="radio" name="howdidyouhear" value="family" '.($person->get_howdidyouhear()=="family"?"checked":"").'>Family or friend'.
 		'&nbsp;&nbsp;<input class="form-check-input" type="radio" name="howdidyouhear" value="volunteer" '.($person->get_howdidyouhear()=="volunteer"?"checked":"").'>Current volunteer'.

@@ -88,7 +88,7 @@ $(function() {
 		<?php date_default_timezone_set ("America/New_York");
 		$venue = $_GET['venue'];
 		$venues = array('portland'=>"RMH Portland",'bangor'=>"RMH Bangor");
-		echo '<b>'." Gwyneth's Gifts Volunteer Reports</b><br>Today's date: ".date("F d, Y");
+		echo '<b>'." Angels on Wheels Volunteer Reports</b><br>Today's date: ".date("F d, Y");
 		echo '</p>';
 		echo '<input type="hidden" name="_form_submit" value="report'.$venue.'" />';?>
 	<table>	<tr>
