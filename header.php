@@ -99,7 +99,20 @@
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'calendar.php?venue=portland'.''.'">Calendar</a></li>');
                 echo('<a class="navbar-brand">|</a>');
                 echo('<a class="navbar-brand">Events</a>');
+
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Search</a></li>');
+             
+                #echo('<a class="navbar-brand">|</a>');
+                #echo('<a class="navbar-brand">Campaigns</a>');
+                    #if ($_SESSION['access_level'] >=2){
+                     #   echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="'. $path . 'createCampaign.php?id=new">Add</a></li>');
+                    #}
+               
+                echo('<a class="navbar-brand">|</a>');
+                echo('<a class="navbar-brand">Campaigns</a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'viewCampaign.php">View</a></li>');
+                
+                
                 //echo('<button type="button" class="btn btn-link"><a href="' . $path . 'index.php" class="link-primary">home</a></button>');
 	        	//echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'about.php">about</a></button>');
 	            //echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">help</a></button>');
@@ -115,12 +128,11 @@
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search</a></li>
 			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="personEdit.php?id=' . 'new' . '">Add</a></li>'); 
 	            echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="'. $path . 'createCampaign.php?id=new">Add Campaign</a></li>');
 	        }
 	        echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'logout.php">Logout</a></li><br>');
             echo('</div></div></nav>');
         }
-        
+
     }
     ?>
 </div>
