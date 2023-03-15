@@ -259,6 +259,52 @@ session_start();
                         //}
 
 
+<<<<<<< HEAD
+=======
+                        
+
+
+
+                        echo ('<div class="container-fluid" id="logBox"><p><strong>Upcoming Events:</strong><br/>');
+                        echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
+                        echo ('
+                            <theadx>
+                            <tr>
+                            <th scope="col">
+                            <u>Date</u>
+                            </th>
+                            <th scope="col"><u>Event</u></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            ');
+                        $con = connect();   
+                        $query = "SELECT * FROM dbevents";
+                        $result = mysqli_query($con, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            // Access the row's values using associative array syntax
+                            //echo $row['event_name'];
+                            
+                            $futureCheck = fix_date($row['event_date']);
+                            if ($futureCheck){
+                                echo ('<tr><td class="searchResults">' .$row['event_date']. '</td>' . 
+                                '<td class="searchResults">' . $row['event_name'] . '</td></tr>');
+                            }
+                            
+                            //echo ('<tr><td class="searchResults">' .$row['event_date']. '</td>' . 
+                                //'<td class="searchResults">' . $row['event_name'] . '</td></tr>');
+                        }
+                        echo ('</tbody></table><br>');
+
+                        //foreach ($events as $event) {
+                        //    
+                        //    echo ('<tr><td class="searchResults">' . $event[0] . '</td>' .
+                        //        '<td class="searchResults">' . $event[0] . '</td></tr>');
+                        //}
+
+                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
+
+>>>>>>> cd43fe0 (Fixed the event notification merge and the helper function merge)
                     }
                 ?>
         </div>
