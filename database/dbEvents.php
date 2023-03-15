@@ -128,21 +128,49 @@ function getonlythose_dbEvents($name, $day, $venue) {
    }
    mysqli_close($con);
    return $theEvents;
-}
+}   
+
 
 //get future events
-function get_future_events(){
-    $con=connect();
-    $query = "SELECT * FROM dbEvents WHERE 
-        (
-            (DATE = CONVERT(date, SYSDATETIME() 
-            AND STARTTIME > CONVERT(time, SYSDATETIME()
-            )
-        ) 
-        OR Date > sysdatetime()
-        )";
-    $result = mysqli_query($con,$query);
-    return $result;
+
+function fix_date($wrong_format_date){
+    //This function is used to take in the date of an event or campaign and return whether 
+    // or not the event/campaign is in the future or not.
+    $explodedString = explode("-",$wrong_format_date);
+    $year = "20".$explodedString[0];
+    $month = $explodedString[1];
+    $day = $explodedString[2];
+    $fixedTime = $year . "/" . $month . "/" . $day;
+    $fixedTimeAsDateTime = strtotime($fixedTime);
+    $newDate = getDate($fixedTimeAsDateTime);
+    $finalDATE = $newDate['year'] . "/" . $newDate['mon'] . "/" . $newDate['mday'];
+    
+    //echo($finalDATE);
+    
+    $finalfinalDate = new Datetime($finalDATE);
+    $currentDate = new DateTime('now');
+    //echo($currentDate);
+
+    //echo(gettype($finalfinalDate));
+    //echo(gettype($currentDate));
+    $finalfinalfinalDate = date_format($finalfinalDate,'Y-m-d H:i:s');
+    $fixedCurrentDate = date_format($currentDate,'Y-m-d H:i:s');   
+    //echo($finalfinalfinalDate);
+    //echo($fixedCurrentDate); 
+    if ($fixedCurrentDate<$finalfinalfinalDate){
+        //echo("True");
+        return True;
+
+    }
+    else{
+        //echo("False");
+        return False;
+    }
+
+   
 }
+
+
+
 
 ?>
