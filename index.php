@@ -259,8 +259,6 @@ session_start();
                         //}
 
 
-<<<<<<< HEAD
-=======
                         
 
 
@@ -304,7 +302,6 @@ session_start();
 
                         echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
 
->>>>>>> cd43fe0 (Fixed the event notification merge and the helper function merge)
                     }
                 ?>
         </div>
