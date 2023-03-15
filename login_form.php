@@ -30,7 +30,6 @@
     <div class="content-container" style="padding-bottom: 100px;">
 <div id="content">
     <?PHP
-    include_once('tester.php');
     include_once('database/dbPersons.php');
     include_once('domain/Person.php');
     if (($_SERVER['PHP_SELF']) == "/logout.php") {
@@ -51,7 +50,7 @@
         echo('<p><table><form method="post"><input type="hidden" name="_submit_check" value="true"><tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Username     </br></pre></td>
         		<td><input type="text" name="user" tabindex="1" style="border: 1px solid black; margin-top: .2in;"></td></tr>
         		<tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Password     </b></pre></br></td><td><input type="password" name="pass" tabindex="2" style="border: 1px solid black"></td></tr><tr><td colspan="2" align="center"><input type="submit" name="Login" value="Login" style="margin-top: .3in;"></td></tr></table>');
-                echo '<button type="button" onclick="" style="background-color: blue; color: white; border: none; padding: 8px; border-radius: 5px; width: 298px;">Create Account</button>';
+                echo '<button type="button" onclick="" style="background-color: blue; color: white; border: none; padding: 8px; border-radius: 5px; width: 296px;">Create Account</button>';
     } else {
         //check if they logged in as a guest:
         if ($_POST['user'] == "guest" && $_POST['pass'] == "") {
@@ -117,5 +116,3 @@
 </body>
 
 </html>
-
-
