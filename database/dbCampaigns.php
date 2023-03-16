@@ -40,10 +40,16 @@ function add_campaign($campaign) {
 
     //if there's no entry for this id, add it
     if ($result == null || mysqli_num_rows($result) == 0) {
-        $sql = "INSERT INTO `dbCampaigns` (`description`, `campaign_name`) VALUES 
-        ( '" . $campaign->get_description() . "','" . $campaign->get_campaign_name() ."')";
+        #$sql = "SELECT MAX(`campaign_id`) FROM `dbCampaigns`";
+        #mysqli_query($con,$sql);
+        
+        $sql = "INSERT INTO `dbCampaigns` (`description`, `campaign_name`,`campaign_start_date`,`campaign_end_date`) VALUES 
+        ( '" . $campaign->get_description() . "','" . $campaign->get_campaign_name() . "','" .
+        $campaign->get_campaign_start() . "','" . $campaign->get_campaign_end() . "')";
+        echo($sql);
         mysqli_query($con,$sql);
         mysqli_close($con);
+        
         return true;
     }
     mysqli_close($con);
@@ -107,7 +113,9 @@ function make_a_campaign($result_row) {
     $theCampaign = new Campaign(
                     $result_row['campaign_name'],                                      
                     $result_row['description'],
-                    $result_row['campaign_id']);  
+                    $result_row['campaign_id'],
+                    $result_row['campaign_start_date'],
+                    $result_row['campaign_end_date']);  
     return $theCampaign;
 }
 

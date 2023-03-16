@@ -15,10 +15,32 @@
             }
     ?>
     <form method="POST">
+     <script>
+			$(function(){
+				$( "#start" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "1920:+nn"});
+			})
+	</script>
+    <script>
+			$(function(){
+				$( "#end" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "1920:+nn"});
+			})
+	</script>
+    
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
     <input type="hidden" name="_form_submit" value="1">
     <table>
-        <tr>&nbsp;&nbsp;&nbsp; Name of Campaign<span style="font-size:x-small;color:FF0000">* </span> 
+    
+        <?PHP 
+        if ($_SESSION['access_level']==2) {
+        echo('<tr><td>Start Date <span style="font-size:x-small;color:FF0000">*</span>: '. 
+	             '</td><td colspan=2><input name="start" id="start" type="text"> </tr>');
+        echo('<tr><td>End Date <span style="font-size:x-small;color:FF0000">*</span>: '. 
+	             '</td><td colspan=2><input name="end" id="end" type="text"</tr>');
+        }
+    ?>
+    </tr>
+        <br>
+        &nbsp;&nbsp;&nbsp; Name of Campaign<span style="font-size:x-small;color:FF0000">* </span> 
              <input type="text" name="name"></tr>
         <br>
         <br>

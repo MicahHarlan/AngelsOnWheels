@@ -30,17 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `dbCampaigns` (
   `campaign_id` int(11) NOT NULL,
   `description` text NOT NULL,
-  `campaign_name` text NOT NULL
+  `campaign_name` text NOT NULL,
+  `campaign_start_date` text DEFAULT NULL,
+  'campaign_end_date' text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dbCampaigns`
 --
 
-INSERT INTO `dbCampaigns` (`campaign_id`, `description`, `campaign_name`) VALUES
-(12, 'Campaign description!! ', 'Campaign'),
-(13, 'JEfffff', 'JEfff'),
-(14, 'JEfffff', 'JEfff');
+--INSERT INTO `dbCampaigns` (`campaign_id`, `description`, `campaign_name`) VALUES
+--(12, 'Campaign description!! ', 'Campaign'),
+--(13, 'JEfffff', 'JEfff',),
+--(14, 'JEfffff', 'JEfff');
 
 -- --------------------------------------------------------
 

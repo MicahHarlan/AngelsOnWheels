@@ -22,26 +22,46 @@
 	private $campaign_name;  // campaign name as a string
 	private $description;   // description of the campaign
 	private $campaign_id;		// the unique id that is attached to each campaign, is then copied into id, used for editing campaign
-	
+	private $campaign_start_date; //Starting date of campaign
+	private $campaign_end_date; //End of Campaign
 
-	function __construct($en ,$description, $ev) {
+	function __construct($en ,$description, $ev,$start,$end) {
 		$this->campaign_name = $en;
 		$this->description = $description;
 		$this->campaign_id = $ev;
+		$this->campaign_start_date = $start;
+		$this->campaign_end_date = $end;
 		
 	}
 
+	//getter functionn for campaign name
 	function get_campaign_name() {
 		return $this->campaign_name;
 	}
 
+
+	//Getter function for campaign description
 	function get_description() {
 		return $this->description;
 	}
 
+	//Getter Function for campaign ID
 	function get_campaign_id() {
 		return $this->campaign_id;
 	}
+	//Getter function for Start date
+	function get_campaign_start() {
+		return $this->campaign_start_date;
+	}
+
+
+	//Getter function for end date
+	function get_campaign_end() {
+		return $this->campaign_end_date;
+	}
+
+	
+
 
 }
 ?>
