@@ -198,8 +198,7 @@ session_start();
                             }
 
                     }
-
-                        //log box                                             used to be Recent Schedule Changes
+                        //log box used to be Recent Schedule Changes
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('
@@ -213,51 +212,13 @@ session_start();
                             </thead>
                             <tbody>
                             ');
+
                         $log = get_last_log_entries(5);
                         foreach ($log as $lo) {
                             echo ('<tr><td class="searchResults">' . $lo[1] . '</td>' .
-                                '<td class="searchResults">' . $lo[2] . '</td></tr>');
+                               '<td class="searchResults">' . $lo[2] . '</td></tr>');
                         }
                         echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
-                    
-                        //code for upcoming events
-                        echo ('<div class="container-fluid" id="upcomingEventBox"><p><strong>Upcoming Events:</strong><br/>');
-                        echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
-                        echo ('
-                            <theadx>
-                            <tr>
-                            <th scope="col">
-                            <u>Date</u>
-                            </th>
-                            <th scope="col"><u>Event</u></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            ');
-                        $con = connect();   
-                        $query = "SELECT * FROM dbevents";
-                        $result = mysqli_query($con, $query);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // Access the row's values using associative array syntax
-                            //echo $row['event_name'];
-                            
-                            $futureCheck = fix_date($row['event_date']);
-                            if ($futureCheck){
-                                echo ('<tr><td class="searchResults">' .$row['event_date']. '</td>' . 
-                                '<td class="searchResults">' . $row['event_name'] . '</td></tr>');
-                            }
-                            
-                            //echo ('<tr><td class="searchResults">' .$row['event_date']. '</td>' . 
-                              //  '<td class="searchResults">' . $row['event_name'] . '</td></tr>');
-                        }
-                        echo ('</tbody></table><br>');
-
-                        //foreach ($events as $event) {
-                        //    
-                        //    echo ('<tr><td class="searchResults">' . $event[0] . '</td>' .
-                        //        '<td class="searchResults">' . $event[0] . '</td></tr>');
-                        //}
-
 
                         
 

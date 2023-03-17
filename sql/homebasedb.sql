@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 17, 2023 at 08:04 PM
+-- Host: 127.0.0.1
+-- Generation Time: Mar 10, 2023 at 06:49 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -182,7 +182,15 @@ CREATE TABLE `dbevents` (
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
 ('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4');
 
--- --------------------------------------------------------
+CREATE TABLE `dbfeedback` (
+                              `id` int(11) NOT NULL,
+                              `name` varchar(30) DEFAULT NULL,
+                              `feedback` text DEFAULT NULL,
+                              `date` varchar(20) NOT NULL,
+                              `satisfaction_rank` int(11) NOT NULL,
+                              `recommend_rank` int(11) NOT NULL,
+                              `volunteer_rank` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Table structure for table `dblog`
@@ -1171,6 +1179,12 @@ ALTER TABLE `dbdates`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dbfeedback`
+--
+ALTER TABLE `dbfeedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dblog`
 --
 ALTER TABLE `dblog`
@@ -1203,6 +1217,12 @@ ALTER TABLE `dbweeks`
 --
 ALTER TABLE `dbCampaigns`
   MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `dbfeedback`
+--
+ALTER TABLE `dbfeedback`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dblog`
