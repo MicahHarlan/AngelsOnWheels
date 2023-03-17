@@ -53,5 +53,6 @@
     if ($_SESSION['access_level'] == 2)
             echo('<br>');
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Submit" name="Submit"><br /><br />');
+    include('footer.inc')
         ?>
 </form>

@@ -47,6 +47,7 @@ $id = str_replace("_"," ",$_GET["id"]);
         echo($test_campaign->get_campaign_name());
         echo("<br>");
         echo($test_campaign->get_description());
+        include('footer.inc');
     }
 
 
