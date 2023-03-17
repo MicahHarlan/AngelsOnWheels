@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 10, 2023 at 06:49 AM
+-- Host: localhost
+-- Generation Time: Mar 17, 2023 at 08:04 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 -- Database: `homebasedb`
 --
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `dbCampaigns`
@@ -32,17 +32,17 @@ CREATE TABLE `dbCampaigns` (
   `description` text NOT NULL,
   `campaign_name` text NOT NULL,
   `campaign_start_date` text DEFAULT NULL,
-  'campaign_end_date' text DEFAULT NULL
+  `campaign_end_date` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dbCampaigns`
 --
 
---INSERT INTO `dbCampaigns` (`campaign_id`, `description`, `campaign_name`) VALUES
---(12, 'Campaign description!! ', 'Campaign'),
---(13, 'JEfffff', 'JEfff',),
---(14, 'JEfffff', 'JEfff');
+INSERT INTO `dbCampaigns` (`campaign_id`, `description`, `campaign_name`, `campaign_start_date`, `campaign_end_date`) VALUES
+(3, 'Please campaign', 'This is campaign', '23-03-01', '23-03-31'),
+(4, 'seas', 'Past Campaign', '40-03-21', '26-03-17'),
+(5, 'The Real Campaign of ', 'Real Past Campaign', '23-03-08', '01-03-22');
 
 -- --------------------------------------------------------
 
@@ -180,17 +180,9 @@ CREATE TABLE `dbevents` (
 --
 
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
-('638553e3173c4', '22-11-05', 'portland', 'One Event', 'The event table has been completely cleared, here is one event though.', '638553e3173c4');
+('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4');
 
-CREATE TABLE `dbfeedback` (
-                              `id` int(11) NOT NULL,
-                              `name` varchar(30) DEFAULT NULL,
-                              `feedback` text DEFAULT NULL,
-                              `date` varchar(20) NOT NULL,
-                              `satisfaction_rank` int(11) NOT NULL,
-                              `recommend_rank` int(11) NOT NULL,
-                              `volunteer_rank` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `dblog`
@@ -209,7 +201,9 @@ CREATE TABLE `dblog` (
 
 INSERT INTO `dblog` (`id`, `time`, `message`, `venue`) VALUES
 (173, '1670011289', '<a href=\"personEdit.php?id=GwynethsGiftAdmin4678931290\">GwynethsGiftAdmin SiteAdmin</a>\'s Personnel Edit Form has been changed.', 'portland'),
-(179, '1678126009', '<a href=\"personEdit.php?id=Admin7037806282\">Admin Jones</a>\'s Personnel Edit Form has been changed.', 'portland');
+(179, '1678126009', '<a href=\"personEdit.php?id=Admin7037806282\">Admin Jones</a>\'s Personnel Edit Form has been changed.', 'portland'),
+(180, '1678726616', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland'),
+(181, '1678727928', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland');
 
 -- --------------------------------------------------------
 
@@ -712,7 +706,9 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('April7038075431', '16-06-06', 'portland', 'April', 'Jones', '189 Spring St', 'Ashburn', 'VA', '20147', '7038075431', 'cell', '', '', '08-31-73', 'jonesey@yahoo.com', NULL, NULL, '', '', '', '', '', '', 'ASG Risk Management', 'Claims Manager', '16-06-01:1800-2100:3,16-05-27:1200-1500:3,16-06-07:1800-2100:3,16-06-15:1230-1330:1,16-06-21:1800-2100:3,16-06-22:1200-1300:1,16-07-05:1800-2100:3,16-07-15:1700-1800:1,16-07-17:1700-1830:1.5,16-07-19:1800-2030:2.5,16-07-20:1230-1330:1,16-07-27:1630-1800:1.5,16-07-31:1330-1830:5,16-08-02:1800-2100:3,16-08-07:1600-1800:2', 'volunteer', '', '', '', 'no', 'volunteer,sub,mealprep,events', 'active', 'Sat:10-1:portland,Sun:9-12:portland,Sun:2-5:portland,Mon:3-6:portland,Tue:3-6:portland,Fri:3-6:portland,Mon:6-9:portland,Tue:6-9:portland,Fri:6-9:portland,Sun:5-9:portland', ',even:Tue:6-9:portland', '16-06-01:1800-2100:3,16-05-27:1200-1500:3,16-06-07:1800-2100:3,16-06-15:1230-1330:1,16-06-21:1800-2100:3,16-06-22:1200-1300:1,16-07-05:1800-2100:3,16-07-15:1700-1800:1,16-07-17:1700-1830:1.5,16-07-19:1800-2030:2.5,16-07-20:1230-1330:1,16-07-27:1630-1800:1.5,16-07-31:1330-1830:5,16-08-02:1800-2100:3,16-08-07:1600-1800:2', '', '340392d4c35f1399b0056739a63606be'),
 ('GwynethsGiftAdmin4678931290', '', 'portland', 'GwynethsGiftAdmin', 'SiteAdmin', 'Princess Anne St #101', 'Fredericksburg', 'VA', '22401', '4678931290', 'home', '', '', '', 'info@gwynethsgift.org', 'S', 'Yes', 'Yes', 'Yes', '-', '7777777777', 'Relative', '', 'Email', '', '', '', '', '', '', '', 'manager', 'active', 'Mon:9-12:portland,Mon:12-3:portland,Mon:3-6:portland,Mon:6-9:portland', '', '', '', 'e8f7e210dd29cb6729245a99b1b4d32c'),
 ('GuestApplying4564563232', '22-12-02', 'portland', 'GuestApplying', 'hi', '56 street', 'Richmond', 'VA', '34567', '4564563232', 'home', '', '', '90-12-14', 'hi@outlook.com', 'S', 'Yes', 'Yes', 'Yes', 'Joe', '3453454545', 'Parent', 'Weekends', 'Email', '', '', 'family', '', '', '', '', 'volunteer', 'applicant', 'Tue:9-12:portland,Wed:9-12:portland,Tue:12-3:portland,Tue:3-6:portland,Tue:6-9:portland', '', '23-03-07:1200-0130:13.5', '', '1a1dc91c907325c69271ddf0c944bc72'),
-('Admin7037806282', '17-07-26', 'portland', 'Admin', 'Jones', '1 Gum Tree Rd', 'Ashburn', 'VA', '22222', '7037806282', '', '', '', '', 'admin@yahoo.com', 'S', 'No', 'No', 'No', 'Admin', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'manager', 'active', '', '', '', '', 'be6bef2c7a57bead38826deed4077d03');
+('Admin7037806282', '17-07-26', 'portland', 'Admin', 'Jones', '1 Gum Tree Rd', 'Ashburn', 'VA', '22222', '7037806282', '', '', '', '', 'admin@yahoo.com', 'S', 'No', 'No', 'No', 'Admin', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'manager', 'active', '', '', '', '', 'be6bef2c7a57bead38826deed4077d03'),
+('ben1234567890', '23-03-13', 'portland', 'ben', 'Harlan', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-13', 'fake@gmail.com', 'XXL', 'No', 'Yes', 'No', 'Ben', '1234567890', 'Spouse', 'Never', '', '', '', 'internet', '', '', 'C', '', 'volunteer', 'active', 'Tue:9-12:portland', '', '', 'Cool', '99b251033723ddfe973774771c4080be'),
+('Mciah1234567890', '23-03-13', 'portland', 'Mciah', 'applicant', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-08', 'mharlan62@gmail.com', 'XXL', 'No', 'Yes', 'No', 'micah harlan', '1234567890', 'Relative', 'sfeeewefweed', 'Email', '', '', 'internet', '', '', 'None', '', 'volunteer', 'active', 'Mon:9-12:portland', '', '', '', '5ea64b432012b05dd978407fe897d41d');
 
 -- --------------------------------------------------------
 
@@ -1175,12 +1171,6 @@ ALTER TABLE `dbdates`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dbfeedback`
---
-ALTER TABLE `dbfeedback`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `dblog`
 --
 ALTER TABLE `dblog`
@@ -1209,16 +1199,16 @@ ALTER TABLE `dbweeks`
 --
 
 --
--- AUTO_INCREMENT for table `dbfeedback`
+-- AUTO_INCREMENT for table `dbCampaigns`
 --
-ALTER TABLE `dbfeedback`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `dbCampaigns`
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dblog`
 --
 ALTER TABLE `dblog`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

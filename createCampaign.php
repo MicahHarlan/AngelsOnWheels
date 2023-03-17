@@ -17,8 +17,8 @@ $id = str_replace("_"," ",$_GET["id"]);
 		<script src="lib/jquery-ui.js"></script>
 		<script>
 			$(function(){
-				$( "#start" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "1920:+nn"});
-				$( "#end" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "1920:+nn"});
+				$( "#start" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "2023:2040"});
+				$( "#end" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "2023:2040"});
 			})
 		</script>
     </head>

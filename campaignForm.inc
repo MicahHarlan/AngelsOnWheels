@@ -54,5 +54,4 @@
             echo('<br>');
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Submit" name="Submit"><br /><br />');
         ?>
-        
 </form>
