@@ -46,7 +46,7 @@ function add_campaign($campaign) {
         $sql = "INSERT INTO `dbCampaigns` (`description`, `campaign_name`,`campaign_start_date`,`campaign_end_date`) VALUES 
         ( '" . $campaign->get_description() . "','" . $campaign->get_campaign_name() . "','" .
         $campaign->get_campaign_start() . "','" . $campaign->get_campaign_end() . "')";
-        echo($sql);
+
         mysqli_query($con,$sql);
         mysqli_close($con);
         
