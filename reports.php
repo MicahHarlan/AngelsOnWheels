@@ -95,6 +95,7 @@ $(function() {
 		<td class = "search-description" valign="top"> &nbsp;&nbsp;&nbsp;&nbsp;Select Report Type: 
 		<p>	<select multiple name="report-types[]" id = "report-type" size="6"> <!-- size should = # of options -->
 	  		<option value="volunteer-hours">Total Hours</option>
+			<option value="individual-hours">Individual Hours</option>
 	  		<option value="shifts-staffed-vacant">Shifts/Vacancies</option>
 	  		<option value="emails">* Volunteer Emails</option>
 	  		<option value="volunteers">* Volunteer Contact Info</option>
