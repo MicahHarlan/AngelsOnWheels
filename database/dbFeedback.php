@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ERROR | E_PARSE);
 include_once('dbinfo.php');
 function insert_feedback($id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer) {
     global $con, $id, $name, $recommendations, $date, $satisfaction, $recommend, $volunteer;
@@ -25,20 +25,6 @@ function insert_feedback($id, $name, $recommendations, $date, $satisfaction, $re
 }
 
 /**
- * Add dbFeedback
- * 
- */
-function create_dbFeedback() {
-    $con=connect();
-    mysqli_query($con,"DROP TABLE IF EXISTS dbFeedback");
-    
-    $result = mysqli_query($con,"CREATE TABLE dbLog ( id int(10) NOT NULL AUTO_INCREMENT,name VARCHAR(20), feedback TEXT, date date, PRIMARY KEY(id))");
-    if (!$result)
-        echo mysqli_error($con);
-    mysqli_close($con);
-}
-
-/**
  * deletes a feedback entry
  */
 function delete_feedback_entry($id) {
@@ -56,7 +42,7 @@ function delete_feedback_entry($id) {
  */
 function delete_feedback_entries($ids) {
     $con=connect();
-    for ($i = 0; $i < count($ids); ++$i) {
+    for ($i = 0; $i < count((array)$ids); ++$i) {
         $query = "DELETE FROM dbFeedback WHERE id=\"" . $ids[$i] . "\"";
         $result = mysqli_query($con,$query);
         if (!$result)
@@ -78,6 +64,7 @@ function get_feedback() {
         die("error getting log");
     } else {
         for ($i = 0; $i < mysqli_num_rows($result); ++$i) {
+       
             $result_row = mysqli_fetch_row($result);
             if ($result_row) {
                 $fb[] = array($result_row[0],$result_row[1], $result_row[2], $result_row[3]);
