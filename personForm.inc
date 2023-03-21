@@ -30,7 +30,7 @@ if ($_SESSION['access_level'] == 0) {
             <p>3102 Plank Rd Ste. 425<br>
             P.O. Box 41237<br>
             Fredericksburg, VA 22407</p>
-            <li><strong>Email:</strong> angelsonnwheels@gmail.com</li>
+            <li><strong>Email:</strong> angelsonnwheels@gmail.com</li>         
             <li><a href="https://www.angelsonwheelscharity.org"><strong>Website</strong></a></li>
             <li><strong>Phone: </strong>(540)-735-7887</li>
             </ul>');

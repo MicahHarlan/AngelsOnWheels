@@ -392,6 +392,23 @@ function get_all_venue_shifts($from, $to, $venue) {
 	return $all_shifts;
 }
 
+function get_individual_shifts($from,$to,$venue,$person) {
+    $con=connect();
+    $query = "SELECT * FROM dbShifts WHERE persons LIKE '%" . $person . "%'";
+    $result = mysqli_query($con,$query);
+    if ($result == null || mysqli_num_rows($result) == 0) {
+        mysqli_close($con);
+        return false;
+    }
+    $result = mysqli_query($con,$query);
+    $individual_shifts = array();
+    while ($result_row = mysqli_fetch_assoc($result)) {
+        $shift = make_a_shift($result_row);
+        $individual_shifts[] = $shift;
+    }
+    return $individual_shifts;
+}
+
 function get_volunteer_hours($from,$to,$venue){ //Used for Total Hours Report echo
 	$the_hours = array();
 	$all_shifts = get_all_venue_shifts($from,$to,$venue);
@@ -409,6 +426,26 @@ function get_volunteer_hours($from,$to,$venue){ //Used for Total Hours Report ec
        		$the_hours[] = $shift_info;
     	}
     }  
+    return $the_hours;
+}
+
+function get_individual_hours($from,$to,$venue,$name_from) { // Used for Individual Hours Report echo
+    $the_hours = array();
+    $individual_shifts = get_individual_shifts($from,$to,$venue,$name_from);
+    foreach($individual_shifts as $a_shift) {
+        $the_date = $a_shift->get_date();
+        if($the_date >= $from && $the_date <= $to) {
+            if($a_shift->get_hours() == "night") {
+                $length = 12;
+            }
+            else {
+                $length = 3; // THIS MIGHT BE WRONG
+            }
+            $num_hours = $length;
+            $shift_info = $a_shift->get_day().":".$a_shift->get_hours().":".$num_hours;
+            $the_hours[] = $shift_info;
+        }
+    }
     return $the_hours;
 }
 
