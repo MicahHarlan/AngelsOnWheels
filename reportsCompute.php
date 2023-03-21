@@ -31,6 +31,9 @@ function show_report($venue) {
 		if (in_array('volunteer-hours', $_POST['report-types'])) {
 			report_volunteer_hours_by_day($from, $to, $venue);
 		}
+		else if (in_array('individual-hours', $_POST['report-types'])) {
+			report_individual_hours($from, $to, $venue, $name_from);
+		}
 	    else if (in_array('shifts-staffed-vacant', $_POST['report-types'])) {
 			report_shifts_staffed_vacant_by_day($from, $to, $venue);
 		}
@@ -59,6 +62,20 @@ function report_volunteer_hours_by_day($from, $to, $venue) {
 
 	$report = get_volunteer_hours($from, $to, $venue);
 	display_totals_table($report, $venue);	
+}
+
+function report_individual_hours($from, $to, $venue, $name_from) {
+	if($from == ""){$from = "00-00-00";}
+	if($to == ""){$to = date("y-m-d");}
+
+	echo "<br><b> Individual Hours Worked </b><br>";
+	if ($from!="00-00-00")
+		echo " from ".pretty_date($from);
+	if ($to!="")
+		echo " through ".pretty_date($to);
+
+	$report = get_individual_hours($from, $to, $venue, $name_from);
+	display_totals_individual($report, $venue);
 }
 
 function report_shifts_staffed_vacant_by_day($from, $to, $venue) {
@@ -199,6 +216,15 @@ function display_totals_table($report, $venue){  //Creates a table for the Total
 	}
 	$res .= "</tbody></table>";
 	echo $res;
+}
+
+function display_totals_individual($report, $venue){  //Creates a table for the Total Hours report
+	$num = 0;
+	foreach($report as $entry){
+		$elements = explode(":",$entry); 
+		$num += (int)$elements[2];
+	}
+	echo "<p>".$num." Hours Worked.</p>";
 }
 
 function display_vacancies_table($report, $venue){
