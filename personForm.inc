@@ -30,7 +30,7 @@ if ($_SESSION['access_level'] == 0) {
             <p>3102 Plank Rd Ste. 425<br>
             P.O. Box 41237<br>
             Fredericksburg, VA 22407</p>
-            <li><strong>Email:</strong> angelsonnwheels@gmail.com</li>
+            <li><strong>Email:</strong> angelsonnwheels@gmail.com</li>         
             <li><a href="https://www.angelsonwheelscharity.org"><strong>Website</strong></a></li>
             <li><strong>Phone: </strong>(540)-735-7887</li>
             </ul>');
@@ -223,7 +223,7 @@ if ($person->get_relation() == 'Other')
 echo('</select>');
 
 
-echo "<p><b>How did you hear about Gwyneth's Gift? </b>";
+echo "<p><b>How did you hear about Angels on Wheels? </b>";
 echo '<p><input class="form-check-input" type="radio" name="howdidyouhear" value="internet" '.($person->get_howdidyouhear()=="internet"?"checked":"").'>Internet search or website'.
 		'&nbsp;&nbsp;<input class="form-check-input" type="radio" name="howdidyouhear" value="family" '.($person->get_howdidyouhear()=="family"?"checked":"").'>Family or friend'.
 		'&nbsp;&nbsp;<input class="form-check-input" type="radio" name="howdidyouhear" value="volunteer" '.($person->get_howdidyouhear()=="volunteer"?"checked":"").'>Current volunteer'.

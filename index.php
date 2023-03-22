@@ -199,6 +199,10 @@ session_start();
                                 echo('<br clear="all">');
                             }
 
+                            // if an Admin is logged in, they can select to ViewFeedback
+
+                            echo ('<div class="container-fluid" id="feedbackLink"><br><p><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback from Volunteers</a></p><br></div>');
+                           
                     }
                         //log box used to be Recent Schedule Changes
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
@@ -229,7 +233,7 @@ session_start();
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Upcoming Events:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('
-                            <theadx>
+                            <thead>
                             <tr>
                             <th scope="col">
                             <u>Date</u>
@@ -271,8 +275,13 @@ session_start();
 
                         echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
                         echo('<div class="fb-page" data-href="https://m.facebook.com/angelsonwheelscharity" data-tabs="timeline" data-width="1200" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://m.facebook.com/angelsonwheelscharity" class="fb-xfbml-parse-ignore"><a href="https://m.facebook.com/angelsonwheelscharity">Angels On Wheels Charity Organization</a></blockquote></div>');
+                     
+                        echo ('</div>');
+                        
+
 
                     }
+
                 ?>
         </div>
     </div>

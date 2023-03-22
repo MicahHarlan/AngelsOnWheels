@@ -7,6 +7,7 @@
                     <a href="https://www.facebook.com/angelsonwheelscharity/" target="_blank"><img alt="facebook icon" src="images/facebook.png" style="width:3em; border-radius: 15px; padding: 0.5em;"></a>
                     <a href="https://www.gofundme.com/f/angelsonwheelscharity" target="_blank"><img alt="gofundme icon" src="images/gofundme.png" style="width:3em; border-radius: 15px; padding: 0.5em;"></a>
                     <a href="https://instagram.com/angelsonwheelscharity?igshid=YmMyMTA2M2Y=" target="_blank"><img alt="instagram icon" src="images/instagram.png" style="width:3em; border-radius: 15px; padding: 0.5em;"></a>
+
                 </div>
 <!--                <div class="footer-text" style="background-color: #fff;">-->
 <!--                    <p style="font-size:10px; margin:0;">-->
