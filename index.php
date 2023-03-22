@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
  * software.  It comes with absolutely no warranty. You can redistribute and/or
  * modify it under the terms of the GNU General Public License as published by the
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
+ * 
  */
 session_cache_expire(30);
 session_start();
