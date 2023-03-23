@@ -56,7 +56,7 @@ session_start();
 				</form>	
 
 				<div class= "table-responsive">
-
+					<form method="POST">
 					<table class="table feedback-table">
 						<thead>
 							<tr>
@@ -66,14 +66,13 @@ session_start();
 								<th> Likely to Recommend for Others to Contribute (1-5)</th>
 								<th>Likely to Encourage Others to Volunteer (1-5)</th>
 								<th>Date </th>
-								<th><form action "" method= "POST"><input type="submit" value="Delete Selected Feedback" name="delete"></th>
+								<th><input type="submit" value="Delete Selected Feedback" name="delete"></th>
 							</tr>
 						</thead>	
 						<tbody>
 							<?php
-
-							
-						$con=connect();
+						
+				$con=connect();
     $sort_direction = "ASC";
 	$sort_field = "id";
     if(isset($_GET['sort_feedback'])){
@@ -149,17 +148,18 @@ session_start();
 						if(isset($_POST['delete']) && isset($_POST['checkbox'])){
 						
 							$del= count((array)$_POST['checkbox']);
+							
 							$i = 0;
+
 							while ($i<$del){
 								$keyToDelete = $_POST['checkbox'][$i];
 
 								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
 								$i++;
 							}
-							header('Location:viewFeedbackAdmin.php');
-							}
+							echo "<meta http-equiv='refresh' content='0'>";
 							
-						
+						}
 						?>
 						</tbody>
 				</div>		
@@ -170,7 +170,7 @@ session_start();
 </div>
 	</body>
 <footer>
-	<?php include('footer.inc');?>
+	<?php mysqli_close($con); include('footer.inc');?>
 </footer>
 
 </html>
