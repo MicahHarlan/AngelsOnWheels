@@ -168,7 +168,7 @@ function fix_date($wrong_format_date){
     }
 }
 
-function monthCeck($event_date){
+function monthCheckEvent($event_date){
     $explodedString = explode("-",$event_date);
     $year = "20".$explodedString[0];
     $month = $explodedString[1];

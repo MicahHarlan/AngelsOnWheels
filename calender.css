@@ -14,14 +14,14 @@
 }
 .calendar .days .day_name {
     width: calc(100% / 7);
-    border-right: 1px solid #2c7aca;
+    border-right: 1px solid #9B2FCD;
     padding: 20px;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: bold;
     color: #818589;
     color: #fff;
-    background-color: #448cd6;
+    background-color: #ad56d6;
 }
 .calendar .days .day_name:nth-child(7) {
     border: none;
@@ -54,10 +54,10 @@
     word-wrap: break-word;
 }
 .calendar .days .day_num .event.green {
-    background-color: #51ce57;
+    background-color: #EEB800;
 }
 .calendar .days .day_num .event.blue {
-    background-color: #518fce;
+    background-color: #FFDA5F;
 }
 .calendar .days .day_num .event.red {
     background-color: #ce5151;
@@ -89,16 +89,17 @@ body {
     margin: 0;
 }
 .navtop {
-    background-color: #8c9ab0;
+    background-color: #8B09C8;
     height: 60px;
     width: 100%;
     border: 0;
 }
 .navtop div {
-    display: flex;
-    margin: 0 auto;
+    margin: auto;
     width: 800px;
     height: 100%;
+    padding: 15px;
+    text-align: center;
 }
 .navtop div h1, .navtop div a {
     display: inline-flex;

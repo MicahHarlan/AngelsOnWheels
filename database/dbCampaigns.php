@@ -169,10 +169,37 @@ function get_all_campaigns() {
         return False;
     }
  }
+/*
+ $result_row['campaign_name'],                                      
+ $result_row['description'],
+ $result_row['campaign_id'],
+ $result_row['campaign_start_date'],
+ $result_row['campaign_end_date']); */
 
+ function monthCheckCampaign($event_start_date, $event_end_date){
+    $explodedStart = explode("-",$event_start_date);
+    $yearStart = "20".$explodedStart[0];
+    $monthStart = $explodedStart[1];
+    $currentMonth = date("m");
+    $currentYear = date("Y");
+    $explodedEnd = explode("-",$event_end_date);
+    $yearEnd = "20".$explodedEnd[0];
+    $monthEnd = $explodedEnd[1];
+    if($currentYear == $yearStart && $currentMonth == $monthStart){
+        return True;
+    }
+    elseif($currentYear == $yearEnd && $currentMonth == $monthEnd){
+        return True;
+    }
+    else{
+        return False;
+    }
+}
 
-
-
+function dayCheckCampaign($start, $end){
+    $diff = strtotime($start) - strtotime($end);
+    return abs(round($diff / 86400));
+}
 
 // retrieve only those events that match the criteria given in the arguments
 /* function getonlythose_dbCampaigns($name, $day, $venue) {
