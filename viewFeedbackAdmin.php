@@ -146,20 +146,42 @@ session_start();
 ?>
 <?php
 				//if "deleted selected feedback" AND checkboxes are selected		
-						if(isset($_POST['delete']) && isset($_POST['checkbox'])){
-						
+					if(isset($_POST['delete']) && isset($_POST['checkbox'])){
 							$del= count((array)$_POST['checkbox']);
+							$results = mysqli_query($con, "SELECT COUNT(id) from dbFeedback");
+							//$results = $results->fetch_array();
+							echo($del);
+							echo("----");
+							//$toDelete = ((array)$_POST['checkbox']);
+							echo(($_POST['checkbox']['value']));
+							echo("---");
+							
+							for($i=0; $i<$del; $i++){
+								echo($i);
+								echo("===");
+								$keyToDelete = $_POST['checkbox'][$i];
+								echo($keyToDelete);
+								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
+							}
+							
+
+							/*
 							$i = 0;
 							while ($i<$del){
+								echo($_POST['checkbox'][$i]);
 								$keyToDelete = $_POST['checkbox'][$i];
+								echo($keyToDelete);
 
 								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
 								$i++;
 							}
 							header('Location:viewFeedbackAdmin.php');
 							}
-							
-						
+							<meta HTTP-EQUIV="REFRESH" content="2; url=viewFeedbackAdmin.php">
+
+							*/
+							header('Location:viewFeedbackAdmin.php');	
+					}
 						?>
 						</tbody>
 				</div>		
