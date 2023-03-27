@@ -76,8 +76,8 @@ session_start();
 
                         // link to personal profile for editing
                         echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
-                        echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
-                        	     .'">here</a></strong> to view or edit your account.</p></div>');
+                        echo('</ul><p>Go <strong><a href="profile.php?id='.$person->get_id()
+                        	     .'">here</a></strong> to view your account.</p></div>');
                         echo('<br></br>');
 
 //                        // display upcoming schedule
@@ -143,8 +143,8 @@ session_start();
 
                         // link to personal profile for editing
                         echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
-                        echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
-                        .'">here</a></strong> to view or edit your account.</p></div>');
+                        echo('</ul><p>Go <strong><a href="profile.php?id='.$person->get_id()
+                        .'">here</a></strong> to view your account.</p></div>');
                         //echo('<br></br>');
 
                             //DEFAULT PASSWORD CHECK
