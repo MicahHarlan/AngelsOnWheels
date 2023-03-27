@@ -166,11 +166,10 @@ function fix_date($wrong_format_date){
         //echo("False");
         return False;
     }
-
-   
 }
 
+function monthCeck($event_date){
 
-
+}
 
 ?>
