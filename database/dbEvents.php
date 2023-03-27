@@ -169,7 +169,18 @@ function fix_date($wrong_format_date){
 }
 
 function monthCeck($event_date){
-
+    $explodedString = explode("-",$event_date);
+    $year = "20".$explodedString[0];
+    $month = $explodedString[1];
+    $day = $explodedString[2];
+    $currentMonth = date("m");
+    $currentYear = date("Y");
+    if($currentYear == $year && $currentMonth == $month){
+        return True;
+    }
+    else{
+        return False;
+    }
 }
 
 ?>

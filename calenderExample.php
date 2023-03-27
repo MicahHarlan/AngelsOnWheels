@@ -2,6 +2,7 @@
 <?php
 session_cache_expire(30);
 session_start();
+include_once('database/dbEvents.php');
 include 'calenderTemp.php';
 $calendar = new Calender(date("Y-m-d"));
 /*
@@ -22,6 +23,9 @@ $query = "SELECT * FROM dbevents";
 $resultsEvents = mysqli_query($con, $query);
 while ($row = mysqli_fetch_assoc($resultsEvents)) {
     $thisMonthCheck = monthCeck($row['event_date']);
+    if($thisMonthCheck){
+        $calendar->add_event($row['event_name'], $row['event_date'], 1, 'green');
+    }
 }
 
 $calendar->add_event('Birthday', '2023-02-03', 1, 'green');
