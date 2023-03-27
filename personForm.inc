@@ -20,7 +20,7 @@
 echo('<link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>');
 
 if ($_SESSION['access_level'] == 0) {
-    echo('<p><strong>Volunteer Service Application</strong><br />');
+    echo('<p><strong>Volunteer Service Application</strong><br/>');
     echo('Please provide as much information as you can. ' . 
        '<br>When finished, hit <b>Submit</b> at the bottom of this page, and then <b>logout</b>. <br>');
          echo('<p> <strong> Recruiter Contact Information </strong> </p>');
@@ -86,7 +86,7 @@ if ($_SESSION['access_level'] == 0) {
         <legend class="col-sm-2 col-form-label col-form-label-lg">Personal Information:</legend>
     <?php
         if ($person->get_first_name()=="new")
-        	echo '<p>First Name<span style="font-size:x-small;color:FF0000">*</span>: <input class="form-control-sm" type="text" name="first_name" tabindex="1" value="'.$person->get_first_name().'">';
+        	echo '<p>First Name<span style="font-size:x-small;color:FF0000">*</span>: <input class="form-control-sm" type="text" name="first_name" tabindex="1" >';
         else 
         	echo '<p>First Name: '.$person->get_first_name();
     ?>  &nbsp;&nbsp;&nbsp;&nbsp;  Last Name<span style="font-size:x-small;color:FF0000">*</span>: <input class="form-control-sm" type="text" name="last_name" tabindex="2" value="<?PHP echo($person->get_last_name()) ?>">

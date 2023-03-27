@@ -21,7 +21,7 @@ $id = str_replace("_"," ",$_GET["id"]);
 if ($id == 'new') {
     // for new applicants set the venue to portland so all their availability info saves, leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
     $_SESSION['venue']="portland"; 
-    $person = new Person('new', 'applicant', $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
+    $person = new Person("new", null, $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
                     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "");
 } else {
     $person = retrieve_person($id);
