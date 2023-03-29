@@ -61,6 +61,16 @@
                     echo '<p>Emergency contact number: '.$person->get_contact_num();
                     echo '<p>What is your relationship to the emergency contact: '.$person->get_relation();
             ?>
+            <style>
+                .square{
+                    height: 1000px;
+                    width: 930px;
+                    color: white;
+                    background-color: #870287;
+                    margin-left: 50px;
+                    padding-bottom: 200px;
+                }
+            </style>
         </div>
     </div>
     <?PHP
