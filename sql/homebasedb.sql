@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2023 at 06:49 AM
+-- Generation Time: Mar 21, 2023 at 01:51 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dbCampaigns`
+-- Table structure for table `dbcampaigns`
 --
 
-CREATE TABLE `dbCampaigns` (
+CREATE TABLE `dbcampaigns` (
   `campaign_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `campaign_name` text NOT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `dbCampaigns` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `dbCampaigns`
+-- Dumping data for table `dbcampaigns`
 --
 
-INSERT INTO `dbCampaigns` (`campaign_id`, `description`, `campaign_name`, `campaign_start_date`, `campaign_end_date`) VALUES
+INSERT INTO `dbcampaigns` (`campaign_id`, `description`, `campaign_name`, `campaign_start_date`, `campaign_end_date`) VALUES
 (3, 'Please campaign', 'This is campaign', '23-03-01', '23-03-31'),
 (4, 'seas', 'Past Campaign', '40-03-21', '26-03-17'),
 (5, 'The Real Campaign of ', 'Real Past Campaign', '23-03-08', '01-03-22');
@@ -182,15 +182,33 @@ CREATE TABLE `dbevents` (
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
 ('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbfeedback`
+--
+
 CREATE TABLE `dbfeedback` (
-                              `id` int(11) NOT NULL,
-                              `name` varchar(30) DEFAULT NULL,
-                              `feedback` text DEFAULT NULL,
-                              `date` varchar(20) NOT NULL,
-                              `satisfaction_rank` int(11) NOT NULL,
-                              `recommend_rank` int(11) NOT NULL,
-                              `volunteer_rank` int(11) NOT NULL
+  `id` int(10) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `feedback` text DEFAULT NULL,
+  `date` varchar(20) NOT NULL,
+  `satisfaction_rank` int(11) NOT NULL,
+  `recommend_rank` int(11) NOT NULL,
+  `volunteer_rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dbfeedback`
+--
+
+INSERT INTO `dbfeedback` (`id`, `name`, `feedback`, `date`, `satisfaction_rank`, `recommend_rank`, `volunteer_rank`) VALUES
+(26, 'Saira', 'I love angels on wheels!', '2023-03-11', 4, 5, 3),
+(27, 'Charlie', 'Needs more pizza.', '2022-06-22', 2, 4, 3),
+(28, 'Lucy', 'Volunteering is fun!', '2013-04-22', 5, 5, 5),
+(29, 'Drew', 'I had a great time!', '2011-10-31', 2, 2, 2);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `dblog`
@@ -1167,9 +1185,9 @@ INSERT INTO `dbweeks` (`id`, `dates`, `venue`, `status`, `name`, `end`) VALUES
 --
 
 --
--- Indexes for table `dbCampaigns`
+-- Indexes for table `dbcampaigns`
 --
-ALTER TABLE `dbCampaigns`
+ALTER TABLE `dbcampaigns`
   ADD PRIMARY KEY (`campaign_id`);
 
 --
@@ -1213,16 +1231,16 @@ ALTER TABLE `dbweeks`
 --
 
 --
--- AUTO_INCREMENT for table `dbCampaigns`
+-- AUTO_INCREMENT for table `dbcampaigns`
 --
-ALTER TABLE `dbCampaigns`
+ALTER TABLE `dbcampaigns`
   MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dbfeedback`
 --
 ALTER TABLE `dbfeedback`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `dblog`
