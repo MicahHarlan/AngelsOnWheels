@@ -10,9 +10,9 @@ class Calender {
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
     }
 
-    public function add_event($txt, $date, $days = 1, $color = '') {
+    public function add_event($txt, $date, $days = 1, $color = '', $id) {
         $color = $color ? ' ' . $color : $color;
-        $this->events[] = [$txt, $date, $days, $color];
+        $this->events[] = [$txt, $date, $days, $color, $id];
     }
 
     public function __toString() {
@@ -22,9 +22,9 @@ class Calender {
         $first_day_of_week = array_search(date('D', strtotime($this->active_year . '-' . $this->active_month . '-1')), $days);
         $html = '<div class="calendar">';
         $html .= '<div class="header">';
-        $html .= '<div class="month-year">';
+        $html .= '<div class="month-year">&#x21E6;';
         $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
-        $html .= '</div>';
+        $html .= '&#x21E8;</div> ';
         $html .= '</div>';
         $html .= '<div class="days">';
         foreach ($days as $day) {
@@ -51,9 +51,16 @@ class Calender {
             foreach ($this->events as $event) {
                 for ($d = 0; $d <= ($event[2]-1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
-                        $html .= '<div class="event' . $event[3] . '">';
-                        $html .= $event[0];
-                        $html .= '</div>';
+                        if(strcmp(' green', $event[3])!=1){
+                            $html .= '<div class="event' . $event[3] . '"><a href=eventEdit.php?id='.$event[4].'>';
+                            $html .= $event[0];
+                            $html .= '</a></div>';
+                        }
+                        else{
+                            $html .= '<div class="event' . $event[3] . '"><a href=campaignEdit.php?id='.$event[4].'>';
+                            $html .= $event[0];
+                            $html .= '</a></div>';
+                        }
                     }
                 }
             }

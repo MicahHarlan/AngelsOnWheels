@@ -17,16 +17,18 @@
  */
 session_cache_expire(30);
 session_start();
-include_once('database/dbEvents.php');
-include_once('domain/Event.php');
-include_once('database/dbLog.php'); // can be used in later iterations
+include_once('database/dbCampaigns.php');
+include_once('domain/Campaign.php');
+include_once('database/dbPersons.php');
+include_once('domain/Person.php');
+
 $id = str_replace("_"," ",$_GET["id"]);
 
 if ($id == 'new') {
     $event = new Event('event', $_SESSION['venue'],  
                     null, null, null, "");
 } else {
-    $event = retrieve_event($id);
+    $event = retrieve_campaign($id);
     if (!$event) { // try again by changing blanks to _ in id
         $id = str_replace(" ","_",$_GET["id"]);
         $event = retrieve_event($id);
@@ -40,7 +42,7 @@ if ($id == 'new') {
 <html>
     <head>
         <title>
-            Editing <?PHP echo($event->get_event_name()); ?>
+            Editing <?PHP echo($event->get_campaign_name()); ?>
         </title>
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -56,59 +58,60 @@ if ($id == 'new') {
     <body>
         <div id="container">
             <?PHP include('header.php'); ?>
+            
             <div id="content">
                 <?PHP
-                include('eventValidate.inc');
+                include('campaignValidate.inc');
                 if ($_POST['_form_submit'] != 1)
                 //in this case, the form has not been submitted, so show it
-                    include('eventForm.php');
+                    include('campaignEditForm.php');
                 elseif($_POST['signup']){
-                        $thisperson = retrieve_person($_SESSION['_id']);
-                        $this_person_id = $thisperson->get_id();
-                        $campId = $_POST['camp_id'];
-    
-                        $con = connect();
-                        //echo("<p>SIGNUP-". $campId . '-'.$this_person_id);
-                        $query = 'SELECT * FROM dbcampaigns';
-                        $result = mysqli_query($con, $query);
-                        $list = '';
-                        while($row = $result->fetch_assoc()){
-                            $list .= $row['campaign_working'];
-                            //echo($row['campaign_working'].'</p>');
-                        }
-                        $list .= $this_person_id . "#";
-                        $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
-                        mysqli_query($con, $query);
-                        include('eventForm.php');
-                        //echo($result);
-                        /* $list = $result['campaign_working'].$this_person_id.'#';
-    
-                        $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
-                        mysqli_query($con, $query);*/
+                    $thisperson = retrieve_person($_SESSION['_id']);
+                    $this_person_id = $thisperson->get_id();
+                    $campId = $_POST['camp_id'];
+
+                    $con = connect();
+                    //echo("<p>SIGNUP-". $campId . '-'.$this_person_id);
+                    $query = 'SELECT * FROM dbcampaigns';
+                    $result = mysqli_query($con, $query);
+                    $list = '';
+                    while($row = $result->fetch_assoc()){
+                        $list .= $row['campaign_working'];
+                        //echo($row['campaign_working'].'</p>');
+                    }
+                    $list .= $this_person_id . "#";
+                    $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
+                    mysqli_query($con, $query);
+                    include('campaignEditForm.php');
+                    //echo($result);
+                    /* $list = $result['campaign_working'].$this_person_id.'#';
+
+                    $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
+                    mysqli_query($con, $query);*/
                 }
                 elseif($_POST['unsignup']){
-                        $thisperson = retrieve_person($_SESSION['_id']);
-                        $this_person_id = $thisperson->get_id();
-                        $campId = $_POST['camp_id'];
-                        $con = connect();
-                        $query = 'SELECT * FROM dbcampaigns';
-                        $result = mysqli_query($con, $query);
-                        $list = '';
-                        while($row = $result->fetch_assoc()){
-                            //echo("+++".$row['campaign_working']."+++");
-                            $working = explode("#", $row['campaign_working']);
-                            foreach($working as $person){
-                                //echo("-".$person."-");
-                                if($this_person_id!==$person && $person!=""){
-                                    $list .= $person . "#";
-                                }
+                    $thisperson = retrieve_person($_SESSION['_id']);
+                    $this_person_id = $thisperson->get_id();
+                    $campId = $_POST['camp_id'];
+                    $con = connect();
+                    $query = 'SELECT * FROM dbcampaigns';
+                    $result = mysqli_query($con, $query);
+                    $list = '';
+                    while($row = $result->fetch_assoc()){
+                        //echo("+++".$row['campaign_working']."+++");
+                        $working = explode("#", $row['campaign_working']);
+                        foreach($working as $person){
+                            //echo("-".$person."-");
+                            if($this_person_id!==$person && $person!=""){
+                                $list .= $person . "#";
                             }
                         }
-                        //echo("=======".$list);
-                        $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
-                        mysqli_query($con, $query);
-                        include('eventForm.php');
                     }
+                    //echo("=======".$list);
+                    $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
+                    mysqli_query($con, $query);
+                    include('campaignEditForm.php');
+                }
                 else {
                     //in this case, the form has been submitted, so validate it
                     $errors = validate_form($event);  //step one is validation.
@@ -116,14 +119,15 @@ if ($id == 'new') {
                     if ($errors) {
                         // display the errors and the form to fix
                         show_errors($errors);
-                        $event = new Event($event->get_event_name(), $_POST['location'],   
+                        $event = new Event($event->get_campaign_name(), $_POST['location'],   
                                         $_POST['event_date'], $_POST['description'], $_POST['event_id']);
-                        include('eventForm.php');
+                        include('campaignEditForm.php');
                     }
                     // this was a successful form submission; update the database and exit
-                    else
-                        process_form($id,$event);
+                    else{
+                        //process_form($id,$event);
                         echo "</div>";
+                    }
                     include('footer.inc');
                     echo('</div></body></html>');
                     die();

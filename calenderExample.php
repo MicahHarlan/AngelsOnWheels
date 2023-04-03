@@ -16,7 +16,7 @@ $resultsEvents = mysqli_query($con, $query);
 while ($row = mysqli_fetch_assoc($resultsEvents)) {
     $thisMonthCheck = monthCheckEvent($row['event_date']);
     if($thisMonthCheck){
-        $calendar->add_event($row['event_name'], $row['event_date'], 1, 'green');
+        $calendar->add_event($row['event_name'], $row['event_date'], 1, 'green', $row['event_id']);
     }
 }
 
@@ -27,7 +27,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
     $thisMonthCheck = monthCheckCampaign($row['campaign_start_date'], $row['campaign_end_date']);
     if($thisMonthCheck){
         $days_between = dayCheckCampaign($row['campaign_start_date'], $row['campaign_end_date']);
-        $calendar->add_event($row['campaign_name'], $row['campaign_start_date'], $days_between, 'blue');
+        $calendar->add_event($row['campaign_name'], $row['campaign_start_date'], $days_between, 'blue', $row['campaign_id']);
     }
 }
 
@@ -48,7 +48,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	    		<h1>Event Calender</h1>
 	    	</div>
 	    </nav>
-		<div class="content home">
+		
 			<?=$calendar?>
 		</div>
 	</body>
