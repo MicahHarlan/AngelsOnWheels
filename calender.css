@@ -1,4 +1,38 @@
+.title{
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #8B09C8;
+    height: 60px;
+    width: 100%;
+    border: 0;
+    box-shadow: 0 5px 5px -5px black;
+    font-size: 24px;
+    color: #ebedee;
+}
+.button {
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: #FFDA5F;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+}
+.button:hover{
+    background-color: #FFC500
+}
+.button:active{
+    background-color: #B98F00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 .calendar {
+    padding-left: 2%;
+    padding-right: 2%;
     display: flex;
     flex-flow: column;
 }
@@ -7,6 +41,7 @@
     font-weight: bold;
     color: #636e73;
     padding: 20px 0;
+    text-align: center;
 }
 .calendar .days {
     display: flex;
@@ -93,6 +128,7 @@ body {
     height: 60px;
     width: 100%;
     border: 0;
+    box-shadow: 0 5px 5px -5px black;
 }
 .navtop div {
     margin: auto;

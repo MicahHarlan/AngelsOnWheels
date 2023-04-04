@@ -166,13 +166,10 @@ echo '</fieldset>';
     ?>
 
     <p>
+    <input type="hidden" name="event_id" value=<?PHP echo("\"" . $event->get_event_id() . "\""); ?>>
         <?PHP
         
-
-
-        
         echo('<input type="hidden" name="_submit_check" value="1"><p>');
-
 
         // only managers can submit edits
         if ($_SESSION['access_level'] == 2)

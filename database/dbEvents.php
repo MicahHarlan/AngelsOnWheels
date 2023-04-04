@@ -41,7 +41,8 @@ function add_event($event) {
                 $event->get_venue() . '","' .
                 $event->get_event_name() . '","' . 
                 $event->get_description() . '","' .
-                $event->get_event_id() .            
+                $event->get_event_id() .  '","' .
+                $event->get_event_working() .         
                 '");');							
         mysqli_close($con);
         return true;
