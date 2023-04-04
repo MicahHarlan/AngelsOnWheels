@@ -145,14 +145,15 @@ session_start();
 ?>
 <?php
 				//if "deleted selected feedback" AND checkboxes are selected		
-						if(isset($_POST['delete']) && isset($_POST['checkbox'])){
-						
+					if(isset($_POST['delete']) && isset($_POST['checkbox'])){
 							$del= count((array)$_POST['checkbox']);
 							
 							$i = 0;
 
 							while ($i<$del){
+								echo($_POST['checkbox'][$i]);
 								$keyToDelete = $_POST['checkbox'][$i];
+								echo($keyToDelete);
 
 								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
 								$i++;
