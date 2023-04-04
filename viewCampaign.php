@@ -34,10 +34,35 @@ include_once('domain/Campaign.php');
             ?>
             <br>
             <h4>List of current and Future Campaigns</h4> 
+            <br> 
+            <h4>Search Campaign by name</h4> 
+            <form method="POST"> 
+            <p><strong>Campaign Name:</strong> <input type="text" name="campaignName"></input>
+            <input class="btn btn-success" type="submit" name="Search" value="Search">
+            </p>
+            </form>
+
+            <center><hr style="width:90%"></center>
+
+            <p>
+            <br>
+                    <h4>Sort Campaigns</h4>
+            <br>
+            
+            <form>       
+            <select name="sort" class="form-control" style="width:15%">
+                <option>Sort By..</option>
+                <option>Alpabetical Ascendinng (A-Z)</option>
+                <option>Alpabetical Descending (Z-A)</option>
+                <option>Date (Closest)</option>
+            
+             </select>
+             <input class="btn btn-success" type="submit" name="Search" value="Sort">
+            </form>
+            </p>
 
             <?PHP
             echo("<br>"); 
-
             $result = get_all_campaigns();
             echo '<div class="overflow-auto" id="target" style="width: variable; height: 400px;">';
             echo '<p><table class="table table-info table-responsive table-striped-columns table-hover 
@@ -62,7 +87,7 @@ include_once('domain/Campaign.php');
             
             <!-- below is the footer that we're using currently-->
                 </div>
-        </div>
+        
         <?PHP include('footer.inc'); ?>
     </body>
 </html>
