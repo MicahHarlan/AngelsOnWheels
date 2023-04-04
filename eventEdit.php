@@ -67,6 +67,7 @@ if ($id == 'new') {
                 elseif($_POST['signup']){
                         $thisperson = retrieve_person($_SESSION['_id']);
                         $this_person_id = $thisperson->get_id();
+                        //echo("====".$this_person_id);
                         $campId = $_POST['event_id'];
                         //echo($this_person_id);
                         $con = connect();
@@ -76,7 +77,7 @@ if ($id == 'new') {
                         $list = '';
                         while($row = $result->fetch_assoc()){
                             $list .= $row['event_working'];
-                            //echo($row['campaign_working'].'</p>');
+                            //echo('|'.$row['event_working'].'|</p>');
                         }
                         //echo("-----".$campId);
                         $list .= $this_person_id . "#";
