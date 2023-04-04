@@ -13,8 +13,10 @@
  * Created for Gwyneth's Gift in 2022 using original Homebase code as a guide
  */
 
-session_start();
+
+
 session_cache_expire(30);
+session_start();
 ?>
 <html>
     <head>
@@ -28,7 +30,8 @@ session_cache_expire(30);
     </head>
     <body style="background-color: rgb(250, 249, 246);">
         <div class="container-fluid" id="container">
-            <?PHP include('header.php'); ?>
+            <?PHP include('header.php');
+            include('database/dbEvents.php'); ?>
             <div class="container-fluid" id="content">
                 <?PHP
                 // display the search form
@@ -56,7 +59,7 @@ session_cache_expire(30);
 				    if (sizeof($result) > 0) {
 				       echo ' (select one for more info).';
                        echo '<div class="overflow-auto" id="target" style="width: variable; height: 400px;">';
-				       echo '<p><table class="table table-info table-responsive table-striped-columns table-hover table-bordered"> <tr><td>Event Name</td><td>Event Date (YY-MM-DD)</td></tr>';
+				       echo '<p><table class="table table-info table-responsive table-striped-columns table-hover table-bordered"><thead> <tr><th>Event Name</th><th>Event Date (YY-MM-DD)</th></tr></thead>';
 				       foreach ($result as $vol) {
 				          echo "<tr><td><a href=eventEdit.php?id=" . 
 				               str_replace(" ","_",$vol->get_id()) . ">" .
@@ -64,12 +67,120 @@ session_cache_expire(30);
 				          echo "</td></a></tr>";
 				       }
 				       echo '</table>';
-				       echo '</div>';   
+				   
 				    }
 				               
                 }
+             
                 ?>
-                <!-- below is the footer that we're using currently-->
+                <br>
+ <center><hr style="width:90%"></center>
+ <br>
+                <!-- Add table of events after the search function-->
+                <p><strong>Event List:</strong> <p>
+                <form action="">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="input-group mb-3">
+								<select name="sort_event" class="form-control">
+									<option value="">Sort by...</option>
+									<option value="a-z"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "a-z"){echo "selected";}?>>Name (Alphabetical)</option>
+									<option value="z-a"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "z-a"){echo "selected";}?>>Name (Reverse Alphabetical)</option>
+									<option value="venueAsc"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "venueAsc"){echo "selected";}?>>Venue (Alphabetical)</option>
+									<option value="venueDes"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "venueDes"){echo "selected";}?>>Venue (Reverse Alphabetical)</option>
+									<option value="dateAsc"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "dateAsc"){echo "selected";}?>>Date (Ascending)</option>
+									<option value="dateDes"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "dateDes"){echo "selected";}?>>Date (Descending)</option>
+									
+								</select>
+								<button type="submit" class="input-group-text" id="basic-addon2">Sort
+
+								</button>
+							</div>
+
+						</div>		
+					</div>
+				</form>
+                <div class= "overflow-auto" id="target" >
+					<table class="table table-info table-responsive table-striped-columns table-hover table-bordered" id= "eventTable">
+						<thead>
+							<tr>
+								<th> Event Name</th>
+								<th> Event Venue</th>
+								<th> Event Date</th>
+							</tr>
+						</thead>	
+						<tbody>
+                            <?php
+      //Initally sorted Alphabetically                      
+                            $sort_direction = "ASC";
+                            $sort_field = "event_name";
+
+
+                            if(isset($_GET['sort_event'])){
+                                if($_GET['sort_event'] == "a-z"){
+                                    $sort_field = "event_name";
+                                    $sort_direction = "ASC";
+                                }else if ($_GET['sort_event'] == "z-a"){
+                                    $sort_direction = "DESC";
+                                    $sort_field = "event_name";
+                                }else if ($_GET['sort_event'] == "venueAsc"){
+                                    $sort_direction = "ASC";
+                                    $sort_field = "venue";
+                                }else if ($_GET['sort_event'] == "venueDes"){
+                                    $sort_direction = "DESC";
+                                    $sort_field = "venue";
+                                }else if ($_GET['sort_event'] == "dateAsc"){
+                                    $sort_direction = "ASC";
+                                    $sort_field = "event_date";
+                                }else if ($_GET['sort_event'] == "dateDes"){
+                                    $sort_direction = "DESC";
+                                    $sort_field = "event_date";
+                                }
+                              
+                            }
+
+
+
+                            $result = sort_events($sort_field, $sort_direction);
+                            if (!$result) {
+                                die("error getting events.");
+                            } else if (mysqli_num_rows($result) > 0){
+                                foreach($result as $row){
+                                    $evid = $row['event_id'];
+                                ?>
+                                <tr>
+
+                                <?php
+                                    //Link to Event Page from table
+                                    //Volunteer View Event
+
+                                    //Admin Edit Event
+                                 echo    "<td><a href=eventEdit.php?id=" . 
+				               str_replace(" ","_",$evid) . ">" .
+                               $row['event_name'] . "</td>"
+                                ?>
+                                            <td><?=$row['venue']; ?> </td>
+                                            <td> <?=$row['event_date']; ?></td>
+                
+                                </tr>
+                                </form>
+                                <?php
+                                }
+                            }else{
+                                ?>
+                                <tr>
+                                    <td colspan= "3"> There is currently no events.</td>
+                            </tr>
+                            <?php
+                            }
+                        ?>
+            
+                        </tbody>
+            </table>
+            </div>
+            </div>
+                  <!-- below is the footer that we're using currently-->
+                  <br><br><br><br>
                 </div>
         </div>
         <?PHP include('footer.inc'); ?>
