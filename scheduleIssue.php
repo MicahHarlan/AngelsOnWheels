@@ -31,43 +31,54 @@ if ($id == 'new') {
         }
     }
 }
-$evid = $event->get_event_id()
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?PHP echo($event->get_event_name()); ?></title>
+    <title>Report Issue</title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
+    <link rel="stylesheet" href="styling\scheduleIssue.css" type="text/css" />
 </head>
-<?php include('header.php'); ?>
-<body style="background-color: rgb(250, 249, 246);">
+ <?php include('header.php'); ?>
+ <body style="background-color: rgb(250, 249, 246);">
 <div class="container" style="padding-bottom: 100px;">
-    <h2> <?PHP echo($event->get_event_name()); ?> </h2>
-
-    <div class= "content">
-        
-    <p><strong>Date: </strong><?PHP echo($event->get_event_date()); ?> </p>
-    <p><strong>Venue: </strong> <?PHP echo($event->get_venue()); ?> </p>
-    <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
-
+  <h2>Report Schedule Issue: <?PHP echo($event->get_event_name()); ?></h2> 
+  <form method="post">
+    <div  class="id">
+        <input type="text" required placeholder="Your name" name="name">
     </div>
+    <div class="issueBox">
+        <textarea name="issues" cols="50" rows="5" required placeholder="Report Issues here..."></textarea>
+    </div>
+<div class="issueButton">
+        <input type="submit" name="submit" value="Submit">
+</div>
 <br>
+</form>
 
-<!--sign up button not working yet-->
-    <button class= "signUpButton">Sign Up for Event</button>
+<?php
+include_once('database/dbinfo.php');
+include_once('database/dbIssues.php');
 
-        <!--send event id to the schedule issue page-->
-        <?php 
-        echo    "<a href=scheduleIssue.php?id=" . 
-        str_replace(" ","_",$evid) . ">";
-        ?> 
-            <button class= "reportButton">Report Schedule Issue</button> 
-        </a>
+if(isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $issues = $_POST['issues'];
+    $date = date("Y-m-d");
+    $evid = $event->get_event_id();
+    $insertId;
+    $con = connect();
+
+    report_issue( $insertId, $name, $issues, $date, $evid);
+}
+?>
+
 </div>
 
+<br><br><br><br>
 </body>
-<br><br>
+
 <?php include('footer.inc'); ?>
+
 </html>

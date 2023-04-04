@@ -94,7 +94,7 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'feedback.php">Send Feedback</a></li>');
                 
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'ViewCampaign.php"></a>View Campaign</li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'ViewCampaign.php">View Campaign</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 
 
