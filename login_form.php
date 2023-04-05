@@ -49,11 +49,16 @@
         echo '</ul>';
         echo('<p><table><form method="post"><input type="hidden" name="_submit_check" value="true"><tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Username     </br></pre></td>
         		<td><input type="text" name="user" tabindex="1" style="border: 1px solid black; margin-top: .2in;"></td></tr>
-        		<tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Password     </b></pre></br></td><td><input type="password" name="pass" tabindex="2" style="border: 1px solid black"></td></tr><tr><td colspan="2" align="center"><input type="submit" name="Login" value="Login" style="margin-top: .3in;"></td></tr></table>');
-                echo '<button type="button" onclick="" style="background-color: blue; color: white; border: none; padding: 8px; border-radius: 5px; width: 296px;">Create Account</button>';
+        		<tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Password     </b></pre></br></td><td><input type="password" name="pass" tabindex="2" 
+                style="border: 1px solid black"></td></tr><tr><td colspan="2" align="center"><input type="submit" 
+                name="Login" value="Login" style="margin-top: .3in;"></td></tr></table>');
+                
+                echo ('
+                <input type="submit" name="user" value="Create Account" style="background-color: blue; color: white; 
+                border: none; padding: 8px; border-radius: 5px; width: 296px;"</input></form>');
     } else {
         //check if they logged in as a guest:
-        if ($_POST['user'] == "guest" && $_POST['pass'] == "") {
+        if ($_POST['user'] == "Create Account" && $_POST['pass'] == "") {
             $_SESSION['logged_in'] = 1;
             $_SESSION['access_level'] = 0;
             $_SESSION['venue'] = "";
@@ -85,7 +90,7 @@
                     echo "<script type=\"text/javascript\">window.location = \"index.php\";</script>";
                 }
                 else {
-                    echo('<div align="left"><p class="error">Error: invalid username/password</p><p>Access to Homebase requires a Username and a Password. <p>For guest access, enter Username <strong>guest</strong> and no Password.</p>');
+                    echo('<div align="left"><p class="error">Error: invalid username/password</p><p>Access to Homebase requires a Username and a Password.');
                     echo('<p>If you are a volunteer, your Username is your first name followed by your phone number with no spaces. ' .
                     'For instance, if your first name were John and your phone number were (207)-123-4567, ' .
                     'then your Username would be <strong>John2071234567</strong>.  ');
@@ -96,7 +101,7 @@
                 }
             } else {
                 //At this point, they failed to authenticate
-                echo('<div align="left"><p class="error">Error: invalid username/password</p><p>Access to Homebase requires a Username and a Password. <p>For guest access, enter Username <strong>guest</strong> and no Password.</p>');
+                echo('<div align="left"><p class="error">Error: invalid username/password</p><p>Access to Homebase requires a Username and a Password.');
                 echo('<p>If you are a volunteer, your Username is your first name followed by your phone number with no spaces. ' .
                 'For instance, if your first name were John and your phone number were (207)-123-4567, ' .
                 'then your Username would be <strong>John2071234567</strong>.  ');
