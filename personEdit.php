@@ -22,7 +22,7 @@ $id = str_replace("_"," ",$_GET["id"]);
 if ($id == 'new') {
     // for new applicants set the venue to portland so all their availability info saves, leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
     $_SESSION['venue']="portland"; 
-    $person = new Person('new', 'applicant', $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
+    $person = new Person("new", null, $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
                     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "");
 } else {
     $person = retrieve_person($id);
@@ -44,6 +44,8 @@ if ($id == 'new') {
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css"/>
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="personEditMobile.css" type="text/css"/>
+
         <script src="lib/jquery-1.9.1.js"></script>
         <script src="lib\bootstrap\js\bootstrap.js"></script>
 		<script src="lib/jquery-ui.js"></script>
@@ -58,12 +60,12 @@ if ($id == 'new') {
     <body style="background-color: rgb(250, 249, 246);">
         <div class="container-fluid" id="container">
             <?PHP include('header.php'); ?>
-            <div class="container-fluid border border-dark" id="content">
+            <div class="willthisFix container-fluid border border-dark" id="content">
                 <?PHP
                 include('personValidate.inc');
                 if ($_POST['_form_submit'] != 1)
                 //in this case, the form has not been submitted, so show it
-                    include('personForm.inc');
+                    include('personForm.php');
                 else {
                     //in this case, the form has been submitted, so validate it
                     $errors = validate_form($person);  //step one is validation.
