@@ -17,7 +17,6 @@
 
 session_cache_expire(30);
 session_start();
-session_start();
 ?>
 <html>
     <head>
