@@ -15,8 +15,9 @@
  * @author Jerrick Hoang
  * @version 11/5/2013
  */
-session_start();
+
 session_cache_expire(30);
+session_start();
 
 include_once('header.php'); 
 include_once('database/dbPersons.php');

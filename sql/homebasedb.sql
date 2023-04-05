@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2023 at 01:51 PM
+-- Generation Time: Apr 04, 2023 at 10:55 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -180,7 +180,10 @@ CREATE TABLE `dbevents` (
 --
 
 INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
-('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4');
+('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4'),
+('64244b4ae8e8d', '23-03-31', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d'),
+('64244b69c36c7', '23-04-19', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7'),
+('64244b935a854', '23-08-01', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854');
 
 -- --------------------------------------------------------
 
@@ -203,10 +206,33 @@ CREATE TABLE `dbfeedback` (
 --
 
 INSERT INTO `dbfeedback` (`id`, `name`, `feedback`, `date`, `satisfaction_rank`, `recommend_rank`, `volunteer_rank`) VALUES
-(26, 'Saira', 'I love angels on wheels!', '2023-03-11', 4, 5, 3),
-(27, 'Charlie', 'Needs more pizza.', '2022-06-22', 2, 4, 3),
-(28, 'Lucy', 'Volunteering is fun!', '2013-04-22', 5, 5, 5),
-(29, 'Drew', 'I had a great time!', '2011-10-31', 2, 2, 2);
+(43, 'Saira', 'I love angels on wheels!', '2023-03-11', 4, 4, 5),
+(44, 'Lucy', 'I love to volunteer', '2022-04-11', 4, 2, 5),
+(45, 'Charlie', 'Needs more pizza', '2022-06-22', 2, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbissues`
+--
+
+CREATE TABLE `dbissues` (
+  `id` int(10) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `issue` text NOT NULL,
+  `date` varchar(20) NOT NULL,
+  `event_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dbissues`
+--
+
+INSERT INTO `dbissues` (`id`, `name`, `issue`, `date`, `event_id`) VALUES
+(1, 'Saira', 'I this event conflicts with another!', '2022-04-11', ''),
+(5, 'Charlie', 'This event is too long!', '2023-04-04', '64244b4ae8e8d'),
+(6, 'Lucy', 'I have an issue.', '2023-04-04', '64244b4ae8e8d'),
+(17, 'Drew', 'I dont like the theme of this event.', '2023-04-04', '64244b4ae8e8d');
 
 -- --------------------------------------------------------
 
@@ -229,7 +255,8 @@ INSERT INTO `dblog` (`id`, `time`, `message`, `venue`) VALUES
 (173, '1670011289', '<a href=\"personEdit.php?id=GwynethsGiftAdmin4678931290\">GwynethsGiftAdmin SiteAdmin</a>\'s Personnel Edit Form has been changed.', 'portland'),
 (179, '1678126009', '<a href=\"personEdit.php?id=Admin7037806282\">Admin Jones</a>\'s Personnel Edit Form has been changed.', 'portland'),
 (180, '1678726616', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland'),
-(181, '1678727928', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland');
+(181, '1678727928', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland'),
+(182, '1679505092', '<a href=\"personEdit.php?id=Saira7777777777\">Saira Beg</a>\'s Personnel Edit Form has been changed.', 'portland');
 
 -- --------------------------------------------------------
 
@@ -734,7 +761,8 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('GuestApplying4564563232', '22-12-02', 'portland', 'GuestApplying', 'hi', '56 street', 'Richmond', 'VA', '34567', '4564563232', 'home', '', '', '90-12-14', 'hi@outlook.com', 'S', 'Yes', 'Yes', 'Yes', 'Joe', '3453454545', 'Parent', 'Weekends', 'Email', '', '', 'family', '', '', '', '', 'volunteer', 'applicant', 'Tue:9-12:portland,Wed:9-12:portland,Tue:12-3:portland,Tue:3-6:portland,Tue:6-9:portland', '', '23-03-07:1200-0130:13.5', '', '1a1dc91c907325c69271ddf0c944bc72'),
 ('Admin7037806282', '17-07-26', 'portland', 'Admin', 'Jones', '1 Gum Tree Rd', 'Ashburn', 'VA', '22222', '7037806282', '', '', '', '', 'admin@yahoo.com', 'S', 'No', 'No', 'No', 'Admin', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'manager', 'active', '', '', '', '', 'be6bef2c7a57bead38826deed4077d03'),
 ('ben1234567890', '23-03-13', 'portland', 'ben', 'Harlan', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-13', 'fake@gmail.com', 'XXL', 'No', 'Yes', 'No', 'Ben', '1234567890', 'Spouse', 'Never', '', '', '', 'internet', '', '', 'C', '', 'volunteer', 'active', 'Tue:9-12:portland', '', '', 'Cool', '99b251033723ddfe973774771c4080be'),
-('Mciah1234567890', '23-03-13', 'portland', 'Mciah', 'applicant', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-08', 'mharlan62@gmail.com', 'XXL', 'No', 'Yes', 'No', 'micah harlan', '1234567890', 'Relative', 'sfeeewefweed', 'Email', '', '', 'internet', '', '', 'None', '', 'volunteer', 'active', 'Mon:9-12:portland', '', '', '', '5ea64b432012b05dd978407fe897d41d');
+('Mciah1234567890', '23-03-13', 'portland', 'Mciah', 'applicant', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-08', 'mharlan62@gmail.com', 'XXL', 'No', 'Yes', 'No', 'micah harlan', '1234567890', 'Relative', 'sfeeewefweed', 'Email', '', '', 'internet', '', '', 'None', '', 'volunteer', 'active', 'Mon:9-12:portland', '', '', '', '5ea64b432012b05dd978407fe897d41d'),
+('Saira7777777777', '23-03-22', 'portland', 'Saira', 'Beg', '1 Float way', 'Fredericksburg', 'VA', '22407', '7777777777', '', '', '', '23-03-21', 'Sairabeg@gmail.com', 'S', 'Yes', 'Yes', 'Yes', 'Mom', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'volunteer', 'active', 'Tue:3-6:portland', '', '', '', 'cbe6b0f20918ae80d8e5a37c92447029');
 
 -- --------------------------------------------------------
 
@@ -1203,6 +1231,12 @@ ALTER TABLE `dbfeedback`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dbissues`
+--
+ALTER TABLE `dbissues`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dblog`
 --
 ALTER TABLE `dblog`
@@ -1240,13 +1274,19 @@ ALTER TABLE `dbcampaigns`
 -- AUTO_INCREMENT for table `dbfeedback`
 --
 ALTER TABLE `dbfeedback`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `dbissues`
+--
+ALTER TABLE `dbissues`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `dblog`
 --
 ALTER TABLE `dblog`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

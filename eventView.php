@@ -12,69 +12,157 @@
 session_cache_expire(30);
 session_start();
 
+include_once('database/dbEvents.php');
+include_once('domain/Event.php');
+include_once('database/dbLog.php'); // can be used in later iterations
+include_once('database/dbPersons.php');
+    include_once('domain/Person.php');
+    
+
+    if(isset($_POST['signup'])){
+        $thisperson = retrieve_person($_SESSION['_id']);
+        $this_person_id = $thisperson->get_id();
+        //echo("====".$this_person_id);
+        $campId = $_POST['event_id'];
+        //echo($this_person_id);
+        $con = connect();
+        //echo("<p>SIGNUP-". $campId . '-'.$this_person_id);
+        $query = 'SELECT * FROM dbevents';
+        $result = mysqli_query($con, $query);
+        $list = '';
+        while($row = $result->fetch_assoc()){
+            $list .= $row['event_working'];
+            //echo('|'.$row['event_working'].'|</p>');
+        }
+        //echo("-----".$campId);
+        $list .= $this_person_id . "#";
+        $query = 'UPDATE dbevents SET event_working="'.$list.'" WHERE id="'.$campId.'"';
+        mysqli_query($con, $query);
+        include('eventForm.php');
+        //echo($result);
+        /* $list = $result['campaign_working'].$this_person_id.'#';
+
+        $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
+        mysqli_query($con, $query);*/
+}
+elseif(isset($_POST['unsignup'])){
+        $thisperson = retrieve_person($_SESSION['_id']);
+        $this_person_id = $thisperson->get_id();
+        $campId = $_POST['event_id'];
+        $con = connect();
+        $query = 'SELECT * FROM dbevents';
+        $result = mysqli_query($con, $query);
+        $list = '';
+        while($row = $result->fetch_assoc()){
+            $working = explode("#", $row['event_working']);
+            foreach($working as $person){
+                //echo("-".$person."-");
+                if($this_person_id!==$person && $person!=""){
+                    $list .= $person . "#";
+                }
+            }
+        }
+        //echo("=======".$list);
+        $query = 'UPDATE dbevents SET event_working="'.$list.'" WHERE id="'.$campId.'"';
+        mysqli_query($con, $query);
+        include('eventForm.php');
+    }
+
+$id = str_replace("_"," ",$_GET["id"]);
+
+if ($id == 'new') {
+    $event = new Event('event', $_SESSION['venue'],  
+                    null, null, null, "");
+} else {
+    $event = retrieve_event($id);
+    if (!$event) { // try again by changing blanks to _ in id
+        $id = str_replace(" ","_",$_GET["id"]);
+        $event = retrieve_event($id);
+        if (!$event) {
+            echo('<p id="error">Error: there\'s no event with this id in the database</p>' . $id);
+            die();
+        }
+    }
+}
+$evid = $event->get_event_id()
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About</title>
+    <title><?PHP echo($event->get_event_name()); ?></title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="styling/about.css" type="text/css" />
+    <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
 </head>
-<body>
+<?php include('header.php'); ?>
+<body style="background-color: rgb(250, 249, 246);">
 <div class="container" style="padding-bottom: 100px;">
-    <?php include('header.php'); ?>
-    <div id="content" class="mt-4">
-        <h2 class="text-center"><strong>About Gwyneth's Gift Foundation</strong></h2>
-        <p class="text-center">Gwyneth’s Gift Foundation is devoted to making a difference in the community and the lives of those within. We hope that through our work,
-            we can serve as a catalyst for increasing the survival rate of those suffering from an out-of-hospital cardiac arrest because they received
-            immediate life-saving measures from a member within their community.</p>
+    <h2> <?PHP echo($event->get_event_name()); ?> </h2>
 
-        <p class="text-center">Gwyneth’s Gift Foundation is a 501(c)(3) tax-exempt organization. Gwyneth’s Gift Foundation is Guidestar Gold Transparency, a member of
-            the Rappahannock United Way Local Government Campaign (LGC) and the Commonwealth of Virginia Campaign (CVC).</p>
+    <div class= "content">
+        
+    <p><strong>Date: </strong><?PHP echo($event->get_event_date()); ?> </p>
+    <p><strong>Venue: </strong> <?PHP echo($event->get_venue()); ?> </p>
+    <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
 
-        <p class="text-center">Gwyneth’s Gift Foundation was founded in 2015 by Joel and Jennifer Griffin in honor of their oldest daughter, Gwyneth. Through the Foundation’s
-            work, Gwyneth’s spirit of caring, compassion, and community lives on as we create a world where everyone can save a life.</p>
-
-        <div>
-            <h3 class="section-title text-center">Our Vision</h3>
-            <p class="text-center">To create a Culture of Action where communities are educated, confident, and empowered to save the lives of individuals suffering from cardiac arrest.</p>
-        </div>
-        <div>
-            <h3 class="section-title text-center">Our Mission</h3>
-            <p class="text-center">To raise awareness of Cardiopulmonary Resuscitation (CPR) and the use of Automated External Defibrillators (AEDs).</p>
-        </div>
-
-        <h3 class="section-title text-center">Our Team</h3>
-        <div class="team-row">
-            <div class="team-member">
-                <h4>Jennifer Griffin</h4>
-                <p>Co-founder & President</p>
-            </div>
-            <div class="team-member">
-                <h4>Joel Griffin</h4>
-                <p>Co-founder & Chairman</p>
-            </div>
-        </div>
-        <div class="team-row">
-            <div class="team-member">
-                <img src="tutorial/screenshots/KS.png" alt="Kathleen Steininger">
-                <h4>Kathleen Steininger</h4>
-                <p>Director of Operations</p>
-            </div>
-            <div class="team-member">
-                <img src="tutorial/screenshots/VG.jpg" alt="Veronica Gutierrez">
-                <h4>Veronica Gutierrez</h4>
-                <p>Event Manager</p>
-            </div>
-            <div class="team-member">
-                <img src="tutorial/screenshots/ER.jpg" alt="Emily Ripka">
-                <h4>Emily Ripka</h4>
-                <p>Marketing & PR Manager</p>
-            </div>
-        </div>
     </div>
+<br>
+
+<!--sign up button not working yet-->
+<form method="POST">
+    <?PHP
+    
+    if ($_SESSION['access_level'] >= 1){
+        $con = connect();
+        echo('<p><strong>People Working:</strong> <ul>');
+        $thisperson = retrieve_person($_SESSION['_id']);
+        $thisname = $thisperson->get_first_name();
+        $this_person_id = $thisperson->get_id();
+        #echo($this_person_id);
+        $eventId = $event->get_event_id();
+        $query = 'SELECT * FROM dbevents WHERE id="'.$eventId.'" LIMIT 1';
+        $result = mysqli_query($con, $query);
+        $set = 0;
+        while($row = $result->fetch_assoc()){
+            $working = explode("#", $row['event_working']);
+            //echo($woking);
+            if(count($working)==0){
+                echo('<li>No one signed up yet.</li>');
+            }
+            else{
+                //$woking = explode("#", $people_working);
+                foreach ($working as $person){
+                    $query = 'SELECT * FROM dbPersons WHERE id="'.$person.'" LIMIT 1';
+                    $result = mysqli_query($con, $query);
+                    while($row = $result->fetch_assoc()){
+                        if($row['id']==$this_person_id){
+                            $set = 1;
+                        }
+                        echo("<li>".$row['first_name'].' '.$row['last_name'].'</li>');
+                    }
+                }
+            } 
+        }   
+        echo('</ul></p>');
+        if($set==0){     
+            echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Sign-up to Work (Not working yet)" name="signup"><br /><br />');
+        }
+        elseif($set==1){     
+            echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Un-Sign-up" name="unsignup"><br /><br />');
+        }
+    }
+    ?>
+</form>
+        <!--send event id to the schedule issue page-->
+        <?php 
+        echo    "<a href=scheduleIssue.php?id=" . 
+        str_replace(" ","_",$evid) . ">";
+        ?> 
+            <button class= "reportButton">Report Schedule Issue</button> 
+        </a>
 </div>
-<?php include('footer.inc'); ?>
+
 </body>
+<br><br>
+<?php include('footer.inc'); ?>
 </html>

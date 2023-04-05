@@ -20,9 +20,7 @@ session_start();
 ?>
 <html>
     <head>
-        <title>
-            Search for Events
-        </title>
+        <title>Events</title>
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
 		<link rel="stylesheet" href="lib/jquery-ui.css" />
@@ -61,18 +59,26 @@ session_start();
                        echo '<div class="overflow-auto" id="target" style="width: variable; height: 400px;">';
 				       echo '<p><table class="table table-info table-responsive table-striped-columns table-hover table-bordered"><thead> <tr><th>Event Name</th><th>Event Date (YY-MM-DD)</th></tr></thead>';
 				       foreach ($result as $vol) {
-				          echo "<tr><td><a href=eventEdit.php?id=" . 
-				               str_replace(" ","_",$vol->get_id()) . ">" .
-				                $vol->get_event_name() . "</td><td>" . $vol->get_event_date();
-				          echo "</td></a></tr>";
+                            //if Volunteer
+                            if  ($_SESSION['access_level'] == 1) { 
+                                                    echo "<tr><td><a href=eventView.php?id=" . 
+                                                        str_replace(" ","_",$vol->get_id()) . ">" .
+                                                            $vol->get_event_name() . "</td><td>" . $vol->get_event_date();
+                                                    echo "</td></a></tr>";
+                            }
+                            //if Admin
+                            else if  ($_SESSION['access_level'] == 2) { 
+                                echo "<tr><td><a href=eventEdit.php?id=" . 
+                                str_replace(" ","_",$vol->get_id()) . ">" .
+                                $vol->get_event_name() . "</td><td>" . $vol->get_event_date();
+                            echo "</td></a></tr>";
+                            }
 				       }
-				       echo '</table>';
-				   
-				    }
-				               
-                }
-             
+				       echo '</table>';   
+				    }		               
+                }            
                 ?>
+
                 <br>
  <center><hr style="width:90%"></center>
  <br>
@@ -88,8 +94,8 @@ session_start();
 									<option value="z-a"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "z-a"){echo "selected";}?>>Name (Reverse Alphabetical)</option>
 									<option value="venueAsc"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "venueAsc"){echo "selected";}?>>Venue (Alphabetical)</option>
 									<option value="venueDes"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "venueDes"){echo "selected";}?>>Venue (Reverse Alphabetical)</option>
-									<option value="dateAsc"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "dateAsc"){echo "selected";}?>>Date (Ascending)</option>
-									<option value="dateDes"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "dateDes"){echo "selected";}?>>Date (Descending)</option>
+									<option value="dateAsc"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "dateAsc"){echo "selected";}?>>Date (Oldest to Newest)</option>
+									<option value="dateDes"<?php if(isset($_GET['sort_event']) && $_GET['sort_event'] == "dateDes"){echo "selected";}?>>Date (Newest to Oldest)</option>
 									
 								</select>
 								<button type="submit" class="input-group-text" id="basic-addon2">Sort
@@ -115,7 +121,7 @@ session_start();
                             $sort_direction = "ASC";
                             $sort_field = "event_name";
 
-
+    //setting the sort field and direction
                             if(isset($_GET['sort_event'])){
                                 if($_GET['sort_event'] == "a-z"){
                                     $sort_field = "event_name";
@@ -136,7 +142,6 @@ session_start();
                                     $sort_direction = "DESC";
                                     $sort_field = "event_date";
                                 }
-                              
                             }
 
 
@@ -151,13 +156,14 @@ session_start();
                                 <tr>
 
                                 <?php
-                                    //Link to Event Page from table
-                                    //Volunteer View Event
-
-                                    //Admin Edit Event
-                                 echo    "<td><a href=eventEdit.php?id=" . 
-				               str_replace(" ","_",$evid) . ">" .
-                               $row['event_name'] . "</td>"
+                                    //Volunteer - clicking on an Event name will take you to the View Event Page
+                            if  ($_SESSION['access_level'] == 1) {  echo    "<td><a href=eventView.php?id=" . 
+                                str_replace(" ","_",$evid) . ">" .
+                                $row['event_name'] . "</td>";} 
+                                //Admin - selecting an Event name will take you to the Event Edit Page
+                            else if  ($_SESSION['access_level'] == 2) { echo    "<td><a href=eventEdit.php?id=" . 
+                                str_replace(" ","_",$evid) . ">" .
+                                $row['event_name'] . "</td>";} 
                                 ?>
                                             <td><?=$row['venue']; ?> </td>
                                             <td> <?=$row['event_date']; ?></td>
