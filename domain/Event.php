@@ -61,9 +61,9 @@
 		return $this->event_id;
 	}
 
-	function get_event_working() {
-		return $this->event_id;
-	}
+	//function get_event_working() {
+	//	return $this->event_id;
+	//}
 
 }
 ?>
