@@ -42,7 +42,7 @@
 ?>
 <form method="POST">
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
-    
+    <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
     <input type="hidden" name="_form_submit" value="1">
     <script>
 			$(function(){
@@ -73,8 +73,18 @@
             echo('&nbsp;&nbsp;&nbsp;&nbspEvent Name <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="event_name" tabindex="2" value="'. $event->get_event_name() . '"');
         }
         if ($_SESSION['access_level']==1) {
-            echo ('<h3 style="text-align:center" Event:>'  . $event->get_event_name() . '</h3>');
-            
+            ?>
+        <body style="background-color: rgb(250, 249, 246);">
+<div class="container">
+    <h2> <?PHP echo($event->get_event_name()); ?> </h2>
+    <div class= "content">
+        
+        <p><strong>Date: </strong><?PHP echo($event->get_event_date()); ?> </p>
+        <p><strong>Venue: </strong> <?PHP echo($event->get_venue()); ?> </p>
+        <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
+    
+        </div>
+        <?php
         }
     ?>
 
@@ -99,15 +109,15 @@ if ($_SESSION['access_level']==2) {
 }
 
 // volunteers can view the event description
+/*
 if ($_SESSION['access_level']==1) {
     echo('<br>');
 	echo('<p>Event Description: Please read before signing up<br />');
     echo ('<p style="border-width:3px; border-style:solid; border-color:#0000FF.; padding: 1em;">' . $event->get_description() . '</p>');
-	
 
 }
 
-/*
+
 echo('<h4>need to add:</h4>');
 echo('<h4>event hours/shift hours</h4>');
 echo('<h4>ability to upload pdf?</h4>');
@@ -126,7 +136,10 @@ echo '</fieldset>';
 <?PHP
     if ($_SESSION['access_level'] >= 1){
         $con = connect();
-        echo('<p><strong>People Working:</strong> <ul>');
+        
+echo('<p><strong>People Working:</strong> <ul>');
+
+        
         $thisperson = retrieve_person($_SESSION['_id']);
         $thisname = $thisperson->get_first_name();
         $this_person_id = $thisperson->get_id();
@@ -172,16 +185,26 @@ echo '</fieldset>';
         echo('<input type="hidden" name="_submit_check" value="1"><p>');
 
         // only managers can submit edits
-        if ($_SESSION['access_level'] == 2)
+        if ($_SESSION['access_level'] == 2){
             //echo('Hit <input type="submit" value="Submit" name="Submit Edits"> to submit these edits.<br /><br />');
             echo('Hit <input class="btn btn-success" type="submit" value="Submit" name="Submit Edits"> to submit these edits.<br /><br />');
+        }
         
         if ($id != 'new' && $_SESSION['access_level'] >= 2) {
             echo ('<input type="checkbox" name="deleteMe" value="DELETE"> Check this box and then hit ' .
             '<input type="submit" value="Delete" name="Delete Entry"> to delete this entry. <br />');
-            
-            
-            
+
         }
+       
         ?>
+                <!--send event id to the schedule issue page-->
+                <?php 
+        echo    "<a href=scheduleIssue.php?id=" . 
+        str_replace(" ","_",$event->get_event_id()) . ">";
+        ?> 
+            <button class= "reportButton">Report Schedule Issue</button> 
+        </a>
+     
+        </div>
+
 </form>

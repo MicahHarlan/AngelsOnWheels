@@ -61,7 +61,7 @@ session_start();
 				       foreach ($result as $vol) {
                             //if Volunteer
                             if  ($_SESSION['access_level'] == 1) { 
-                                                    echo "<tr><td><a href=eventView.php?id=" . 
+                                                    echo "<tr><td><a href=eventEdit.php?id=" . 
                                                         str_replace(" ","_",$vol->get_id()) . ">" .
                                                             $vol->get_event_name() . "</td><td>" . $vol->get_event_date();
                                                     echo "</td></a></tr>";
@@ -157,7 +157,7 @@ session_start();
 
                                 <?php
                                     //Volunteer - clicking on an Event name will take you to the View Event Page
-                            if  ($_SESSION['access_level'] == 1) {  echo    "<td><a href=eventView.php?id=" . 
+                            if  ($_SESSION['access_level'] == 1) {  echo    "<td><a href=eventEdit.php?id=" . 
                                 str_replace(" ","_",$evid) . ">" .
                                 $row['event_name'] . "</td>";} 
                                 //Admin - selecting an Event name will take you to the Event Edit Page
