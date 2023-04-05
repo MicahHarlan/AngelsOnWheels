@@ -25,6 +25,8 @@ error_reporting(E_ERROR | E_PARSE);
         include('login_form.php');
         die();
     } else if ($_SESSION['logged_in']) {
+        include_once('database/dbPersons.php');
+        include_once('domain/Person.php');
 
         /*         * Set our permission array.
          * anything a guest can do, a volunteer and manager can also do
@@ -53,6 +55,7 @@ error_reporting(E_ERROR | E_PARSE);
         //Check if they're at a valid page for their access level.
         $current_page = strtolower(substr($_SERVER['PHP_SELF'], strpos($_SERVER['PHP_SELF'],"/")+1));
         $current_page = substr($current_page, strpos($current_page,"/")+1);
+        $person = retrieve_person($_SESSION['_id']);
         
         if($permission_array[$current_page]>$_SESSION['access_level']){
             //in this case, the user doesn't have permission to view this page.
@@ -81,7 +84,7 @@ error_reporting(E_ERROR | E_PARSE);
             echo('<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>');
         	echo('<div class="collapse navbar-collapse" id="navbarSupportedContent">');
             echo('<ul class="navbar-nav me-auto mb-2 mb-lg-0">');
-//            echo " <br><b>"."Gwyneth's Gift Homebase"."</b>|"; //changed: 'Homebase' to 'Gwyneth's Gift Homebase'
+//            echo " <br><b>"."Angels On Wheels Homebase"."</b>|"; //changed: 'Homebase' to 'Angels On Wheels Homebase'
 	        if ($_SESSION['access_level'] == 1) {
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'index.php">Home</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'about.php">About</a></li>');
@@ -96,6 +99,7 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'ViewCampaign.php">View Campaign</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
 
 
 //                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
@@ -127,7 +131,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
-	       
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
 	       
                 
 	       
