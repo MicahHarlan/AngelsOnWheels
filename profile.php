@@ -95,7 +95,7 @@
                 if ($person->get_first_name()=="new")
         	        echo '<p>First Name<span style="font-size:x-small;color:FF0000">*</span>: <input class="form-control-sm" type="text" name="first_name" tabindex="1" value="'.$person->get_first_name().'">';
                 else 
-                    echo '<h3>Personal Information</h3>';
+                    echo '<h3 style="margin-left:40px;">Personal Information</h3>';
                     echo '<div class="rounded-circle text-center" style="float:right; margin-right:100px; width: 150px; height: 150px; background-color: white; color:#870287"><p style="padding-top:8px;font-size:11;">T-Shirt Size</p>';
                     echo '<p style="font-size:40px; padding-top:0px;">' .$person->get_shirt_size() . '</p></div>';
                     echo '<div class="rounded-circle text-center" style="clear: both; float:right; margin-right:200px; width: 150px; height: 150px; background-color: white; color:#870287"><p style="padding-top:12px;font-size:11;">Computer Owner</p>';
@@ -104,7 +104,7 @@
                     echo '<p style="font-size:40px;">' .$person->get_camera() . '</p></div>';
                     echo '<div class="rounded-circle text-center" style="clear: both; float:right; margin-right:200px;width: 150px; height: 150px; background-color: white; color:#870287"><p style="padding-top:22px;font-size:11;">Reliable Transportation</p>';
                     echo '<p style="font-size:40px;">' .$person->get_transportation() . '</p></div>';
-        	        echo '<table><tr valign=top><td style="color:white">Name:</td></tr>';
+        	        echo '<table style="margin-left:40px;"><tr valign=top><td style="color:white">Name:</td></tr>';
                     echo '<tr valign=top><td style="color:white; height:50px">' . $person->get_first_name() . ' ' . $person->get_last_name() . '</td></tr>';
                     echo '<tr valign=top style="color:white"><td>Address: </td></tr>';
                     echo '<tr valign=top style="color:white"><td>' . $person->get_address() . '</td></tr>';
@@ -119,9 +119,9 @@
                     echo '<tr valign=top style="color:white; height:50px"><td>' . $person->get_contact_time() . '</td></tr>';
                     echo '<tr valign=top style="color:white"><td>Preferred Method of Contact: </td></tr>';
                     echo '<tr valign=top style="color:white; height:50px"><td>' . $person->get_cMethod() . '</td></tr></table>';
-                    echo '<h3>Emergency Contact Information</h3>';
+                    echo '<h3 style="margin-left:40px;">Emergency Contact Information</h3>';
                     echo '<div style="margin-left:80px"></div>';
-                    echo '<table><tr valign=top><td style="color:white">Name:</td></tr>';
+                    echo '<table style="margin-left:40px;"><tr valign=top><td style="color:white">Name:</td></tr>';
                     echo '<tr valign=top><td style="color:white; height:50px">' . $person->get_contact_name() . '</td></tr>';
                     echo '<tr valign=top style="color:white"><td>Telephone Number: </td></tr>';
                     echo '<tr valign=top style="color:white; height:50px;"><td>' . $person->get_contact_num() . '</td></tr>';
