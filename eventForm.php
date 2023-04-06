@@ -40,9 +40,11 @@
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
     }
 ?>
+
 <form method="POST">
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
-    <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
+    <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />
+    
     <input type="hidden" name="_form_submit" value="1">
     <script>
 			$(function(){
@@ -73,8 +75,9 @@
             echo('&nbsp;&nbsp;&nbsp;&nbspEvent Name <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="event_name" tabindex="2" value="'. $event->get_event_name() . '"');
         }
         if ($_SESSION['access_level']==1) {
-            ?>
-        <body style="background-color: rgb(250, 249, 246);">
+             
+    ?>
+        
 <div class="container">
     <h2> <?PHP echo($event->get_event_name()); ?> </h2>
     <div class= "content">
@@ -84,15 +87,9 @@
         <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
     
         </div>
-        <?php
-        }
-    ?>
-
 </select>
 <?php     
-        
-       
-        
+        }
 ?>
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
@@ -107,13 +104,13 @@ if ($_SESSION['access_level']==2) {
 	echo($event->get_description().'</textarea>');
     
 }
-
-// volunteers can view the event description
 /*
+// volunteers can view the event description
 if ($_SESSION['access_level']==1) {
     echo('<br>');
 	echo('<p>Event Description: Please read before signing up<br />');
     echo ('<p style="border-width:3px; border-style:solid; border-color:#0000FF.; padding: 1em;">' . $event->get_description() . '</p>');
+	
 
 }
 
@@ -136,10 +133,7 @@ echo '</fieldset>';
 <?PHP
     if ($_SESSION['access_level'] >= 1){
         $con = connect();
-        
-echo('<p><strong>People Working:</strong> <ul>');
-
-        
+        echo('<p><strong>People Working:</strong> <ul>');
         $thisperson = retrieve_person($_SESSION['_id']);
         $thisname = $thisperson->get_first_name();
         $this_person_id = $thisperson->get_id();
@@ -175,6 +169,16 @@ echo('<p><strong>People Working:</strong> <ul>');
         elseif($set==1){     
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Un-Sign-up" name="unsignup"><br /><br />');
         }
+
+        //Start Report button
+        
+        echo    "<a href=scheduleIssue.php?id=" . 
+        str_replace(" ","_",$event->get_id()) . ">";
+        ?> 
+            <button class= "reportButton">Report Schedule Issue</button> 
+        <!--End  Report button-->
+
+<?php
     }
     ?>
 
@@ -189,22 +193,12 @@ echo('<p><strong>People Working:</strong> <ul>');
             //echo('Hit <input type="submit" value="Submit" name="Submit Edits"> to submit these edits.<br /><br />');
             echo('Hit <input class="btn btn-success" type="submit" value="Submit" name="Submit Edits"> to submit these edits.<br /><br />');
         }
-        
         if ($id != 'new' && $_SESSION['access_level'] >= 2) {
             echo ('<input type="checkbox" name="deleteMe" value="DELETE"> Check this box and then hit ' .
             '<input type="submit" value="Delete" name="Delete Entry"> to delete this entry. <br />');
 
         }
-       
         ?>
-                <!--send event id to the schedule issue page-->
-                <?php 
-        echo    "<a href=scheduleIssue.php?id=" . 
-        str_replace(" ","_",$event->get_event_id()) . ">";
-        ?> 
-            <button class= "reportButton">Report Schedule Issue</button> 
-        </a>
-     
         </div>
-
+    </body>    
 </form>
