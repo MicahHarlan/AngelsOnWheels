@@ -169,7 +169,7 @@ echo '</fieldset>';
         elseif($set==1){     
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Un-Sign-up" name="unsignup"><br /><br />');
         }
-
+        if ($_SESSION['access_level'] == 1){
         //Start Report button
         
         echo    "<a href=scheduleIssue.php?id=" . 
@@ -179,6 +179,7 @@ echo '</fieldset>';
         <!--End  Report button-->
 
 <?php
+    }
     }
     ?>
 
