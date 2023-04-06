@@ -198,10 +198,7 @@ function get_all_campaigns() {
  function get_campaign_by_name_sort($type) { 
     $con=connect();
     $query = "SELECT * FROM `dbcampaigns` ORDER BY `dbcampaigns`.`campaign_name`" . $type;
-    function dayCheckCampaign($start, $end){
-    $diff = strtotime($start) - strtotime($end);
-    return abs(round($diff / 86400));
-}    $result = mysqli_query($con,$query);
+    $result = mysqli_query($con,$query);
     $theCampaigns = array();
     while ($result_row = mysqli_fetch_assoc($result)) {      
         $theCampaign = make_a_campaign($result_row);
