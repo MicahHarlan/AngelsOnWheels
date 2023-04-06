@@ -11,8 +11,9 @@
  * 	@author Oliver Radwan, Xun Wang and Allen Tucker
  * 	@version 9/1/2008 revised 4/1/2012 revised 8/3/2015
  */
-session_start();
+
 session_cache_expire(30);
+session_start();
 include_once('database/dbPersons.php');
 include_once('domain/Person.php');
 include_once('database/dbLog.php');
