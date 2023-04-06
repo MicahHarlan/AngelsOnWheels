@@ -89,7 +89,7 @@ if ($id == 'new') {
                     $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
                     mysqli_query($con, $query);*/
                 }
-                elseif($_POST['unsignup']){
+                else if($_POST['unsignup']){
                     $thisperson = retrieve_person($_SESSION['_id']);
                     $this_person_id = $thisperson->get_id();
                     $campId = $_POST['camp_id'];
@@ -111,7 +111,22 @@ if ($id == 'new') {
                     $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
                     mysqli_query($con, $query);
                     include('campaignEditForm.php');
-                }
+
+                } else if ($_POST['deleteMe'] == "DELETE") {
+                        $result = retrieve_campaign($id);
+                        $camp_name = $result->get_campaign_name();   
+                        if (!$result)
+                            echo('<p>Unable to delete. ' . $camp_name . ' is not in the database. <br>Please report this error to the Manager.');
+                        else {
+                                $result = remove_campaign($id);
+                                echo("<p>You have successfully removed " . $camp_name . " from the database.</p>");
+                                if ($id == $_SESSION['_id']) {
+                                    session_unset();
+                                    session_destroy();
+                                }
+                        }
+                    }
+
                 else {
                     //in this case, the form has been submitted, so validate it
                     $errors = validate_form($event);  //step one is validation.

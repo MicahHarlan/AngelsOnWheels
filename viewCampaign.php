@@ -67,8 +67,6 @@ include_once('domain/Campaign.php');
             <?PHP
             echo("<br>");
 
-
-
             $result = get_all_campaigns();
             //Searching by name
             if (isset($_GET['Search'])){
@@ -111,7 +109,10 @@ include_once('domain/Campaign.php');
             
             $td = "</td><td>";
                 echo("<tr>");
-			    echo("<td>" . $vol->get_campaign_name() . $td
+
+                $id = $vol->get_campaign_id();
+
+			    echo("<td> <a href='campaignEdit.php?id=".$id."'>". $vol->get_campaign_name() ."</a>". $td
             .    $vol->get_description()  . $td . $vol->get_campaign_start()) . $td . $vol->get_campaign_end();
                 echo("</tr>");    
                     }

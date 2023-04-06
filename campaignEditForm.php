@@ -39,6 +39,7 @@ if ($_SESSION['access_level']==2) {
 	echo('<p><strong>Campaign Description:</strong><br />');
 	echo('<textarea name="description" rows="2" cols="75">');
 	echo($event->get_description().'</textarea>');
+   
     
 }
 
@@ -113,6 +114,10 @@ if ($_SESSION['access_level']==1) {
     if ($_SESSION['access_level'] == 2){
             echo('<br>');
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Submit" name="Submit"><br /><br />');
+            
+            echo ('<input type="checkbox" name="deleteMe" value="DELETE"> Check this box and then hit ' .
+            '<input type="submit" value="Delete" name="Delete Entry"> to delete this entry. <br />');
+
     }
     include('footer.inc')
         ?>
