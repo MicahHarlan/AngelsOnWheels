@@ -25,11 +25,11 @@ function add_person($person) {
     if (!$person instanceof Person)
         die("Error: add_person type mismatch");
     $con=connect();
-    $query = "SELECT * FROM dbPersons WHERE id = '" . $person->get_id() . "'";
+    $query = "SELECT * FROM dbpersons WHERE id = '" . $person->get_id() . "'";
     $result = mysqli_query($con,$query);
     //if there's no entry for this id, add it
     if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_query($con,'INSERT INTO dbPersons VALUES("' .
+        mysqli_query($con,'INSERT INTO dbpersons VALUES("' .
                 $person->get_id() . '","' .
                 $person->get_start_date() . '","' .
                 $person->get_venue() . '","' .
@@ -82,13 +82,13 @@ function add_person($person) {
 
 function remove_person($id) {
     $con=connect();
-    $query = 'SELECT * FROM dbPersons WHERE id = "' . $id . '"';
+    $query = 'SELECT * FROM dbpersons WHERE id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    $query = 'DELETE FROM dbPersons WHERE id = "' . $id . '"';
+    $query = 'DELETE FROM dbpersons WHERE id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
@@ -101,7 +101,7 @@ function remove_person($id) {
 
 function retrieve_person($id) {
     $con=connect();
-    $query = "SELECT * FROM dbPersons WHERE id = '" . $id . "'";
+    $query = "SELECT * FROM dbpersons WHERE id = '" . $id . "'";
     $result = mysqli_query($con,$query);
     if (mysqli_num_rows($result) !== 1) {
         mysqli_close($con);
@@ -122,7 +122,7 @@ function retrieve_persons_by_name ($name) {
 	$name = explode(" ", $name);
 	$first_name = $name[0];
 	$last_name = $name[1];
-    $query = "SELECT * FROM dbPersons WHERE first_name = '" . $first_name . "' AND last_name = '". $last_name ."'";
+    $query = "SELECT * FROM dbpersons WHERE first_name = '" . $first_name . "' AND last_name = '". $last_name ."'";
     $result = mysqli_query($con,$query);
     while ($result_row = mysqli_fetch_assoc($result)) {
         $the_person = make_a_person($result_row);
@@ -133,7 +133,7 @@ function retrieve_persons_by_name ($name) {
 
 function change_password($id, $newPass) {
     $con=connect();
-    $query = 'UPDATE dbPersons SET password = "' . $newPass . '" WHERE id = "' . $id . '"';
+    $query = 'UPDATE dbpersons SET password = "' . $newPass . '" WHERE id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return $result;
@@ -141,7 +141,7 @@ function change_password($id, $newPass) {
 
 function update_hours($id, $new_hours) {
     $con=connect();
-    $query = 'UPDATE dbPersons SET hours = "' . $new_hours . '" WHERE id = "' . $id . '"';
+    $query = 'UPDATE dbpersons SET hours = "' . $new_hours . '" WHERE id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return $result;
@@ -149,7 +149,7 @@ function update_hours($id, $new_hours) {
 
 function update_birthday($id, $new_birthday) {
 	$con=connect();
-	$query = 'UPDATE dbPersons SET birthday = "' . $new_birthday . '" WHERE id = "' . $id . '"';
+	$query = 'UPDATE dbpersons SET birthday = "' . $new_birthday . '" WHERE id = "' . $id . '"';
 	$result = mysqli_query($con,$query);
 	mysqli_close($con);
 	return $result;
@@ -157,7 +157,7 @@ function update_birthday($id, $new_birthday) {
 
 function update_start_date($id, $new_start_date) {
 	$con=connect();
-	$query = 'UPDATE dbPersons SET start_date = "' . $new_start_date . '" WHERE id = "' . $id . '"';
+	$query = 'UPDATE dbpersons SET start_date = "' . $new_start_date . '" WHERE id = "' . $id . '"';
 	$result = mysqli_query($con,$query);
 	mysqli_close($con);
 	return $result;
@@ -170,7 +170,7 @@ function update_start_date($id, $new_start_date) {
 
 function getall_dbPersons($name_from, $name_to, $venue) {
     $con=connect();
-    $query = "SELECT * FROM dbPersons";
+    $query = "SELECT * FROM dbpersons";
     $query.= " WHERE venue = '" .$venue. "'"; 
     $query.= " AND last_name BETWEEN '" .$name_from. "' AND '" .$name_to. "'"; 
     $query.= " ORDER BY last_name,first_name";
@@ -191,7 +191,7 @@ function getall_dbPersons($name_from, $name_to, $venue) {
 
 function getall_volunteer_names() {
 	$con=connect();
-	$query = "SELECT first_name, last_name FROM dbPersons ORDER BY last_name,first_name";
+	$query = "SELECT first_name, last_name FROM dbpersons ORDER BY last_name,first_name";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
@@ -255,7 +255,7 @@ function make_a_person($result_row) {
 
 function getall_names($status, $type, $venue) {
     $con=connect();
-    $result = mysqli_query($con,"SELECT id,first_name,last_name,type FROM dbPersons " .
+    $result = mysqli_query($con,"SELECT id,first_name,last_name,type FROM dbpersons " .
             "WHERE venue='".$venue."' AND status = '" . $status . "' AND TYPE LIKE '%" . $type . "%' ORDER BY last_name,first_name");
     mysqli_close($con);
     return $result;
@@ -267,13 +267,13 @@ function getall_names($status, $type, $venue) {
 
 function getall_type($t) {
     $con=connect();
-    $query = "SELECT * FROM dbPersons WHERE (type LIKE '%" . $t . "%' OR type LIKE '%sub%') AND status = 'active'  ORDER BY last_name,first_name";
+    $query = "SELECT * FROM dbpersons WHERE (type LIKE '%" . $t . "%' OR type LIKE '%sub%') AND status = 'active'  ORDER BY last_name,first_name";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    mysqli_close;
+    mysqli_close($con);
     return $result;
 }
 
@@ -283,7 +283,7 @@ function getall_type($t) {
 
 function getall_available($type, $day, $shift, $venue) {
     $con=connect();
-    $query = "SELECT * FROM dbPersons WHERE (type LIKE '%" . $type . "%' OR type LIKE '%sub%')" .
+    $query = "SELECT * FROM dbpersons WHERE (type LIKE '%" . $type . "%' OR type LIKE '%sub%')" .
             " AND availability LIKE '%" . $day .":". $shift .
             "%' AND status = 'active' AND venue = '" . $venue . "' ORDER BY last_name,first_name";
     $result = mysqli_query($con,$query);
@@ -295,7 +295,7 @@ function getall_available($type, $day, $shift, $venue) {
 // retrieve only those persons that match the criteria given in the arguments
 function getonlythose_dbPersons($type, $status, $name, $day, $shift, $venue) {
    $con=connect();
-   $query = "SELECT * FROM dbPersons WHERE type LIKE '%" . $type . "%'" .
+   $query = "SELECT * FROM dbpersons WHERE type LIKE '%" . $type . "%'" .
            " AND status LIKE '%" . $status . "%'" .
            " AND (first_name LIKE '%" . $name . "%' OR last_name LIKE '%" . $name . "%')" .
            " AND availability LIKE '%" . $day . "%'" . 
@@ -342,7 +342,7 @@ function get_people_for_export($attr, $first_name, $last_name, $type, $status, $
     error_log("query for type is ". $type_query);
     
    	$con=connect();
-    $query = "SELECT ". $attr ." FROM dbPersons WHERE 
+    $query = "SELECT ". $attr ." FROM dbpersons WHERE 
     			first_name REGEXP ". $first_name . 
     			" and last_name REGEXP ". $last_name . 
     			" and (type REGEXP ". $type_query .")". 
@@ -362,7 +362,7 @@ function get_people_for_export($attr, $first_name, $last_name, $type, $status, $
 //return an array of "last_name:first_name:birth_date", and sorted by month and day
 function get_birthdays($name_from, $name_to, $venue) {
 	$con=connect();
-   	$query = "SELECT * FROM dbPersons WHERE availability LIKE '%" . $venue . "%'" . 
+   	$query = "SELECT * FROM dbpersons WHERE availability LIKE '%" . $venue . "%'" . 
    	$query.= " AND last_name BETWEEN '" .$name_from. "' AND '" .$name_to. "'";
     $query.= " ORDER BY birthday";
 	$result = mysqli_query($con,$query);
@@ -379,7 +379,7 @@ function get_birthdays($name_from, $name_to, $venue) {
 // and sorted alphabetically
 function get_logged_hours($from, $to, $name_from, $name_to, $venue) {
 	$con=connect();
-   	$query = "SELECT first_name,last_name,hours,venue FROM dbPersons "; 
+   	$query = "SELECT first_name,last_name,hours,venue FROM dbpersons "; 
    	$query.= " WHERE venue = '" .$venue. "'";
    	$query.= " AND last_name BETWEEN '" .$name_from. "' AND '" .$name_to. "'";
    	$query.= " ORDER BY last_name,first_name";
