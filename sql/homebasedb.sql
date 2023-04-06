@@ -32,7 +32,8 @@ CREATE TABLE `dbcampaigns` (
   `description` text NOT NULL,
   `campaign_name` text NOT NULL,
   `campaign_start_date` text DEFAULT NULL,
-  `campaign_end_date` text DEFAULT NULL
+  `campaign_end_date` text DEFAULT NULL,
+  `campaign_working` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -172,7 +173,8 @@ CREATE TABLE `dbevents` (
   `venue` text DEFAULT NULL,
   `event_name` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `event_id` text DEFAULT NULL
+  `event_id` text DEFAULT NULL,
+  `event_working` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
