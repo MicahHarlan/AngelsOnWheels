@@ -130,6 +130,6 @@ $(function() {
 </div>
 </div>
 </div>
-        <?PHP include('footer.inc'); ?>
+        <?PHP include('footer.php'); ?>
 
 </body>

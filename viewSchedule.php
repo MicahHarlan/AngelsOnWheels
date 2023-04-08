@@ -43,7 +43,7 @@ include_once("domain/MasterScheduleEntry.php");
                 echo "<br>";
                 ?>
             </div>
-            <?PHP include('footer.inc'); ?>
+            <?PHP include('footer.php'); ?>
         </div>
     </body>
 </html>

@@ -159,7 +159,7 @@
         <div style="padding-bottom: 150px"></div>
     </div>
     <?PHP
-    include('footer.inc');
+    include('footer.php');
     ?>
 </body>
 </html>
