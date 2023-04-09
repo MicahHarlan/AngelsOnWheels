@@ -28,9 +28,9 @@ include_once('dbinfo.php');
  */
 function create_dbLog() {
     $con=connect();
-    mysqli_query($con,"DROP TABLE IF EXISTS dbLog");
+    mysqli_query($con,"DROP TABLE IF EXISTS dblog");
     //NOTE: primary key set to id.  id is text in the form: yy-mm-dd-ss-se,  ss=shift start,  se=shift end
-    $result = mysqli_query($con,"CREATE TABLE dbLog (id INT(3) NOT NULL AUTO_INCREMENT,time TEXT, message TEXT, PRIMARY KEY(id))");
+    $result = mysqli_query($con,"CREATE TABLE dblog (id INT(3) NOT NULL AUTO_INCREMENT,time TEXT, message TEXT, PRIMARY KEY(id))");
     if (!$result)
         echo mysqli_error($con);
     mysqli_close($con);
@@ -42,7 +42,7 @@ function create_dbLog() {
 function add_log_entry($message) {
     $time = time();
     $con=connect();
-    $query = "INSERT INTO dbLog (time, message, venue) VALUES (\"" . $time . "\",\"" . $message . "\",\"" . $_SESSION['venue'] ."\")";
+    $query = "INSERT INTO dblog (time, message, venue) VALUES (\"" . $time . "\",\"" . $message . "\",\"" . $_SESSION['venue'] ."\")";
     $result = mysqli_query($con,$query);
     if (!$result) {
         echo mysqli_error($con);
@@ -55,7 +55,7 @@ function add_log_entry($message) {
  */
 function delete_log_entry($id) {
     $con=connect();
-    $query = "DELETE FROM dbLog WHERE id=\"" . $id . "\" AND venue=\"" .$_SESSION["venue"]."\"";
+    $query = "DELETE FROM dblog WHERE id=\"" . $id . "\" AND venue=\"" .$_SESSION["venue"]."\"";
     $result = mysqli_query($con,$query);
     if (!$result)
         echo mysqli_error($con);
@@ -69,7 +69,7 @@ function delete_log_entry($id) {
 function delete_log_entries($ids) {
     $con=connect();
     for ($i = 0; $i < count($ids); ++$i) {
-        $query = "DELETE FROM dbLog WHERE id=\"" . $ids[$i] . "\" AND venue=\"" .$_SESSION["venue"]."\"";
+        $query = "DELETE FROM dblog WHERE id=\"" . $ids[$i] . "\" AND venue=\"" .$_SESSION["venue"]."\"";
         $result = mysqli_query($con,$query);
         if (!$result)
             echo mysqli_error($con);
@@ -83,7 +83,7 @@ function delete_log_entries($ids) {
  */
 function get_full_log() {
     $con=connect();
-    $query = "SELECT * FROM dbLog WHERE venue=\"" .$_SESSION['venue']."\" ORDER BY time DESC";
+    $query = "SELECT * FROM dblog WHERE venue=\"" .$_SESSION['venue']."\" ORDER BY time DESC";
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     if (!$result) {

@@ -18,7 +18,6 @@ include_once('database/dbPersons.php');
 include_once('domain/Person.php');
 include_once('database/dbLog.php');
 $id = str_replace("_"," ",$_GET["id"]);
-
 if ($id == 'new') {
     // for new applicants set the venue to portland so all their availability info saves, leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
     $_SESSION['venue']="portland"; 
@@ -64,9 +63,10 @@ if ($id == 'new') {
             <div class="willthisFix container-fluid border border-dark" id="content">
                 <?PHP
                 include('personValidate.inc');
-                if ($_POST['_form_submit'] != 1)
+                if ($_POST['_form_submit'] != 1){
                 //in this case, the form has not been submitted, so show it
-                    include('personForm.php');
+                include('personForm.php');
+                }
                 else {
                     //in this case, the form has been submitted, so validate it
                     $errors = validate_form($person);  //step one is validation.
