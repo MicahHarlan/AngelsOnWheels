@@ -24,12 +24,69 @@ session_start();
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
 		<link rel="stylesheet" href="lib/jquery-ui.css" />
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+	<script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+		$(document).on('click', '.btn_print', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('container_content'); 
+
+			html2pdf().from(element).save();
+
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			html2pdf().set(opt).from(element).save();
+		});
+
+	});
+	</script>
+    <script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+		$(document).on('click', '.btn_print2', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('container_content2'); 
+
+			html2pdf().from(element).save();
+
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			html2pdf().set(opt).from(element).save();
+		});
+
+	});
+	</script>
     </head>
     <body style="background-color: rgb(250, 249, 246);">
         <div class="container-fluid" id="container">
             <?PHP include('header.php');
             include('database/dbEvents.php'); ?>
+
+             		<!-- Button to Save as PDF-->
+                     <div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
+				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print2">
+				</div>
+ <div class="container_content2" id="container_content2" >
             <div class="container-fluid" id="content">
                 <?PHP
                 // display the search form
@@ -78,10 +135,16 @@ session_start();
 				    }		               
                 }            
                 ?>
-
+            
                 <br>
  <center><hr style="width:90%"></center>
  <br>
+
+             		<!-- Button to Save as PDF-->
+                     <div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
+				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print">
+				</div>
+ <div class="container_content" id="container_content" >
                 <!-- Add table of events after the search function-->
                 <p><strong>Event List:</strong> <p>
                 <form action="">
@@ -185,9 +248,11 @@ session_start();
             </table>
             </div>
             </div>
+            </div>
                   <!-- below is the footer that we're using currently-->
                   <br><br><br><br>
                 </div>
+                        </div>
         </div>
         <?PHP include('footer.inc'); ?>
     </body>
