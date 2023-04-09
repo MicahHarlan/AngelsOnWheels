@@ -20,6 +20,8 @@
     // Only managers for adding and edit
     include_once('database/dbPersons.php');
     include_once('domain/Person.php');
+    session_cache_expire(30);
+    session_start();
     if ($_SESSION['access_level'] == 2)
 	    if ($id == 'new') {
 	        echo('<p><strong>Event Page</strong><br />');
@@ -40,7 +42,7 @@
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
     }
 ?>
-
+    <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />
 <form method="POST">
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
     <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />
@@ -169,19 +171,17 @@ echo '</fieldset>';
         elseif($set==1){     
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Un-Sign-up" name="unsignup"><br /><br />');
         }
-        if ($_SESSION['access_level'] == 1){
+      //  if ($_SESSION['access_level'] == 1){
         //Start Report button
-        
-        echo    "<a href=scheduleIssue.php?id=" . 
-        str_replace(" ","_",$event->get_id()) . ">";
-        ?> 
-            <button class= "reportButton">Report Schedule Issue</button> 
-        <!--End  Report button-->
+     /*   
+        echo '<form action="scheduleIssue.php?id=' . str_replace(" ", "_", $event->get_id()) . '"><input type="submit" value="Report Schedule Issue">
+        </form>'; 
+   */
 
-<?php
+
+ //   
     }
-    }
-    ?>
+?>
 
     <p>
     <input type="hidden" name="event_id" value=<?PHP echo("\"" . $event->get_event_id() . "\""); ?>>
@@ -200,6 +200,18 @@ echo '</fieldset>';
 
         }
         ?>
-        </div>
+       
+        </form>
+        <?PHP
+
+        if ($_SESSION['access_level'] == 1){
+            $evid = $event->get_event_id();
+
+            ?><form style="float: left; margin-bottom:4em; margin-top:-2em; padding-top:-3em;" class="reportButton" method="post" action="scheduleIssue.php?id=<?php echo str_replace(" ", "_", $evid); ?>"><input class="btn btn-success"type="submit" value="Report Schedule Issue">
+            </form>
+    <?php
+        }
+        ?>
+         </div>
     </body>    
-</form>
+
