@@ -81,13 +81,14 @@ session_start();
         <div class="container-fluid" id="container">
             <?PHP include('header.php');
             include('database/dbEvents.php'); ?>
-
+ <div class="container-fluid" id="content">
              		<!-- Button to Save as PDF-->
                      <div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
 				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print2">
 				</div>
+                <div>
  <div class="container_content2" id="container_content2" >
-            <div class="container-fluid" id="content">
+           
                 <?PHP
                 // display the search form
                 $area = $_GET['area'];
@@ -113,7 +114,7 @@ session_start();
                         echo ' with name like "' . $name . '"';
 				    if (sizeof($result) > 0) {
 				       echo ' (select one for more info).';
-                       echo '<div class="overflow-auto" id="target" style="width: variable; height: 400px;">';
+                       echo '<div class="overflow-auto" id="target" style="width: variable; ">';
 				       echo '<p><table class="table table-info table-responsive table-striped-columns table-hover table-bordered"><thead> <tr><th>Event Name</th><th>Event Date (YY-MM-DD)</th></tr></thead>';
 				       foreach ($result as $vol) {
                             //if Volunteer
@@ -135,15 +136,17 @@ session_start();
 				    }		               
                 }            
                 ?>
-            
-                <br>
+ </div>
+                </div>
+            <br>
  <center><hr style="width:90%"></center>
  <br>
 
-             		<!-- Button to Save as PDF-->
+    <!-- Button to Save as PDF-->
                      <div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
 				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print">
 				</div>
+                
  <div class="container_content" id="container_content" >
                 <!-- Add table of events after the search function-->
                 <p><strong>Event List:</strong> <p>
@@ -248,7 +251,8 @@ session_start();
             </table>
             </div>
             </div>
-            </div>
+        </div>
+        <!-- End of 2nd Save to PDF-->
                   <!-- below is the footer that we're using currently-->
                   <br><br><br><br>
                 </div>
