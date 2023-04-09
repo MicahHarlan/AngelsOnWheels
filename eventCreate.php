@@ -79,7 +79,7 @@ if ($id == 'new') {
                     else
                         process_form($id,$event);
                         echo "</div>";
-                    include('footer.inc');
+                    include('footer.php');
                     echo('</div></body></html>');
                     die();
                 }
@@ -158,7 +158,7 @@ if ($id == 'new') {
                 }
                 ?>
             </div>
-            <?PHP include('footer.inc'); ?>
+            <?PHP include('footer.php'); ?>
         </div>
     </body>
 </html> 

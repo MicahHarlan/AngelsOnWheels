@@ -129,6 +129,6 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 		</div>
 	</div>
 		<br/><br/><br/>
-		<?PHP include('footer.inc'); ?>
+		<?PHP include('footer.php'); ?>
 	</body>
 </html>

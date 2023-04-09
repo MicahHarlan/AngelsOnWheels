@@ -254,7 +254,7 @@ session_start();
                 </div>
                         </div>
         </div>
-        <?PHP include('footer.inc'); ?>
+        <?PHP include('footer.php'); ?>
     </body>
 </html>
 

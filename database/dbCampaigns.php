@@ -25,31 +25,29 @@ include_once(dirname(__FILE__).'/../domain/Campaign.php');
 
 
 /*
- * add an event to dbEvents table: if already there, return false
+ * add an campaign to dbcampaign table: if already there, return false
  */
 
 function add_campaign($campaign) {
     if (!$campaign instanceof Campaign)
         die("Error: add_campaign type mismatch");
     $con=connect();
-    $query = "SELECT * FROM dbCampaigns WHERE campaign_id = '" . $campaign->get_campaign_id() . "'";
+    $query = "SELECT * FROM dbcampaigns WHERE campaign_id = '" . $campaign->get_campaign_id() . "'";
     $result = mysqli_query($con,$query);
-    
     $desc = "description";
     $camp_name = "campaign_name";
-
+    
     //if there's no entry for this id, add it
     if ($result == null || mysqli_num_rows($result) == 0) {
         #$sql = "SELECT MAX(`campaign_id`) FROM `dbCampaigns`";
         #mysqli_query($con,$sql);
         
-        $sql = "INSERT INTO `dbCampaigns` (`description`, `campaign_name`,`campaign_start_date`,`campaign_end_date`) VALUES 
+        $sql = "INSERT INTO `dbcampaigns` (`description`, `campaign_name`,`campaign_start_date`,`campaign_end_date`) VALUES 
         ( '" . $campaign->get_description() . "','" . $campaign->get_campaign_name() . "','" .
         $campaign->get_campaign_start() . "','" . $campaign->get_campaign_end() . "')";
 
         mysqli_query($con,$sql);
         mysqli_close($con);
-        
         return true;
     }
     mysqli_close($con);
@@ -57,18 +55,18 @@ function add_campaign($campaign) {
 }
 
 /*
- * remove an event from dbCampaign table.  If already there, return false
+ * remove an campaign from dbCampaign table.  If already there, return false
  */
 
 function remove_campaign($id) {
     $con=connect();
-    $query = 'SELECT * FROM dbCampaigns WHERE campaign_id = "' . $id . '"';
+    $query = 'SELECT * FROM dbcampaigns WHERE campaign_id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    $query = 'DELETE FROM dbCampaigns WHERE campaign_id = "' . $id . '"';
+    $query = 'DELETE FROM dbcampaigns WHERE campaign_id = "' . $id . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
@@ -80,7 +78,7 @@ function remove_campaign($id) {
  */
 function retrieve_campaign($id) {
     $con=connect();
-    $query = "SELECT * FROM dbCampaigns WHERE campaign_id = '" . $id . "'";
+    $query = "SELECT * FROM dbcampaigns WHERE campaign_id = '" . $id . "'";
     $result = mysqli_query($con,$query);
     if (mysqli_num_rows($result) !== 1) {
         mysqli_close($con);
@@ -99,7 +97,7 @@ function retrieve_campaign($id) {
 // not in use, may be useful for future iterations in changing how events are edited (i.e. change the remove and create new event process)
 function update_campaign_date($id, $new_event_date) {
 	$con=connect();
-	$query = 'UPDATE dbEvents SET event_date = "' . $new_event_date . '" WHERE id = "' . $id . '"';
+	$query = 'UPDATE dbcampaigns SET event_date = "' . $new_event_date . '" WHERE id = "' . $id . '"';
 	$result = mysqli_query($con,$query);
 	mysqli_close($con);
 	return $result;
@@ -121,9 +119,8 @@ function make_a_campaign($result_row) {
 
 // retrieve only those events that match the criteria given in the arguments
 function get_all_campaigns() {
-   
     $con=connect();
-    $query = "SELECT * FROM `dbCampaigns`";
+    $query = "SELECT * FROM `dbcampaigns`";
     $result = mysqli_query($con,$query);
     $theCampaigns = array();
     while ($result_row = mysqli_fetch_assoc($result)) {
@@ -133,11 +130,12 @@ function get_all_campaigns() {
     }
     mysqli_close($con);
     return $theCampaigns;
- }   
+ } 
 
- function fix_camp_date($wrong_format_date){
-    //This function is used to take in the date of an event or campaign and return whether 
+
+//This function is used to take in the date of an event or campaign and return whether 
     // or not the event/campaign is in the future or not.
+ function fix_camp_date($wrong_format_date){
     $explodedString = explode("-",$wrong_format_date);
     $year = "20".$explodedString[0];
     $month = $explodedString[1];
@@ -146,51 +144,35 @@ function get_all_campaigns() {
     $fixedTimeAsDateTime = strtotime($fixedTime);
     $newDate = getDate($fixedTimeAsDateTime);
     $finalDATE = $newDate['year'] . "/" . $newDate['mon'] . "/" . $newDate['mday'];
-    
-    //echo($finalDATE);
-    
     $finalfinalDate = new Datetime($finalDATE);
     $currentDate = new DateTime('now');
-   
-
-    //echo(gettype($finalfinalDate));
-    //echo(gettype($currentDate));
     $finalfinalfinalDate = date_format($finalfinalDate,'Y-m-d H:i:s');
     $fixedCurrentDate = date_format($currentDate,'Y-m-d H:i:s');   
-    //echo($finalfinalfinalDate);
-    //echo($fixedCurrentDate); 
-    if ($fixedCurrentDate<$finalfinalfinalDate){
-        //echo("True");
+    if ($fixedCurrentDate<$finalfinalfinalDate){    
         return True;
-
     }
-    else{
-        //echo("False");
+    else{   
         return False;
     }
  }
-/*
- $result_row['campaign_name'],                                      
- $result_row['description'],
- $result_row['campaign_id'],
- $result_row['campaign_start_date'],
- $result_row['campaign_end_date']); 
 
- function retrieve_campaign($id) {
+ 
+
+ //Given a campaign this returns that campaign
+ function get_campaign_by_name($name) { 
     $con=connect();
-    $query = "SELECT * FROM dbEvents WHERE campaign_id = '" . $id . "'";
-    $result = mysqli_query($con, $query);
-    if (mysqli_num_rows($result) !== 1) {
-        //mysqli_close($con);
-        return false;
+    $query = "SELECT * FROM dbcampaigns WHERE campaign_name = '" . $name . "'";
+    $result = mysqli_query($con,$query);
+    $theCampaigns = array();
+    while ($result_row = mysqli_fetch_assoc($result)) {
+        $theCampaign = make_a_campaign($result_row);
+        $theCampaigns[] = $theCampaign;
     }
-    $result_row = mysqli_fetch_assoc($result);
-    // var_dump($result_row);
-    //$theEvent = make_an_event($result_row);
-//    mysqli_close($con);
-    return $result_row;
+    mysqli_close($con);
+    return $theCampaigns;
  }
-*/
+
+
  function monthCheckCampaign($event_start_date, $event_end_date){
     $explodedStart = explode("-",$event_start_date);
     $yearStart = "20".$explodedStart[0];
@@ -211,26 +193,48 @@ function get_all_campaigns() {
     }
 }
 
-function dayCheckCampaign($start, $end){
+
+ //Sorts campaign by name ASC or DESC
+ function get_campaign_by_name_sort($type) { 
+    $con=connect();
+    $query = "SELECT * FROM `dbcampaigns` ORDER BY `dbcampaigns`.`campaign_name`" . $type;
+    $result = mysqli_query($con,$query);
+    $theCampaigns = array();
+    while ($result_row = mysqli_fetch_assoc($result)) {      
+        $theCampaign = make_a_campaign($result_row);
+        $theCampaigns[] = $theCampaign;
+    }
+    mysqli_close($con);
+    return $theCampaigns;
+ } 
+
+function sort_start_dates_by($type) { 
+    $con=connect();    
+    if($type == "start_asc"){
+        $type = "start_date` ASC";
+    }
+    if($type == "start_desc"){
+        $type = "start_date` DESC";
+    }
+    if($type == "end_asc"){
+        $type = "end_date` ASC";
+    }
+    if($type == "end_desc"){
+        $type = "end_date` DESC";
+    }
+    $query = "SELECT * FROM `dbcampaigns` ORDER BY `dbcampaigns`.`campaign_".$type;
+    $result = mysqli_query($con,$query); 
+    $theCampaigns = array();
+    while ($result_row = mysqli_fetch_assoc($result)) {     
+        $theCampaign = make_a_campaign($result_row);
+        $theCampaigns[] = $theCampaign;
+    }
+    mysqli_close($con);
+    return $theCampaigns;
+ } 
+
+ function dayCheckCampaign($start, $end){
     $diff = strtotime($start) - strtotime($end);
     return abs(round($diff / 86400));
 }
-
-// retrieve only those events that match the criteria given in the arguments
-/* function getonlythose_dbCampaigns($name, $day, $venue) {
-   $con=connect();
-   $query = "SELECT * FROM dbEvents WHERE event_name LIKE '%" . $campaign_name . "%'" .
-           " AND event_name LIKE '%" . $name . "%'" .
-           " AND venue = '" . $venue . "'" . 
-           " ORDER BY event_name";
-   $result = mysqli_query($con,$query);
-   $theEvents = array();
-   while ($result_row = mysqli_fetch_assoc($result)) {
-       $theEvent = make_an_event($result_row);
-       $theEvents[] = $theEvent;
-   }
-   mysqli_close($con);
-   return $theEvents;
-} */
-
 ?>

@@ -36,7 +36,7 @@ include('dataSearch.inc.php'); // the form has not been submitted, so show it
 
 process_form();
 //pull_shift_data();
-include('footer.inc');
+include('footer.php');
 
 function process_form() {
 
@@ -167,6 +167,6 @@ function export_data($current_time, $search_attr, $export_data) {
 
 ?></div>
 </div>
-        <?PHP include('footer.inc'); ?>
+        <?PHP include('footer.php'); ?>
 </body>
 </html>

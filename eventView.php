@@ -167,5 +167,5 @@ elseif(isset($_POST['unsignup'])){
 
 </body>
 <br><br>
-<?php include('footer.inc'); ?>
+<?php include('footer.php'); ?>
 </html>
