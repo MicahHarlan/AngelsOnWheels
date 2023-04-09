@@ -164,5 +164,5 @@ $evid = $event->get_event_id()
 
 </body>
 <br><br>
-<?php include('footer.inc'); ?>
+<?php include('footer.php'); ?>
 </html>

@@ -57,7 +57,7 @@
                 <input type="submit" name="user" value="Create Account" style="background-color: blue; color: white; 
                 border: none; padding: 8px; border-radius: 5px; width: 296px;"</input></form>');
     } else {
-        //check if they logged in as a guest:
+        //login as a guest
         if ($_POST['user'] == "Create Account" && $_POST['pass'] == "") {
             $_SESSION['logged_in'] = 1;
             $_SESSION['access_level'] = 0;
@@ -116,7 +116,7 @@
         </div>
 </div>
         <footer class="footer">
-            <?php include('footer.inc'); ?>
+            <?php include('footer.php'); ?>
         </footer>
 </body>
 

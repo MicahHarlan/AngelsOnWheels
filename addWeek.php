@@ -214,7 +214,7 @@ session_cache_expire(45);
                 }
                 ?>
             </div>
-            <?PHP include('footer.inc'); ?>
+            <?PHP include('footer.php'); ?>
         </div>
     </body>
 </html>

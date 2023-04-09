@@ -79,6 +79,6 @@ if(isset($_POST['submit'])) {
 <br><br><br><br>
 </body>
 
-<?php include('footer.inc'); ?>
+<?php include('footer.php'); ?>
 
 </html>

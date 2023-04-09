@@ -189,7 +189,7 @@ session_start();
                   <br><br><br><br>
                 </div>
         </div>
-        <?PHP include('footer.inc'); ?>
+        <?PHP include('footer.php'); ?>
     </body>
 </html>
 
