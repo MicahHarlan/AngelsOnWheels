@@ -91,6 +91,6 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 			<?=$calendar?>
 		</div>
 		<br/><br/><br/>
-		<?PHP include('footer.inc'); ?>
+		<?PHP include('footer.php'); ?>
 	</body>
 </html>

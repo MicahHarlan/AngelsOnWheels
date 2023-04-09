@@ -76,6 +76,6 @@ session_start();
         </div>
     </div>
 </div>
-<?php include('footer.inc'); ?>
+<?php include('footer.php'); ?>
 </body>
 </html>

@@ -171,7 +171,7 @@ session_start();
 </div>
 	</body>
 <footer>
-	<?php mysqli_close($con); include('footer.inc');?>
+	<?php mysqli_close($con); include('footer.php');?>
 </footer>
 
 </html>

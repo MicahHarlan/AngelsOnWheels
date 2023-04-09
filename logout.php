@@ -39,7 +39,7 @@ session_start();
                 session_write_close();
                 ?>
                 <p>You are now logged out of Homebase.</p>
-                <?PHP include('footer.inc'); ?>
+                <?PHP include('footer.php'); ?>
             </div>
         </div>
     </body>

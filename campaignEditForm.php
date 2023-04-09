@@ -119,7 +119,7 @@ if ($_SESSION['access_level']==1) {
             '<input type="submit" value="Delete" name="Delete Entry"> to delete this entry. <br />');
 
     }
-    include('footer.inc')
+    include('footer.php')
         ?>
 
 

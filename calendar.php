@@ -90,7 +90,7 @@ session_cache_expire(30);
 	                    	echo('<iframe src="https://calendar.google.com/calendar/embed?src=ronaldbangor84%40gmail.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>');
                 }
                 echo " </div>";
-                include('footer.inc');
+                include('footer.php');
                 ?>      
         </div></div>
     </body>

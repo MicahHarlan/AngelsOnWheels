@@ -122,9 +122,9 @@ include_once('domain/Campaign.php');
 
 </div>
             <!-- below is the footer that we're using currently-->
-                
-        
-        <?PHP include('footer.inc'); ?>
+                </div>
+        </div>
+        <?PHP include('footer.php'); ?>
     </body>
 </html>
 
