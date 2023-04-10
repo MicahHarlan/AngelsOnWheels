@@ -15,7 +15,7 @@ session_start();
 
 	</head>
 
-	<body>
+	<body style="background-color: rgb(250, 249, 246);">
 	<?php
 				include('database/dbFeedback.php');
 
@@ -42,8 +42,8 @@ session_start();
 									<option value="recommendDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "recommendDes"){echo "selected";}?>>Likely to Reccomend (Descending)</option>
 									<option value="encourageAsc"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "encourageAsc"){echo "selected";}?>>Likely to Encourage  (Ascending)</option>
 									<option value="encourageDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "encourageDes"){echo "selected";}?>>Likely to Encourage (Descending)</option>
-									<option value="dateAsc"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateAsc"){echo "selected";}?>>Date (Ascending)</option>
-									<option value="dateDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateDes"){echo "selected";}?>>Date (Descending)</option>
+									<option value="dateAsc"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateAsc"){echo "selected";}?>>Date (Oldest to Newest)</option>
+									<option value="dateDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateDes"){echo "selected";}?>>Date (Newest to Oldest)</option>
 									
 								</select>
 								<button type="submit" class="input-group-text" id="basic-addon2">Sort
@@ -56,7 +56,7 @@ session_start();
 				</form>	
 
 				<div class= "table-responsive">
-
+					<form method="POST">
 					<table class="table feedback-table">
 						<thead>
 							<tr>
@@ -66,14 +66,13 @@ session_start();
 								<th> Likely to Recommend for Others to Contribute (1-5)</th>
 								<th>Likely to Encourage Others to Volunteer (1-5)</th>
 								<th>Date </th>
-								<th><form action "" method= "POST"><input type="submit" value="Delete Selected Feedback" name="delete"></th>
+								<th><input type="submit" value="Delete Selected Feedback" name="delete"></th>
 							</tr>
 						</thead>	
 						<tbody>
 							<?php
-
-							
-						$con=connect();
+						
+				$con=connect();
     $sort_direction = "ASC";
 	$sort_field = "id";
     if(isset($_GET['sort_feedback'])){
@@ -148,25 +147,9 @@ session_start();
 				//if "deleted selected feedback" AND checkboxes are selected		
 					if(isset($_POST['delete']) && isset($_POST['checkbox'])){
 							$del= count((array)$_POST['checkbox']);
-							$results = mysqli_query($con, "SELECT COUNT(id) from dbFeedback");
-							//$results = $results->fetch_array();
-							echo($del);
-							echo("----");
-							//$toDelete = ((array)$_POST['checkbox']);
-							echo(($_POST['checkbox']['value']));
-							echo("---");
 							
-							for($i=0; $i<$del; $i++){
-								echo($i);
-								echo("===");
-								$keyToDelete = $_POST['checkbox'][$i];
-								echo($keyToDelete);
-								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
-							}
-							
-
-							/*
 							$i = 0;
+
 							while ($i<$del){
 								echo($_POST['checkbox'][$i]);
 								$keyToDelete = $_POST['checkbox'][$i];
@@ -175,13 +158,9 @@ session_start();
 								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
 								$i++;
 							}
-							header('Location:viewFeedbackAdmin.php');
-							}
-							<meta HTTP-EQUIV="REFRESH" content="2; url=viewFeedbackAdmin.php">
-
-							*/
-							header('Location:viewFeedbackAdmin.php');	
-					}
+							echo "<meta http-equiv='refresh' content='0'>";
+							
+						}
 						?>
 						</tbody>
 				</div>		
@@ -192,7 +171,7 @@ session_start();
 </div>
 	</body>
 <footer>
-	<?php include('footer.inc');?>
+	<?php mysqli_close($con); include('footer.inc');?>
 </footer>
 
 </html>

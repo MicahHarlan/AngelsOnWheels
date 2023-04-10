@@ -9,9 +9,9 @@
  * (see <http://www.gnu.org/licenses/ for more information).
  * 
  */
-
-session_start();
 session_cache_expire(30);
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +21,10 @@ session_cache_expire(30);
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="styling/about.css" type="text/css" />
 </head>
+<?php include('header.php'); ?>
 <body>
 <div class="container" style="padding-bottom: 100px;">
-    <?php include('header.php'); ?>
+    
     <div id="content" class="mt-4">
         <h2 class="text-center"><strong>About Gwyneth's Gift Foundation</strong></h2>
         <p class="text-center">Gwyneth’s Gift Foundation is devoted to making a difference in the community and the lives of those within. We hope that through our work,

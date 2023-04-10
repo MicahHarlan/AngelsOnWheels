@@ -25,6 +25,8 @@ error_reporting(E_ERROR | E_PARSE);
         include('login_form.php');
         die();
     } else if ($_SESSION['logged_in']) {
+        include_once('database/dbPersons.php');
+        include_once('domain/Person.php');
 
         /*         * Set our permission array.
          * anything a guest can do, a volunteer and manager can also do
@@ -40,7 +42,7 @@ error_reporting(E_ERROR | E_PARSE);
         $permission_array['apply.php'] = 0;
         //pages volunteers can view
         $permission_array['help.php'] = 1;
-        $permission_array['calendar.php'] = 1;
+        $permission_array['calenderExample.php'] = 1;
         $permission_array['feedback.php'] = 1;
         //pages only managers can view
         $permission_array['personsearch.php'] = 2;
@@ -53,6 +55,7 @@ error_reporting(E_ERROR | E_PARSE);
         //Check if they're at a valid page for their access level.
         $current_page = strtolower(substr($_SERVER['PHP_SELF'], strpos($_SERVER['PHP_SELF'],"/")+1));
         $current_page = substr($current_page, strpos($current_page,"/")+1);
+        $person = retrieve_person($_SESSION['_id']);
         
         if($permission_array[$current_page]>$_SESSION['access_level']){
             //in this case, the user doesn't have permission to view this page.
@@ -81,40 +84,41 @@ error_reporting(E_ERROR | E_PARSE);
             echo('<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>');
         	echo('<div class="collapse navbar-collapse" id="navbarSupportedContent">');
             echo('<ul class="navbar-nav me-auto mb-2 mb-lg-0">');
-//            echo " <br><b>"."Gwyneth's Gift Homebase"."</b>|"; //changed: 'Homebase' to 'Gwyneth's Gift Homebase'
+//            echo " <br><b>"."Angels On Wheels Homebase"."</b>|"; //changed: 'Homebase' to 'Angels On Wheels Homebase'
 	        if ($_SESSION['access_level'] == 1) {
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'index.php">Home</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'about.php">About</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">Help</a></li>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'calendar.php?venue=portland'.''.'">Calendar</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'calenderExample.php?venue=portland'.''.'">Calendar</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 //                echo('<a class="navbar-brand">Events</a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Search Event</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Events</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" target="_blank" href="' . $path . 'feedback.php">Send Feedback</a></li>');
                 
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'ViewCampaign.php">View Campaign</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
 
 
 //                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 //                echo('<button type="button" class="btn btn-link"><a href="' . $path . 'index.php" class="link-primary">home</a></button>');
 //	        	echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'about.php">about</a></button>');
 //	            echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">help</a></button>');
-//	            echo(' | calendars: <a href="' . $path . 'calendar.php?venue=bangor'.''.'">Bangor, </a>');
-//	            echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'calendar.php?venue=portland'.''.'">calendar</a></button>'); //added before '<a': |, changed: 'Portland' to 'calendar'
+//	            echo(' | calendars: <a href="' . $path . 'calenderExample.php?venue=bangor'.''.'">Bangor, </a>');
+//	            echo(' | <button type="button" class="btn btn-link"><a href="' . $path . 'calenderExample.php?venue=portland'.''.'">calendar</a></button>'); //added before '<a': |, changed: 'Portland' to 'calendar'
 	        }
 	        if ($_SESSION['access_level'] >= 2) {
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'index.php">Home</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'about.php">About</a></li>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">Help</a></li>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'calendar.php?venue=portland'.''.'">Calendar</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'calenderExample.php?venue=portland'.''.'">Calendar</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 //	            echo('<br>master schedules: <a href="' . $path . 'viewSchedule.php?venue=portland'."".'">Portland, </a>');
 //	            echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventSearch.php">Search Event</a></li>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventEdit.php?id=new">Add Event</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventCreate.php?id=new">Add Event</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 //	            echo('<a class="navbar-brand">Volunteers</a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search Volunteer</a></li>
@@ -127,7 +131,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
-	       
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
 	       
                 
 	       

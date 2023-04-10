@@ -73,8 +73,6 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 		$date = $calendar->get_calender_date();
 		$d = $date[0][0] ."-". $date[0][1] . "-" . $date[0][2];
 		//echo('======'.$d);
-		//echo('<iframe src="https://www.google.com/calendar/embed?src=loveserveddaily%40gmail.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>');
-
 		?>
 
 		<button class="button" type="submit" name="prevMonth" 
@@ -93,7 +91,6 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 			<?=$calendar?>
 		</div>
 		<br/><br/><br/>
-
 		<?PHP include('footer.inc'); ?>
 	</body>
 </html>

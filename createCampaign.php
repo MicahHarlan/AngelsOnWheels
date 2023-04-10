@@ -1,6 +1,6 @@
 <?php
-session_start();
 session_cache_expire(30);
+session_start();
 include_once('database/dbCampaigns.php');
 include_once('domain/Campaign.php');
 $id = str_replace("_"," ",$_GET["id"]);

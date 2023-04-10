@@ -41,7 +41,8 @@ function add_event($event) {
                 $event->get_venue() . '","' .
                 $event->get_event_name() . '","' . 
                 $event->get_description() . '","' .
-                $event->get_event_id() .            
+                $event->get_event_id() .  '","' .
+                $event->get_event_working() .         
                 '");');							
         mysqli_close($con);
         return true;
@@ -116,7 +117,7 @@ function make_an_event($result_row) {
 // retrieve only those events that match the criteria given in the arguments
 function getonlythose_dbEvents($name, $day, $venue) {
    $con=connect();
-   $query = "SELECT * FROM dbEvents WHERE event_name LIKE '%" . $event_name . "%'" .
+   $query = "SELECT * FROM dbEvents WHERE event_name LIKE '%" . $name . "%'" .
            " AND event_name LIKE '%" . $name . "%'" .
            " AND venue = '" . $venue . "'" . 
            " ORDER BY event_name";
@@ -166,11 +167,68 @@ function fix_date($wrong_format_date){
         //echo("False");
         return False;
     }
-
-   
 }
 
+function monthCheckEvent($event_date){
+    $explodedString = explode("-",$event_date);
+    $year = "20".$explodedString[0];
+    $month = $explodedString[1];
+    $day = $explodedString[2];
+    $currentMonth = date("m");
+    $currentYear = date("Y");
+    if($currentYear == $year && $currentMonth == $month){
+        return True;
+    }
+    else{
+        return False;
+    }
+}
 
-
+/**
+ * returns all Events 
+ * @return mysqli_result of id, event_date, venue, event_name, description, and event_id
+ */
+function get_events() {
+    $con=connect();
+    $query = "SELECT * FROM dbEvents";
+    $result = mysqli_query($con,$query);
+    mysqli_close($con);
+    if (!$result) {
+        die("error getting log");
+    } 
+  /*  else {
+        for ($i = 0; $i < mysqli_num_rows($result); ++$i) {
+       
+            $result_row = mysqli_fetch_row($result);
+            if ($result_row) {
+                $ev[] = array($result_row[0],$result_row[1], $result_row[2], $result_row[3], $result_row[4], $result_row[5]);
+            }
+        }
+    } */
+    return $result;
+}
+/**
+ * returns sorted Events 
+ * @return mysqli_result of id, event_date, venue, event_name, description, and event_id
+ */
+function sort_events($sort_field, $sort_direction) {
+    $con=connect();
+    $query = "SELECT * FROM dbEvents ORDER BY $sort_field $sort_direction";
+    $result = mysqli_query($con,$query);
+    mysqli_close($con);
+    if (!$result) {
+        die("error getting log");
+    } 
+  /*  else {
+        for ($i = 0; $i < mysqli_num_rows($result); ++$i) {
+       
+            $result_row = mysqli_fetch_row($result);
+            if ($result_row) {
+                $ev[] = array($result_row[0],$result_row[1], $result_row[2], $result_row[3], $result_row[4], $result_row[5]);
+            }
+        }
+    } */
+    return $result;
+}
 
 ?>

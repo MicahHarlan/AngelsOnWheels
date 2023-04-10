@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
  * software.  It comes with absolutely no warranty. You can redistribute and/or
  * modify it under the terms of the GNU General Public License as published by the
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
+ * 
  */
 session_cache_expire(30);
 session_start();
@@ -29,6 +30,8 @@ session_start();
 </head>
 
 <body style="background-color: rgb(250, 249, 246);">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="Mb0V1Edj"></script>
     <div class="container-fluid">
         <?PHP include('header.php'); ?>
         <div class="container-fluid border border-dark" id="content">
@@ -76,8 +79,8 @@ session_start();
 
                         // link to personal profile for editing
                         echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
-                        echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
-                        	     .'">here</a></strong> to view or edit your account.</p></div>');
+                        echo('</ul><p>Go <strong><a href="profile.php?id='.$person->get_id()
+                        	     .'">here</a></strong> to view your account.</p></div>');
                         echo('<br></br>');
 
 //                        // display upcoming schedule
@@ -143,8 +146,8 @@ session_start();
 
                         // link to personal profile for editing
                         echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
-                        echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
-                        .'">here</a></strong> to view or edit your account.</p></div>');
+                        echo('</ul><p>Go <strong><a href="profile.php?id='.$person->get_id()
+                        .'">here</a></strong> to view your account.</p></div>');
                         //echo('<br></br>');
 
                             //DEFAULT PASSWORD CHECK
@@ -264,6 +267,17 @@ session_start();
                         //    echo ('<tr><td class="searchResults">' . $event[0] . '</td>' .
                         //        '<td class="searchResults">' . $event[0] . '</td></tr>');
                         //}
+                        echo ('</div>');
+
+						//i hope this fixes everything
+            
+
+
+                        
+
+                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
+                        echo('<div class="fb-page" data-href="https://m.facebook.com/angelsonwheelscharity" data-tabs="timeline" data-width="1200" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://m.facebook.com/angelsonwheelscharity" class="fb-xfbml-parse-ignore"><a href="https://m.facebook.com/angelsonwheelscharity">Angels On Wheels Charity Organization</a></blockquote></div>');
+                     
                         echo ('</div>');
                         
 
