@@ -24,13 +24,71 @@ session_start();
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
 		<link rel="stylesheet" href="lib/jquery-ui.css" />
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+	<script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+		$(document).on('click', '.btn_print', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('container_content'); 
+
+			html2pdf().from(element).save();
+
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			html2pdf().set(opt).from(element).save();
+		});
+
+	});
+	</script>
+    <script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+		$(document).on('click', '.btn_print2', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('container_content2'); 
+
+			html2pdf().from(element).save();
+
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			html2pdf().set(opt).from(element).save();
+		});
+
+	});
+	</script>
     </head>
     <body style="background-color: rgb(250, 249, 246);">
         <div class="container-fluid" id="container">
             <?PHP include('header.php');
             include('database/dbEvents.php'); ?>
-            <div class="container-fluid" id="content">
+ <div class="container-fluid" id="content">
+             		<!-- Button to Save as PDF-->
+                     <div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
+				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print2">
+				</div>
+                <div>
+ <div class="container_content2" id="container_content2" >
+           
                 <?PHP
                 // display the search form
                 $area = $_GET['area'];
@@ -56,12 +114,12 @@ session_start();
                         echo ' with name like "' . $name . '"';
 				    if (sizeof($result) > 0) {
 				       echo ' (select one for more info).';
-                       echo '<div class="overflow-auto" id="target" style="width: variable; height: 400px;">';
+                       echo '<div class="overflow-auto" id="target" style="width: variable; ">';
 				       echo '<p><table class="table table-info table-responsive table-striped-columns table-hover table-bordered"><thead> <tr><th>Event Name</th><th>Event Date (YY-MM-DD)</th></tr></thead>';
 				       foreach ($result as $vol) {
                             //if Volunteer
                             if  ($_SESSION['access_level'] == 1) { 
-                                                    echo "<tr><td><a href=eventView.php?id=" . 
+                                                    echo "<tr><td><a href=eventEdit.php?id=" . 
                                                         str_replace(" ","_",$vol->get_id()) . ">" .
                                                             $vol->get_event_name() . "</td><td>" . $vol->get_event_date();
                                                     echo "</td></a></tr>";
@@ -78,10 +136,18 @@ session_start();
 				    }		               
                 }            
                 ?>
-
-                <br>
+ </div>
+                </div>
+            <br>
  <center><hr style="width:90%"></center>
  <br>
+
+    <!-- Button to Save as PDF-->
+                     <div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
+				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print">
+				</div>
+                
+ <div class="container_content" id="container_content" >
                 <!-- Add table of events after the search function-->
                 <p><strong>Event List:</strong> <p>
                 <form action="">
@@ -157,7 +223,7 @@ session_start();
 
                                 <?php
                                     //Volunteer - clicking on an Event name will take you to the View Event Page
-                            if  ($_SESSION['access_level'] == 1) {  echo    "<td><a href=eventView.php?id=" . 
+                            if  ($_SESSION['access_level'] == 1) {  echo    "<td><a href=eventEdit.php?id=" . 
                                 str_replace(" ","_",$evid) . ">" .
                                 $row['event_name'] . "</td>";} 
                                 //Admin - selecting an Event name will take you to the Event Edit Page
@@ -185,9 +251,12 @@ session_start();
             </table>
             </div>
             </div>
+        </div>
+        <!-- End of 2nd Save to PDF-->
                   <!-- below is the footer that we're using currently-->
                   <br><br><br><br>
                 </div>
+                        </div>
         </div>
         <?PHP include('footer.php'); ?>
     </body>

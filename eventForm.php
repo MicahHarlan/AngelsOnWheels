@@ -20,6 +20,8 @@
     // Only managers for adding and edit
     include_once('database/dbPersons.php');
     include_once('domain/Person.php');
+    session_cache_expire(30);
+    session_start();
     if ($_SESSION['access_level'] == 2)
 	    if ($id == 'new') {
 	        echo('<p><strong>Event Page</strong><br />');
@@ -40,10 +42,42 @@
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
     }
 ?>
+    <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />
 <form method="POST">
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
+    <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />
     
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+	<script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+		$(document).on('click', '.btn_print', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('container_content'); 
+
+			html2pdf().from(element).save();
+
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			html2pdf().set(opt).from(element).save();
+		});
+
+	});
+	</script>
+
     <input type="hidden" name="_form_submit" value="1">
+
     <script>
 			$(function(){
 				$( "#event_date" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "1920:+nn"});
@@ -73,16 +107,26 @@
             echo('&nbsp;&nbsp;&nbsp;&nbspEvent Name <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="event_name" tabindex="2" value="'. $event->get_event_name() . '"');
         }
         if ($_SESSION['access_level']==1) {
-            echo ('<h3 style="text-align:center" Event:>'  . $event->get_event_name() . '</h3>');
-            
-        }
+             
     ?>
+              		<!-- Button to Save as PDF-->
+	<div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
+				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print">
+				</div>      
+                <div class="container_content" id="container_content" >              
+<div class="container">
 
+    <h2> <?PHP echo($event->get_event_name()); ?> </h2>
+    <div class= "content">
+        
+        <p><strong>Date: </strong><?PHP echo($event->get_event_date()); ?> </p>
+        <p><strong>Venue: </strong> <?PHP echo($event->get_venue()); ?> </p>
+        <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
+    
+        </div>
 </select>
 <?php     
-        
-       
-        
+        }
 ?>
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
@@ -97,7 +141,7 @@ if ($_SESSION['access_level']==2) {
 	echo($event->get_description().'</textarea>');
     
 }
-
+/*
 // volunteers can view the event description
 if ($_SESSION['access_level']==1) {
     echo('<br>');
@@ -107,7 +151,7 @@ if ($_SESSION['access_level']==1) {
 
 }
 
-/*
+
 echo('<h4>need to add:</h4>');
 echo('<h4>event hours/shift hours</h4>');
 echo('<h4>ability to upload pdf?</h4>');
@@ -162,8 +206,17 @@ echo '</fieldset>';
         elseif($set==1){     
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Un-Sign-up" name="unsignup"><br /><br />');
         }
+      //  if ($_SESSION['access_level'] == 1){
+        //Start Report button
+     /*   
+        echo '<form action="scheduleIssue.php?id=' . str_replace(" ", "_", $event->get_id()) . '"><input type="submit" value="Report Schedule Issue">
+        </form>'; 
+   */
+
+
+ //   
     }
-    ?>
+?>
 
     <p>
     <input type="hidden" name="event_id" value=<?PHP echo("\"" . $event->get_event_id() . "\""); ?>>
@@ -172,16 +225,29 @@ echo '</fieldset>';
         echo('<input type="hidden" name="_submit_check" value="1"><p>');
 
         // only managers can submit edits
-        if ($_SESSION['access_level'] == 2)
+        if ($_SESSION['access_level'] == 2){
             //echo('Hit <input type="submit" value="Submit" name="Submit Edits"> to submit these edits.<br /><br />');
             echo('Hit <input class="btn btn-success" type="submit" value="Submit" name="Submit Edits"> to submit these edits.<br /><br />');
-        
+        }
         if ($id != 'new' && $_SESSION['access_level'] >= 2) {
             echo ('<input type="checkbox" name="deleteMe" value="DELETE"> Check this box and then hit ' .
             '<input type="submit" value="Delete" name="Delete Entry"> to delete this entry. <br />');
-            
-            
-            
+
         }
         ?>
-</form>
+       
+        </form>
+        <?PHP
+
+        if ($_SESSION['access_level'] == 1){
+            $evid = $event->get_event_id();
+
+            ?><form style="float: left; margin-bottom:4em; margin-top:0; padding-top:-3em;" class="reportButton" method="post" action="scheduleIssue.php?id=<?php echo str_replace(" ", "_", $evid); ?>"><input class="btn btn-success"type="submit" value="Report Schedule Issue">
+            </form>
+    <?php
+        }
+        ?>
+         </div>
+    </div>
+    </body>    
+

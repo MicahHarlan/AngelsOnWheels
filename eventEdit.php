@@ -56,7 +56,7 @@ if ($id == 'new') {
 			})
 		</script>
     </head>
-    <body>
+    <body style="background-color: rgb(250, 249, 246);">
         <div id="container">
             <?PHP include('header.php'); ?>
             <div id="content">

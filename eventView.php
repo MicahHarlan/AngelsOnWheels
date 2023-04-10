@@ -18,7 +18,47 @@ include_once('database/dbLog.php'); // can be used in later iterations
 include_once('database/dbPersons.php');
     include_once('domain/Person.php');
     
+    $id = str_replace("_"," ",$_GET["id"]);
 
+    if ($id == 'new') {
+        $event = new Event('event', $_SESSION['venue'],  
+                        null, null, null, "");
+    } else {
+        $event = retrieve_event($id);
+        if (!$event) { // try again by changing blanks to _ in id
+            $id = str_replace(" ","_",$_GET["id"]);
+            $event = retrieve_event($id);
+            if (!$event) {
+                echo('<p id="error">Error: there\'s no event with this id in the database</p>' . $id);
+                die();
+            }
+        }
+    }
+    ?>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?PHP echo($event->get_event_name()); ?></title>
+    <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
+</head>
+<?php include('header.php'); ?>
+<body style="background-color: rgb(250, 249, 246);">
+<div class="container" style="padding-bottom: 100px;">
+    <h2> <?PHP echo($event->get_event_name()); ?> </h2>
+
+    <div class= "content">
+        
+    <p><strong>Date: </strong><?PHP echo($event->get_event_date()); ?> </p>
+    <p><strong>Venue: </strong> <?PHP echo($event->get_venue()); ?> </p>
+    <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
+
+    </div>
+<br>
+
+<?php
+    $evid = $event->get_event_id();
     if(isset($_POST['signup'])){
         $thisperson = retrieve_person($_SESSION['_id']);
         $this_person_id = $thisperson->get_id();
@@ -68,45 +108,8 @@ elseif(isset($_POST['unsignup'])){
         include('eventForm.php');
     }
 
-$id = str_replace("_"," ",$_GET["id"]);
 
-if ($id == 'new') {
-    $event = new Event('event', $_SESSION['venue'],  
-                    null, null, null, "");
-} else {
-    $event = retrieve_event($id);
-    if (!$event) { // try again by changing blanks to _ in id
-        $id = str_replace(" ","_",$_GET["id"]);
-        $event = retrieve_event($id);
-        if (!$event) {
-            echo('<p id="error">Error: there\'s no event with this id in the database</p>' . $id);
-            die();
-        }
-    }
-}
-$evid = $event->get_event_id()
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><?PHP echo($event->get_event_name()); ?></title>
-    <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
-</head>
-<?php include('header.php'); ?>
-<body style="background-color: rgb(250, 249, 246);">
-<div class="container" style="padding-bottom: 100px;">
-    <h2> <?PHP echo($event->get_event_name()); ?> </h2>
-
-    <div class= "content">
-        
-    <p><strong>Date: </strong><?PHP echo($event->get_event_date()); ?> </p>
-    <p><strong>Venue: </strong> <?PHP echo($event->get_venue()); ?> </p>
-    <p><strong>Description: </strong><?PHP echo($event->get_description()); ?> </p>
-
-    </div>
-<br>
 
 <!--sign up button not working yet-->
 <form method="POST">
@@ -145,7 +148,7 @@ $evid = $event->get_event_id()
         }   
         echo('</ul></p>');
         if($set==0){     
-            echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Sign-up to Work (Not working yet)" name="signup"><br /><br />');
+            echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Sign-up to Work" name="signup"><br /><br />');
         }
         elseif($set==1){     
             echo('&nbsp;&nbsp;&nbsp;<input class="btn btn-success" type="submit" value="Un-Sign-up" name="unsignup"><br /><br />');
@@ -153,13 +156,13 @@ $evid = $event->get_event_id()
     }
     ?>
 </form>
-        <!--send event id to the schedule issue page-->
+        <!--Start Report button-->
         <?php 
         echo    "<a href=scheduleIssue.php?id=" . 
         str_replace(" ","_",$evid) . ">";
         ?> 
             <button class= "reportButton">Report Schedule Issue</button> 
-        </a>
+        <!--End  Report button
 </div>
 
 </body>

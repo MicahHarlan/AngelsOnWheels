@@ -264,7 +264,13 @@ session_start();
                         //}
                         echo ('</div>');
 
-                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
+						//i hope this fixes everything
+            
+
+
+                        
+
+                        echo ('</tbody></table><br></p></div><br>');
                         echo('<div class="fb-page" data-href="https://m.facebook.com/angelsonwheelscharity" data-tabs="timeline" data-width="1200" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://m.facebook.com/angelsonwheelscharity" class="fb-xfbml-parse-ignore"><a href="https://m.facebook.com/angelsonwheelscharity">Angels On Wheels Charity Organization</a></blockquote></div>');
                      
                         echo ('</div>');

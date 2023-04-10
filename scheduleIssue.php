@@ -15,7 +15,10 @@ session_start();
 include_once('database/dbEvents.php');
 include_once('domain/Event.php');
 include_once('database/dbLog.php'); // can be used in later iterations
+
 $id = str_replace("_"," ",$_GET["id"]);
+
+
 
 if ($id == 'new') {
     $event = new Event('event', $_SESSION['venue'],  
@@ -31,6 +34,8 @@ if ($id == 'new') {
         }
     }
 }
+$evName = $event->get_event_name();
+$evid = $event->get_event_id();
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +49,7 @@ if ($id == 'new') {
  <?php include('header.php'); ?>
  <body style="background-color: rgb(250, 249, 246);">
 <div class="container" style="padding-bottom: 100px;">
-  <h2>Report Schedule Issue: <?PHP echo($event->get_event_name()); ?></h2> 
+  <h2>Report Schedule Issue: <?PHP echo($evName); ?></h2> 
   <form method="post">
     <div  class="id">
         <input type="text" required placeholder="Your name" name="name">
@@ -53,7 +58,7 @@ if ($id == 'new') {
         <textarea name="issues" cols="50" rows="5" required placeholder="Report Issues here..."></textarea>
     </div>
 <div class="issueButton">
-        <input type="submit" name="submit" value="Submit">
+        <input  class= "btn btn-success" style="float: left;" type="submit" name="submit" value="Submit">
 </div>
 <br>
 </form>
@@ -66,7 +71,7 @@ if(isset($_POST['submit'])) {
     $name = $_POST['name'];
     $issues = $_POST['issues'];
     $date = date("Y-m-d");
-    $evid = $event->get_event_id();
+  //  
     $insertId;
     $con = connect();
 

@@ -52,16 +52,53 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 <!DOCTYPE html>
 <html>
 	<head>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+	<script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+		$(document).on('click', '.btn_print', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('container_content'); 
+
+			html2pdf().from(element).save();
+
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			html2pdf().set(opt).from(element).save();
+		});
+
+	});
+	</script>
+
+	 
     <?PHP include('header.php'); ?>
 		<meta charset="utf-8">
 		<title>Event Calender</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link href="calender.css" rel="stylesheet" type="text/css">
+		
 	</head>
 	<body>
+		<!-- Button to Save as PDF-->
+	<div class="toPdfButton" style="position:absolute;right:0px; margin-right:3em; margin-top:0.7em; ">
+				<input type="button" id="rep" value="Save to PDF" class="btn btn-warning btn_print">
+				</div>
+	<div class="container_content" id="container_content" >
+		
 	    <div class="title">
 	    	Event Calender
+				
 		</div>
 		<div class="calendar">
         <div class="header">
@@ -90,6 +127,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
     	</div>
 			<?=$calendar?>
 		</div>
+	</div>
 		<br/><br/><br/>
 		<?PHP include('footer.php'); ?>
 	</body>
