@@ -15,8 +15,9 @@
  * @author Jerrick Hoang
  * @version 11/5/2013
  */
-session_start();
 session_cache_expire(30);
+session_start();
+//session_cache_expire(30);
 
 include_once('header.php'); 
 include_once('database/dbPersons.php');
@@ -117,12 +118,36 @@ $(function() {
 	To view report, click <input class="btn btn-success btn-sm" type="submit" value="Submit" id ="report-submit" class ="btn">
 	</td></tr>
 	<tr>
-	<td>* To save the report, check here <input type="checkbox" name="export" value="export">, hit 'Submit', and
-	<a href="http://localhost/GwynethsGift/export.csv">Click here</a>.</td></tr>
+	<td>* To save the report,
+	<button onclick="exportTableToCSV()">Click here</button>.</td></tr>
 	<tr><td></td></tr>
 	<tr><td>To run another report, please refresh the page.</td></tr>
 	</table>
 	</form>
+	<script>
+    function exportTableToCSV() {
+      var csv = [];
+      var rows = document.querySelectorAll("table tr");
+      
+      for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+          row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+      }
+
+      // Download CSV file
+      var downloadLink = document.createElement("a");
+      var blob = new Blob(["\ufeff", csv.join("\n")], { type: "text/csv;charset=utf-8" });
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = "my-table.csv";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  </script>
 	<p id="outputs">
 
 	</p>
