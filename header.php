@@ -55,7 +55,9 @@ error_reporting(E_ERROR | E_PARSE);
         //Check if they're at a valid page for their access level.
         $current_page = strtolower(substr($_SERVER['PHP_SELF'], strpos($_SERVER['PHP_SELF'],"/")+1));
         $current_page = substr($current_page, strpos($current_page,"/")+1);
-        $person = retrieve_person($_SESSION['_id']);
+       
+        
+        $person2 = retrieve_person($_SESSION['_id']);
         
         if($permission_array[$current_page]>$_SESSION['access_level']){
             //in this case, the user doesn't have permission to view this page.
@@ -99,7 +101,7 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'ViewCampaign.php">View Campaign</a></li>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person2->get_id().'">Profile</a></li>');
 
 
 //                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
@@ -131,7 +133,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person2->get_id().'">Profile</a></li>');
 	       
                 
 	       

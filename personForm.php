@@ -16,9 +16,14 @@
 /*
  * Modified for Gwyneth's Gift website, 2022
  */
+session_cache_expire(30);
+session_start();
+
 echo('<link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>');
 echo('<link rel="stylesheet" href="personEdit.css" type="text/css"/>');
 echo('<link rel="stylesheet" href="styles.css" type="text/css"/>');
+
+
 
 if ($_SESSION['access_level'] == 0) {
     echo('<p class ="testing"><strong>Volunteer Service Application</strong><br />');
