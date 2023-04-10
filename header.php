@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
+//error_reporting(E_ERROR | E_PARSE);
 /*
  * Copyright 2013 by Allen Tucker. 
  * This program is part of RMHP-Homebase, which is free software.  It comes with 
