@@ -18,6 +18,7 @@
 			Help - <?PHP echo($_GET['helpPage']); ?>
 		</title>
 		<link rel="stylesheet" href="tutorial/styles.css" type="text/css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
