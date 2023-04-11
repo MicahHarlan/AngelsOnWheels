@@ -69,7 +69,7 @@ if ($id == 'new') {
         <div class="container-fluid" id="container">
             <?PHP include('header.php');?>
             
-            <div class="willthisFix container-fluid border border-dark" id="content">
+<!--            <div class="willthisFix container-fluid border border-dark" id="content">-->
                 <?PHP
                 
                 include('personValidate.inc');
