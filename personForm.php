@@ -16,12 +16,9 @@
 /*
  * Modified for Gwyneth's Gift website, 2022
  */
- 
-
 echo('<link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>');
 echo('<link rel="stylesheet" href="personEdit.css" type="text/css"/>');
 echo('<link rel="stylesheet" href="styles.css" type="text/css"/>');
-
 
 if ($_SESSION['access_level'] == 0) {
     echo('<p class ="testing"><strong>Volunteer Service Application</strong><br />');
@@ -41,7 +38,7 @@ if ($_SESSION['access_level'] == 0) {
 } else if ($_SESSION['access_level'] == 1)
     if ($_SESSION['_id'] != $person->get_id()) {
         echo("<p id=\"error\">You do not have sufficient permissions to edit this user.</p>");
-        include('footer.inc');
+        include('footer.php');
         echo('</div></div></body></html>');
         die();
     } else {
@@ -61,12 +58,13 @@ if ($_SESSION['access_level'] == 0) {
 	    } 
 	    else {
 		    echo("<p id=\"error\">You do not have sufficient permissions to add a new person to the database.</p>");
-		    include('footer.inc');
+		    include('footer.php');
 		    echo('</div></div></body></html>');
 		    die();
 	    }
     echo '<br> (<span style="font-size:x-large;color:FF0000">*</span> denotes required information).';
 ?>
+
 <form method="POST">
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
     <input type="hidden" name="old_pass" value=<?PHP echo("\"" . $person->get_password() . "\""); ?>>

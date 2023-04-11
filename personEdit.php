@@ -11,8 +11,9 @@
  * 	@author Oliver Radwan, Xun Wang and Allen Tucker
  * 	@version 9/1/2008 revised 4/1/2012 revised 8/3/2015
  */
-session_start();
 session_cache_expire(30);
+session_start();
+
 include_once('database/dbPersons.php');
 include_once('domain/Person.php');
 include_once('database/dbLog.php');
@@ -35,7 +36,8 @@ if ($id == 'new') {
     }
 }
 ?>
-<html>
+
+<html lang="en">
     <head>
         <title>
             Editing <?PHP echo($person->get_first_name() . " " . $person->get_last_name()); ?>
@@ -99,13 +101,13 @@ if ($id == 'new') {
                                         $availability, $_POST['schedule'], $_POST['hours'], 
                                         $_POST['birthday'], $_POST['start_date'], $_POST['howdidyouhear'], 
                                         $_POST['notes'], $_POST['old_pass']);
-                        include('personForm.inc');
+                        include('personForm.php');
                     }
                     // this was a successful form submission; update the database and exit
                     else
                         process_form($id,$person);
                         echo "</div>";
-                    include('footer.inc');
+                    include('footer.php');
                     echo('</div></body></html>');
                     die();
                 }
@@ -177,7 +179,7 @@ if ($id == 'new') {
                     $notes = trim(str_replace('\\\'', '\'', htmlentities($_POST['notes'])));
                     //used for url path in linking user back to edit form
                     $path = strrev(substr(strrev($_SERVER['SCRIPT_NAME']), strpos(strrev($_SERVER['SCRIPT_NAME']), '/')));
-                    //step two: try to make the deletion, password change, addition, or change                    
+                    //step two: try to make the deletion, password change, addition, or change
                     if ($_POST['deleteMe'] == "DELETE") {
                         $result = retrieve_person($id);
                         if (!$result)
@@ -211,9 +213,9 @@ if ($id == 'new') {
                         $result = remove_person($id);
                         $pass = $first_name . $clean_phone1;
                         $newperson = new Person($first_name, $last_name, $location, $address, $city, $state, $zip, $clean_phone1, $phone1type, $clean_phone2,$phone2type,
-                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time, 
+                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time,
                                         $type, $status, $cMethod, $position, $credithours,
-                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours, 
+                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours,
                                         $birthday, $start_date, $howdidyouhear, $notes, "");
                         $result = add_person($newperson);
                         if (!$result)
@@ -231,9 +233,9 @@ if ($id == 'new') {
                             echo('<p class="error">Unable to add ' . $first_name . ' ' . $last_name . ' to the database. <br>Another person with the same name and phone is already there.');
                         else {
                         	$newperson = new Person($first_name, $last_name, $location, $address, $city, $state, $zip, $clean_phone1, $phone1type, $clean_phone2,$phone2type,
-                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time, 
+                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time,
                                         $type, $status, $cMethod, $position, $credithours,
-                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours, 
+                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours,
                                         $birthday, $start_date, $howdidyouhear, $notes, "");
                             $result = add_person($newperson);
                             if (!$result)
@@ -256,7 +258,7 @@ if ($id == 'new') {
                             $newperson = new Person($first_name, $last_name, $location, $address, $city, $state, $zip, $clean_phone1, $phone1type, $clean_phone2,$phone2type,
                         				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time,
                                         $type, $status, $cMethod, $position, $credithours,
-                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours, 
+                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours,
                                         $birthday, $start_date, $howdidyouhear, $notes, $pass);
                             $result = add_person($newperson);
                             if (!$result)
@@ -270,7 +272,7 @@ if ($id == 'new') {
                 }
                 ?>
             </div>
-            <?PHP include('footer.inc'); ?>
+            <?PHP include('footer.php'); ?>
         </div>
     </body>
 </html> 

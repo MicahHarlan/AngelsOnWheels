@@ -53,12 +53,12 @@ session_start();
             echo "   Today is " . date('l F j, Y') . ".<p>";
             ?>
 
-            <!-- your main page data goes here. This is the place to enter content -->
+            <!-- main page data goes here. This is the place to enter content -->
             <p>
                 <?PHP
                 if ($_SESSION['access_level'] == 0)
-                    echo('<p> To apply for volunteering '.
-                        		'please select <b>apply</b>.');
+                    echo '<script>window.location.href = "' . 'personEdit.php?id=new";</script>';
+//                    echo('<p> To apply for volunteering '. 'please select <b>apply</b>.');
                 if ($person) {
                     /*
                     * Check type of person, and display home page based on that.
@@ -80,8 +80,8 @@ session_start();
 
                         // link to personal profile for editing
                         echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
-                        echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
-                        	     .'">here</a></strong> to view or edit your account.</p></div>');
+                        echo('</ul><p>Go <strong><a href="profile.php?id='.$person->get_id()
+                        	     .'">here</a></strong> to view your account.</p></div>');
                         echo('<br></br>');
 
 //                        // display upcoming schedule
@@ -147,8 +147,8 @@ session_start();
 
                         // link to personal profile for editing
                         echo('<br><div class="container-fluid" id="scheduleBox"><p><strong>Your Personal Profile:</strong><br /></p><ul>');
-                        echo('</ul><p>Go <strong><a href="personEdit.php?id='.$person->get_id()
-                        .'">here</a></strong> to view or edit your account.</p></div>');
+                        echo('</ul><p>Go <strong><a href="profile.php?id='.$person->get_id()
+                        .'">here</a></strong> to view your account.</p></div>');
                         //echo('<br></br>');
 
                             //DEFAULT PASSWORD CHECK
@@ -227,11 +227,6 @@ session_start();
                                '<td class="searchResults">' . $lo[2] . '</td></tr>');
                         }
                         echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
-
-                        
-
-
-
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Upcoming Events:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('
@@ -276,19 +271,16 @@ session_start();
 
                         
 
-                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p></div><br>');
+                        echo ('</tbody></table><br></p></div><br>');
                         echo('<div class="fb-page" data-href="https://m.facebook.com/angelsonwheelscharity" data-tabs="timeline" data-width="1200" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://m.facebook.com/angelsonwheelscharity" class="fb-xfbml-parse-ignore"><a href="https://m.facebook.com/angelsonwheelscharity">Angels On Wheels Charity Organization</a></blockquote></div>');
                      
                         echo ('</div>');
-                        
-
                     }
-
                 ?>
         </div>
     </div>
     <?PHP
-    include('footer.inc');
+    include('footer.php');
     ?>
 </body>
 </html>

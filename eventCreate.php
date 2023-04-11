@@ -15,13 +15,11 @@
 /* 
  * Created for Gwyneth's Gift in 2022 using original Homebase code as a guide
  */
+
 session_cache_expire(30);
 session_start();
-
 include_once('database/dbEvents.php');
 include_once('domain/Event.php');
-include_once('database/dbPersons.php');
-include_once('domain/Person.php');
 include_once('database/dbLog.php'); // can be used in later iterations
 $id = str_replace("_"," ",$_GET["id"]);
 
@@ -56,73 +54,26 @@ if ($id == 'new') {
 			})
 		</script>
     </head>
-    <body style="background-color: rgb(250, 249, 246);">
+    <body>
         <div id="container">
             <?PHP include('header.php'); ?>
             <div id="content">
                 <?PHP
                 include('eventValidate.inc');
-                if ($_POST['_form_submit'] != 1)
-                //in this case, the form has not been submitted, so show it
-                    include('eventForm.php');
-                elseif($_POST['signup']){
-                        $thisperson = retrieve_person($_SESSION['_id']);
-                        $this_person_id = $thisperson->get_id();
-                        //echo("====".$this_person_id);
-                        $campId = $_POST['event_id'];
-                        //echo($this_person_id);
-                        $con = connect();
-                        //echo("<p>SIGNUP-". $campId . '-'.$this_person_id);
-                        $query = 'SELECT * FROM dbevents';
-                        $result = mysqli_query($con, $query);
-                        $list = '';
-                        while($row = $result->fetch_assoc()){
-                            $list .= $row['event_working'];
-                            //echo('|'.$row['event_working'].'|</p>');
-                        }
-                        //echo("-----".$campId);
-                        $list .= $this_person_id . "#";
-                        $query = 'UPDATE dbevents SET event_working="'.$list.'" WHERE id="'.$campId.'"';
-                        mysqli_query($con, $query);
-                        include('eventForm.php');
-                        //echo($result);
-                        /* $list = $result['campaign_working'].$this_person_id.'#';
-    
-                        $query = "UPDATE dbcampaigns SET campaign_working='".$list."' WHERE campaign_id=".$campId;
-                        mysqli_query($con, $query);*/
+                if ($_POST['_form_submit'] != 1){
+                    include('eventForm.inc');
                 }
-                elseif($_POST['unsignup']){
-                        $thisperson = retrieve_person($_SESSION['_id']);
-                        $this_person_id = $thisperson->get_id();
-                        $campId = $_POST['event_id'];
-                        $con = connect();
-                        $query = 'SELECT * FROM dbevents';
-                        $result = mysqli_query($con, $query);
-                        $list = '';
-                        while($row = $result->fetch_assoc()){
-                            $working = explode("#", $row['event_working']);
-                            foreach($working as $person){
-                                //echo("-".$person."-");
-                                if($this_person_id!==$person && $person!=""){
-                                    $list .= $person . "#";
-                                }
-                            }
-                        }
-                        //echo("=======".$list);
-                        $query = 'UPDATE dbevents SET event_working="'.$list.'" WHERE id="'.$campId.'"';
-                        mysqli_query($con, $query);
-                        include('eventForm.php');
-                    }
+                //in this case, the form has not been submitted, so show it
                 else {
                     //in this case, the form has been submitted, so validate it
-             //       $errors = validate_form($event);  //step one is validation.
+                    $errors = validate_form($event);  //step one is validation.
                     // errors array lists problems on the form submitted
                     if ($errors) {
                         // display the errors and the form to fix
                         show_errors($errors);
                         $event = new Event($event->get_event_name(), $_POST['location'],   
                                         $_POST['event_date'], $_POST['description'], $_POST['event_id']);
-                        include('eventForm.php');
+                    include('eventForm.php');
                     }
                     // this was a successful form submission; update the database and exit
                     else

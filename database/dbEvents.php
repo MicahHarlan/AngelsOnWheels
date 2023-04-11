@@ -41,7 +41,8 @@ function add_event($event) {
                 $event->get_venue() . '","' .
                 $event->get_event_name() . '","' . 
                 $event->get_description() . '","' .
-                $event->get_event_id() .            
+                $event->get_event_id() .  '","' .
+                $event->get_event_working() .         
                 '");');							
         mysqli_close($con);
         return true;
@@ -166,8 +167,21 @@ function fix_date($wrong_format_date){
         //echo("False");
         return False;
     }
+}
 
-   
+function monthCheckEvent($event_date){
+    $explodedString = explode("-",$event_date);
+    $year = "20".$explodedString[0];
+    $month = $explodedString[1];
+    $day = $explodedString[2];
+    $currentMonth = date("m");
+    $currentYear = date("Y");
+    if($currentYear == $year && $currentMonth == $month){
+        return True;
+    }
+    else{
+        return False;
+    }
 }
 
 /**

@@ -15,7 +15,7 @@ session_start();
 
 	</head>
 
-	<body>
+	<body style="background-color: rgb(250, 249, 246);">
 	<?php
 				include('database/dbFeedback.php');
 
@@ -42,8 +42,8 @@ session_start();
 									<option value="recommendDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "recommendDes"){echo "selected";}?>>Likely to Reccomend (Descending)</option>
 									<option value="encourageAsc"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "encourageAsc"){echo "selected";}?>>Likely to Encourage  (Ascending)</option>
 									<option value="encourageDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "encourageDes"){echo "selected";}?>>Likely to Encourage (Descending)</option>
-									<option value="dateAsc"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateAsc"){echo "selected";}?>>Date (Ascending)</option>
-									<option value="dateDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateDes"){echo "selected";}?>>Date (Descending)</option>
+									<option value="dateAsc"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateAsc"){echo "selected";}?>>Date (Oldest to Newest)</option>
+									<option value="dateDes"<?php if(isset($_GET['sort_feedback']) && $_GET['sort_feedback'] == "dateDes"){echo "selected";}?>>Date (Newest to Oldest)</option>
 									
 								</select>
 								<button type="submit" class="input-group-text" id="basic-addon2">Sort
@@ -145,14 +145,15 @@ session_start();
 ?>
 <?php
 				//if "deleted selected feedback" AND checkboxes are selected		
-						if(isset($_POST['delete']) && isset($_POST['checkbox'])){
-						
+					if(isset($_POST['delete']) && isset($_POST['checkbox'])){
 							$del= count((array)$_POST['checkbox']);
 							
 							$i = 0;
 
 							while ($i<$del){
+								echo($_POST['checkbox'][$i]);
 								$keyToDelete = $_POST['checkbox'][$i];
+								echo($keyToDelete);
 
 								mysqli_query($con, "DELETE from dbFeedback WHERE id = '$keyToDelete'");
 								$i++;
@@ -170,7 +171,7 @@ session_start();
 </div>
 	</body>
 <footer>
-	<?php mysqli_close($con); include('footer.inc');?>
+	<?php mysqli_close($con); include('footer.php');?>
 </footer>
 
 </html>
