@@ -14,17 +14,24 @@
 session_cache_expire(30);
 session_start();
 
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
 include_once('database/dbPersons.php');
 include_once('domain/Person.php');
 include_once('database/dbLog.php');
 $id = str_replace("_"," ",$_GET["id"]);
 
 if ($id == 'new') {
-    // for new applicants set the venue to portland so all their availability info saves, leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
+    // for new applicants set the venue to portland so all their availability info saves,leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
     $_SESSION['venue']="portland"; 
-    $person = new Person("new", null, $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
+    
+   
+   $person = new Person("new", null, $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
                     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "");
+
 } else {
+    
     $person = retrieve_person($id);
     if (!$person) { // try again by changing blanks to _ in id
         $id = str_replace(" ","_",$_GET["id"]);
@@ -42,11 +49,11 @@ if ($id == 'new') {
         <title>
             Editing <?PHP echo($person->get_first_name() . " " . $person->get_last_name()); ?>
         </title>
+
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css"/>
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="personEditMobile.css" type="text/css"/>
-
         <script src="lib/jquery-1.9.1.js"></script>
         <script src="lib\bootstrap\js\bootstrap.js"></script>
 		<script src="lib/jquery-ui.js"></script>
@@ -60,14 +67,18 @@ if ($id == 'new') {
     </head>
     <body style="background-color: rgb(250, 249, 246);">
         <div class="container-fluid" id="container">
-            <?PHP include('header.php'); ?>
-            <div class="willthisFix container-fluid border border-dark" id="content">
+            <?PHP include('header.php');?>
+            
+<!--            <div class="willthisFix container-fluid border border-dark" id="content">-->
                 <?PHP
+                
                 include('personValidate.inc');
-                if ($_POST['_form_submit'] != 1)
+                if ($_POST['_form_submit'] != 1){
                 //in this case, the form has not been submitted, so show it
                     include('personForm.php');
+                }
                 else {
+
                     //in this case, the form has been submitted, so validate it
                     $errors = validate_form($person);  //step one is validation.
                     // errors array lists problems on the form submitted
