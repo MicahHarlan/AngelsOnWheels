@@ -12,10 +12,12 @@ error_reporting(E_ERROR | E_PARSE);
 
 <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="styling/newheader.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="lib\bootstrap\js\bootstrap.js"></script>
 
 <!-- Begin Header -->
-<div class="navbar" id="navigationLinks">
+<div class="navbar">
 
     <?PHP
     //Log-in security
@@ -75,11 +77,12 @@ error_reporting(E_ERROR | E_PARSE);
         	echo(' | <a href="' . $path . 'logout.php">Logout</a><br>');
         }
         else {
-            echo('<nav class="navbar navbar-custom navbar-expand-lg bg-light">');
-            echo('<div class="container-fluid">');
-            echo('<a class="navbar-brand" href="' . $path . 'index.php">
-            <img src="images\angelsIcon.png" alt="Angles on Wheels Icon" width="203" height="63">
-          </a>');
+           // echo('<nav class="navbar navbar-custom navbar-expand-lg bg-light">');
+            //echo('<div class="container-fluid">');
+            echo('
+            <a class="navbar-brand" href="' . $path . 'index.php">
+            <img src="images\angelsIcon.png" alt="Angles on Wheels Icon" width="100">
+            </a>');
 //            echo('<a class="navbar-brand">Homebase</a>');
             //echo('<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>');
         	//echo('<div class="collapse navbar-collapse" id="navbarSupportedContent">');
@@ -91,7 +94,8 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<a  href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">Help</a>');
                 echo('<a  href="' . $path . 'calenderExample.php?venue=portland'.''.'">Calendar</a>');
                 echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
-                echo('<div class="dropdown"><button class="dropbtn">Events<i class="fa fa-caret-down"></i></button>
+                echo('<div class="dropdown">
+                        <button class="dropbtn">Events &#9660;</button>
                         <div class="dropdown-content">');
                 echo('<a  href="' . $path . 'eventSearch.php">Events</a>');
                 echo('</div></div>');
@@ -120,16 +124,19 @@ error_reporting(E_ERROR | E_PARSE);
 //	            echo('<br>master schedules: <a href="' . $path . 'viewSchedule.php?venue=portland'."".'">Portland, </a>');
 //	            echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
                 
-                echo('<div class="dropdown"><button class="dropbtn">Events<i class="fa fa-caret-down"></i></button>
-                        <div class="dropdown-content">');
-                echo('<a  href="' . $path . 'eventSearch.php">Events</a>');
-                echo('<a  href="' . $path . 'eventCreate.php?id=new">Add Event</a>');
-                echo('</div></div>');
+                echo('
+                    <div class="dropdown">
+                    <button class="dropbtn">Events</button>
+                        <div class="dropdown-content">
+                        <a href="' . $path . 'eventSearch.php">Event search</a>
+                        <a href="' . $path . 'eventCreate.php?id=new">Add Event</a>
+                        </div></div>');
+                
                 
                 
                 //<a  href="' . $path . 'eventSearch.php">Search Event</a>');
 
-                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
+                //echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
 //	            echo('<a class="navbar-brand">Volunteers</a>');
                 echo('<a  href="' . $path . 'personSearch.php">Search Volunteer</a>
 			        <a  href="personEdit.php?id=' . 'new' . '">Add Volunteer</a>');
@@ -146,20 +153,31 @@ error_reporting(E_ERROR | E_PARSE);
                 
 	       
             }
-	        echo('<a  href="' . $path . 'logout.php">Logout</a><br>');
-            echo('</div></div></nav>');
-            /*echo('<br/><br/>');
+	        echo('<a  href="' . $path . 'logout.php">Logout</a>');
+            echo('</div>');
+            echo('<br/><br/>');
             echo('
+                <div class="dropdown">
+                <button class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+                </div>
+            ');
+            echo('<div>
                     <div class="dropdown">
                     <button class="dropbtn">Events</button>
-                    <div class="dropdown-content">
-                        <a href="' . $path . 'eventSearch.php">Search Event</a>
-                        <a href="' . $path . 'eventCreate.php?id=new">Add Event</a>');
-            */
+                        <div class="dropdown-content">
+                        <a href="' . $path . 'eventSearch.php">Event search</a>
+                        <a href="' . $path . 'eventCreate.php?id=new">Add Event</a>
+                        </div></div></div>');
+            
         }
 
 
     }
     ?>
-</div>
+
 <!-- End Header -->
