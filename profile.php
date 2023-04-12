@@ -127,6 +127,33 @@
                     echo '<tr valign=top style="color:white; height:50px;"><td>' . $person->get_contact_num() . '</td></tr>';
                     echo '<tr valign=top style="color:white"><td>Relationship: </td></tr>';
                     echo '<tr valign=top style="color:white; height:50px;"><td>' . $person->get_relation() . '</td></tr></table>';
+                    //Availability
+                    echo '<h3 style="margin-left:40px;">Availability</h3>';
+                    echo '<div style="margin-left:80px"></div>';
+                    $shifts = array('9-12' => '9-12', '12-3' => '12-3', '3-6' => '3-6',
+                    '6-9' => '6-9');
+                    $days = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
+                    echo '<table style="margin-left:40px;"><tr><td style="color:white">Monday&nbsp;&nbsp;</td><td style="color:white">Tuesday&nbsp;&nbsp;</td><td style="color:white">Wednesday&nbsp;&nbsp;</td>
+                    <td style="color:white">Thursday&nbsp;&nbsp;</td><td style="color:white">Friday&nbsp;&nbsp;</td><td style="color:white">Saturday&nbsp;&nbsp;</td><td style="color:white">Sunday</td></tr>';
+                    foreach ($shifts as $shift => $shiftvalue) {
+                        echo ('<tr>');
+                        foreach ($days as $day) {
+                          $shiftdisplay=$shiftvalue;
+                         //some stuff here is redundant, left over from old version w/ weekends having different hours
+                         if (($shift!="night" || $day=="Fri" || $day=="Sat") && $shiftdisplay!="") {
+                            $realkey = $day . ":". $shiftdisplay. ":". $person->get_venue();
+                              echo ('<td class="fix" style="color:white"><input class="Enlarge form-check-input" type="checkbox" name="availability[]" value="' . $realkey . '"');
+                           if (in_array($realkey, $person->get_availability())) echo(' CHECKED');
+                           echo (' disabled>');
+                           echo "<p class='Enlarge'> ".$shiftdisplay.'<p/></td>';
+                          }
+                          else echo "<td></td>";
+                        }
+                        echo ('</tr>');
+                    }
+
+                    echo '</table>';
+
                     // link to personal profile for editing
                     echo('<br><div class="container-fluid" id="scheduleBox" style="text-align:center"><p><strong>Edit Profile:</strong><br /></p><ul>');
                     echo('</ul><p>Click <strong><a href="personEdit.php?id='.$person->get_id().'">here</a></strong> to edit your account.</p></div>');
@@ -147,7 +174,7 @@
             </form>
             <style>
                 .square {
-                height: 1300px;
+                height: 1500px;
                 width: 930px;
                 color: white;
                 background-color: #870287;
