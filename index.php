@@ -15,6 +15,7 @@ session_start();
         Angel's on Wheels
     </title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="styling\notification.css" type="text/css" />
     <style>
         #appLink:visited {
             color: gray;
@@ -27,6 +28,26 @@ session_start();
 </head>
 
 <body style="background-color: rgb(250, 249, 246);">
+
+    <?PHP 
+    $query = "SELECT * FROM dbevents";
+    $resultsEvents = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($resultsEvents)) {
+        $thisMonthCheck =  $calendar->monthCheck($row['event_date']);
+        if($thisMonthCheck){
+        }
+    }
+    ?>
+
+    <div class="banner">
+        <div class="grid">
+            <div class="grid_image"><img src="images\calendar_icon1.png" alt="Calendar Icon" class="banner_image"></div>
+            <div class="grid_number"><div class="banner_number ">4</div></div>
+        </div>
+    </div>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="Mb0V1Edj"></script>
     <div class="container-fluid">
         <?PHP include('header.php'); ?>
         <div class="container-fluid border border-dark" id="content">
