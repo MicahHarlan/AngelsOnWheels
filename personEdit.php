@@ -11,19 +11,27 @@
  * 	@author Oliver Radwan, Xun Wang and Allen Tucker
  * 	@version 9/1/2008 revised 4/1/2012 revised 8/3/2015
  */
-session_start();
 session_cache_expire(30);
+session_start();
+
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
 include_once('database/dbPersons.php');
 include_once('domain/Person.php');
 include_once('database/dbLog.php');
 $id = str_replace("_"," ",$_GET["id"]);
 
 if ($id == 'new') {
-    // for new applicants set the venue to portland so all their availability info saves, leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
+    // for new applicants set the venue to portland so all their availability info saves,leftover from 2 calendar system, Gwyneth's Gift is working off of Portland
     $_SESSION['venue']="portland"; 
-    $person = new Person('new', 'applicant', $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
+    
+   
+   $person = new Person("new", null, $_SESSION['venue'], null, null, null, null, null, null, null, null, null, "applicant", 
                     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "");
+
 } else {
+    
     $person = retrieve_person($id);
     if (!$person) { // try again by changing blanks to _ in id
         $id = str_replace(" ","_",$_GET["id"]);
@@ -35,14 +43,17 @@ if ($id == 'new') {
     }
 }
 ?>
-<html>
+
+<html lang="en">
     <head>
         <title>
             Editing <?PHP echo($person->get_first_name() . " " . $person->get_last_name()); ?>
         </title>
+
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css"/>
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="personEditMobile.css" type="text/css"/>
         <script src="lib/jquery-1.9.1.js"></script>
         <script src="lib\bootstrap\js\bootstrap.js"></script>
 		<script src="lib/jquery-ui.js"></script>
@@ -56,14 +67,18 @@ if ($id == 'new') {
     </head>
     <body style="background-color: rgb(250, 249, 246);">
         <div class="container-fluid" id="container">
-            <?PHP include('header.php'); ?>
-            <div class="container-fluid border border-dark" id="content">
+            <?PHP include('header.php');?>
+            
+<!--            <div class="willthisFix container-fluid border border-dark" id="content">-->
                 <?PHP
+                
                 include('personValidate.inc');
-                if ($_POST['_form_submit'] != 1)
+                if ($_POST['_form_submit'] != 1){
                 //in this case, the form has not been submitted, so show it
-                    include('personForm.inc');
+                    include('personForm.php');
+                }
                 else {
+
                     //in this case, the form has been submitted, so validate it
                     $errors = validate_form($person);  //step one is validation.
                     // errors array lists problems on the form submitted
@@ -97,13 +112,13 @@ if ($id == 'new') {
                                         $availability, $_POST['schedule'], $_POST['hours'], 
                                         $_POST['birthday'], $_POST['start_date'], $_POST['howdidyouhear'], 
                                         $_POST['notes'], $_POST['old_pass']);
-                        include('personForm.inc');
+                        include('personForm.php');
                     }
                     // this was a successful form submission; update the database and exit
                     else
                         process_form($id,$person);
                         echo "</div>";
-                    include('footer.inc');
+                    include('footer.php');
                     echo('</div></body></html>');
                     die();
                 }
@@ -175,7 +190,7 @@ if ($id == 'new') {
                     $notes = trim(str_replace('\\\'', '\'', htmlentities($_POST['notes'])));
                     //used for url path in linking user back to edit form
                     $path = strrev(substr(strrev($_SERVER['SCRIPT_NAME']), strpos(strrev($_SERVER['SCRIPT_NAME']), '/')));
-                    //step two: try to make the deletion, password change, addition, or change                    
+                    //step two: try to make the deletion, password change, addition, or change
                     if ($_POST['deleteMe'] == "DELETE") {
                         $result = retrieve_person($id);
                         if (!$result)
@@ -209,9 +224,9 @@ if ($id == 'new') {
                         $result = remove_person($id);
                         $pass = $first_name . $clean_phone1;
                         $newperson = new Person($first_name, $last_name, $location, $address, $city, $state, $zip, $clean_phone1, $phone1type, $clean_phone2,$phone2type,
-                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time, 
+                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time,
                                         $type, $status, $cMethod, $position, $credithours,
-                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours, 
+                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours,
                                         $birthday, $start_date, $howdidyouhear, $notes, "");
                         $result = add_person($newperson);
                         if (!$result)
@@ -229,9 +244,9 @@ if ($id == 'new') {
                             echo('<p class="error">Unable to add ' . $first_name . ' ' . $last_name . ' to the database. <br>Another person with the same name and phone is already there.');
                         else {
                         	$newperson = new Person($first_name, $last_name, $location, $address, $city, $state, $zip, $clean_phone1, $phone1type, $clean_phone2,$phone2type,
-                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time, 
+                        				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time,
                                         $type, $status, $cMethod, $position, $credithours,
-                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours, 
+                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours,
                                         $birthday, $start_date, $howdidyouhear, $notes, "");
                             $result = add_person($newperson);
                             if (!$result)
@@ -254,7 +269,7 @@ if ($id == 'new') {
                             $newperson = new Person($first_name, $last_name, $location, $address, $city, $state, $zip, $clean_phone1, $phone1type, $clean_phone2,$phone2type,
                         				$email, $shirt_size, $computer, $camera, $transportation, $contact_name, $clean_contact_num, $relation, $contact_time,
                                         $type, $status, $cMethod, $position, $credithours,
-                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours, 
+                                        $commitment, $motivation, $specialties, $convictions, $availability, $schedule, $hours,
                                         $birthday, $start_date, $howdidyouhear, $notes, $pass);
                             $result = add_person($newperson);
                             if (!$result)
@@ -268,7 +283,7 @@ if ($id == 'new') {
                 }
                 ?>
             </div>
-            <?PHP include('footer.inc'); ?>
+            <?PHP include('footer.php'); ?>
         </div>
     </body>
 </html> 

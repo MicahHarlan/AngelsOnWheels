@@ -9,8 +9,9 @@
  * Modified by Xun Wang on Feb 25, 2015
  */
 
-session_start();
+
 session_cache_expire(30);
+session_start();
 ?>
 <html>
     <head>
@@ -131,7 +132,7 @@ session_cache_expire(30);
                 <!-- below is the footer that we're using currently-->
                 </div>
         </div>
-        <?PHP include('footer.inc'); ?>
+        <?PHP include('footer.php'); ?>
     </body>
 </html>
 

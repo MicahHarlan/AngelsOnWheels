@@ -15,8 +15,9 @@
  * @author Jerrick Hoang
  * @version 11/5/2013
  */
-session_start();
 session_cache_expire(30);
+session_start();
+//session_cache_expire(30);
 
 include_once('header.php'); 
 include_once('database/dbPersons.php');
@@ -88,13 +89,14 @@ $(function() {
 		<?php date_default_timezone_set ("America/New_York");
 		$venue = $_GET['venue'];
 		$venues = array('portland'=>"RMH Portland",'bangor'=>"RMH Bangor");
-		echo '<b>'." Gwyneth's Gifts Volunteer Reports</b><br>Today's date: ".date("F d, Y");
+		echo '<b>'." Angels on Wheels Volunteer Reports</b><br>Today's date: ".date("F d, Y");
 		echo '</p>';
 		echo '<input type="hidden" name="_form_submit" value="report'.$venue.'" />';?>
 	<table>	<tr>
 		<td class = "search-description" valign="top"> &nbsp;&nbsp;&nbsp;&nbsp;Select Report Type: 
 		<p>	<select multiple name="report-types[]" id = "report-type" size="6"> <!-- size should = # of options -->
 	  		<option value="volunteer-hours">Total Hours</option>
+			<option value="individual-hours">Individual Hours</option>
 	  		<option value="shifts-staffed-vacant">Shifts/Vacancies</option>
 	  		<option value="emails">* Volunteer Emails</option>
 	  		<option value="volunteers">* Volunteer Contact Info</option>
@@ -116,18 +118,42 @@ $(function() {
 	To view report, click <input class="btn btn-success btn-sm" type="submit" value="Submit" id ="report-submit" class ="btn">
 	</td></tr>
 	<tr>
-	<td>* To save the report, check here <input type="checkbox" name="export" value="export">, hit 'Submit', and
-	<a href="http://localhost/GwynethsGift/export.csv">Click here</a>.</td></tr>
+	<td>* To save the report,
+	<button onclick="exportTableToCSV()">Click here</button>.</td></tr>
 	<tr><td></td></tr>
 	<tr><td>To run another report, please refresh the page.</td></tr>
 	</table>
 	</form>
+	<script>
+    function exportTableToCSV() {
+      var csv = [];
+      var rows = document.querySelectorAll("table tr");
+      
+      for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+          row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+      }
+
+      // Download CSV file
+      var downloadLink = document.createElement("a");
+      var blob = new Blob(["\ufeff", csv.join("\n")], { type: "text/csv;charset=utf-8" });
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = "my-table.csv";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  </script>
 	<p id="outputs">
 
 	</p>
 </div>
 </div>
 </div>
-        <?PHP include('footer.inc'); ?>
+        <?PHP include('footer.php'); ?>
 
 </body>
