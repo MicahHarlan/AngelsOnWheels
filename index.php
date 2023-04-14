@@ -30,38 +30,74 @@ session_start();
         }
     </style>
 </head>
-<?PHP include('header.php'); ?>
+<?PHP 
+include('header.php');
+include_once('database/dbPersons.php');
+include_once('domain/Person.php');
+include_once('database/dbLog.php');
+include_once('domain/Shift.php');
+include_once('database/dbShifts.php');
+include_once('database/dbEvents.php');
+include_once('database/dbCampaigns.php');
+?>
 
 <body style="background-color: rgb(250, 249, 246);">
 
     <?PHP 
-    $query = "SELECT * FROM dbevents";
-    $resultsEvents = mysqli_query($con, $query);
-    while ($row = mysqli_fetch_assoc($resultsEvents)) {
-        $thisMonthCheck =  $calendar->monthCheck($row['event_date']);
-        if($thisMonthCheck){
-        }
-    }
+    $person = retrieve_person($_SESSION['_id']);
+    $personId = $person->get_id();
+    list($eventWorking, $eventIds, $eventDates) = checkEventWorking($personId);
+    //if(count($eventWorking)>0){
+        //echo '<pre>'; print_r($eventWorking); echo '</pre>';
+        ?>
+            <div class="banner">
+                <div class="around_items">
+                <div class="around_grid">
+                <div class="grid">
+                    <div class="grid_image"><img src="images\calendar_icon1.png" alt="Calendar Icon" class="banner_image"></div>
+                    <div class="grid_number"><div class="banner_number "><?PHP echo(count($eventWorking)); ?></div></div>
+                </div>
+                </div>
+                <div class="around_list">
+                <span class="list_events">
+                <h5>You're signed up for:</h5>
+                <ul>
+                <?PHP 
+                if(count($eventWorking)>0){
+                $count = 0;
+                echo('<li>Events: </li>');
+                foreach($eventWorking as $eventName){
+                    echo('<li><strong>|</strong> <a href=eventEdit.php?id='.$eventIds[$count].'>'.$eventName.'</a> ('.monthDay($eventDates[$count]).') <strong>|</strong></li>');
+                    $count = $count + 1;
+                } 
+                }
+                list($theCampaigns, $campaignIds, $campDates) = checkCampaignWorking($personId);
+                $count = 0;
+                if(count($theCampaigns)>0){
+                echo('<br/><li>Campaigns: </li>');
+                foreach($theCampaigns as $campName){
+                    echo('<li><strong>|</strong> <a href=campaignEdit.php?id='.$campaignIds[$count].'>'.$campName.'</a> ('.monthDay($campDates[$count]).') <strong>|</strong></li>');
+                    $count = $count + 1;
+                } 
+                }
+                ?>
+                </ul>
+                </span>
+                </div>
+                </div>
+            </div>
+        <?PHP
+    //}
     ?>
 
-    <div class="banner">
-        <div class="grid">
-            <div class="grid_image"><img src="images\calendar_icon1.png" alt="Calendar Icon" class="banner_image"></div>
-            <div class="grid_number"><div class="banner_number ">4</div></div>
-        </div>
-    </div>
+    
 
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="Mb0V1Edj"></script>
     <div class="container-fluid">
         <div class="container-fluid border border-dark" id="content">
             <?PHP
-            include_once('database/dbPersons.php');
-            include_once('domain/Person.php');
-            include_once('database/dbLog.php');
-            include_once('domain/Shift.php');
-            include_once('database/dbShifts.php');
-            include_once('database/dbEvents.php');
+            
             date_default_timezone_set('America/New_York');
             //    fix_all_birthdays();
             if ($_SESSION['_id'] != "guest") {

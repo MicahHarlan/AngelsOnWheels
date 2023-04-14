@@ -184,25 +184,33 @@ function monthCheckEvent($event_date){
     }
 }
 
+function monthDay($date){
+    $month = date("F", strtotime($date));
+    $day = date("d", strtotime($date));
+    $monthDay = $month . " " . $day;
+    return $monthDay;
+}
+
 function checkEventWorking($user){
+    $con=connect();
     $query = "SELECT * FROM dbevents";
     $resultsEvents = mysqli_query($con, $query);
+    $theEvents = array();
+    $eventIds = array();
+    $eventDates = array();
     while ($row = mysqli_fetch_assoc($resultsEvents)) {
-        if(str_contains($row['event_']))
+        if(str_contains($row['event_working'], $user)){
+            if(monthCheckEvent($row['event_date'])){
+                if(fix_date($row['event_date'])){
+                    array_push($theEvents, $row['event_name']);
+                    array_push($eventIds, $row['event_id']);
+                    array_push($eventDates, $row['event_date']);
+                }
+            }
+        }
     }
-
-    $explodedString = explode("-",$event_date);
-    $year = "20".$explodedString[0];
-    $month = $explodedString[1];
-    $day = $explodedString[2];
-    $currentMonth = date("m");
-    $currentYear = date("Y");
-    if($currentYear == $year && $currentMonth == $month){
-        return True;
-    }
-    else{
-        return False;
-    }
+    //echo '<pre>'; print_r($theEvents); echo '</pre>';
+    return [$theEvents, $eventIds, $eventDates];
 }
 
 /**
