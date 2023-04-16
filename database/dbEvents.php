@@ -12,11 +12,12 @@
 
 /**
  * @version March 1, 2012
- * @author Oliver Radwan and Allen Tucker
+ * @author Oliver Radwan and Allen Tucker, 
  */
 
 /* 
  * Created for Gwyneth's Gift in 2022 using original Homebase code as a guide
+ * Added to for the Angels on Wheels in 2023 using the pre-existing code as a guide.
  */
 
 
@@ -169,6 +170,7 @@ function fix_date($wrong_format_date){
     }
 }
 
+/* Check if an event is happening in the current month */
 function monthCheckEvent($event_date){
     $explodedString = explode("-",$event_date);
     $year = "20".$explodedString[0];
@@ -184,6 +186,7 @@ function monthCheckEvent($event_date){
     }
 }
 
+/* returns the date passed in in the Month day# format  */
 function monthDay($date){
     $month = date("F", strtotime($date));
     $day = date("d", strtotime($date));
@@ -191,6 +194,9 @@ function monthDay($date){
     return $monthDay;
 }
 
+/* check if a certain user is working the event
+    if that event is in the future
+    and if the event is this month */
 function checkEventWorking($user){
     $con=connect();
     $query = "SELECT * FROM dbevents";

@@ -18,6 +18,8 @@ error_reporting(E_ERROR | E_PARSE);
 <div class="d-flex justify-content-center" id="navigationLinks">
 
     <?PHP
+    include_once('database/dbPersons.php');
+    include_once('domain/Person.php');
     //Log-in security
     //If they aren't logged in, display our log-in form.
     if (!isset($_SESSION['logged_in'])) {
@@ -25,8 +27,7 @@ error_reporting(E_ERROR | E_PARSE);
         include('login_form.php');
         die();
     } else if ($_SESSION['logged_in']) {
-        include_once('database/dbPersons.php');
-        include_once('domain/Person.php');
+        
 
         /*         * Set our permission array.
          * anything a guest can do, a volunteer and manager can also do
@@ -58,7 +59,9 @@ error_reporting(E_ERROR | E_PARSE);
        
         
         $person2 = retrieve_person($_SESSION['_id']);
-        
+        $person = retrieve_person($_SESSION['_id']);
+
+
         if($permission_array[$current_page]>$_SESSION['access_level']){
             //in this case, the user doesn't have permission to view this page.
             //we redirect them to the index page.

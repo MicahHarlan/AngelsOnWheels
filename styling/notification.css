@@ -9,17 +9,18 @@
 .around_items {
     display: grid;
     width: 100%;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
 }
 
 .around_grid{
+    padding-top: 3%;
     grid-column-start: 1;
     grid-column-end: 1;
 }
 
 .around_list {
     grid-column-start: 2;
-    grid-column-end: 4;
+    grid-column-end: 5;
 }
 
 .grid {

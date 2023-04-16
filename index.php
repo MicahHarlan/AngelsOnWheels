@@ -47,7 +47,8 @@ include_once('database/dbCampaigns.php');
     $person = retrieve_person($_SESSION['_id']);
     $personId = $person->get_id();
     list($eventWorking, $eventIds, $eventDates) = checkEventWorking($personId);
-    //if(count($eventWorking)>0){
+    list($theCampaigns, $campaignIds, $campDates) = checkCampaignWorking($personId);
+    if(count($eventWorking)>0 || count($theCampaigns)>0){
         //echo '<pre>'; print_r($eventWorking); echo '</pre>';
         ?>
             <div class="banner">
@@ -55,7 +56,7 @@ include_once('database/dbCampaigns.php');
                 <div class="around_grid">
                 <div class="grid">
                     <div class="grid_image"><img src="images\calendar_icon1.png" alt="Calendar Icon" class="banner_image"></div>
-                    <div class="grid_number"><div class="banner_number "><?PHP echo(count($eventWorking)); ?></div></div>
+                    <div class="grid_number"><div class="banner_number "><?PHP echo(count($eventWorking)+count($theCampaigns)); ?></div></div>
                 </div>
                 </div>
                 <div class="around_list">
@@ -65,18 +66,20 @@ include_once('database/dbCampaigns.php');
                 <?PHP 
                 if(count($eventWorking)>0){
                 $count = 0;
-                echo('<li>Events: </li>');
+                echo('<li>Events: </li> <strong>|</strong>');
                 foreach($eventWorking as $eventName){
-                    echo('<li><strong>|</strong> <a href=eventEdit.php?id='.$eventIds[$count].'>'.$eventName.'</a> ('.monthDay($eventDates[$count]).') <strong>|</strong></li>');
+                    echo('<li> <a href=eventEdit.php?id='.$eventIds[$count].'>'.$eventName.'</a> ('.monthDay($eventDates[$count]).') </li><strong>|</strong>');
                     $count = $count + 1;
                 } 
                 }
-                list($theCampaigns, $campaignIds, $campDates) = checkCampaignWorking($personId);
+                if(count($eventWorking)>0 && count($theCampaigns)>0){
+                    echo('<br/>');
+                }
                 $count = 0;
                 if(count($theCampaigns)>0){
-                echo('<br/><li>Campaigns: </li>');
+                echo('<li>Campaigns: </li> <strong>|</strong>');
                 foreach($theCampaigns as $campName){
-                    echo('<li><strong>|</strong> <a href=campaignEdit.php?id='.$campaignIds[$count].'>'.$campName.'</a> ('.monthDay($campDates[$count]).') <strong>|</strong></li>');
+                    echo('<li> <a href=campaignEdit.php?id='.$campaignIds[$count].'>'.$campName.'</a> ('.monthDay($campDates[$count]).')</li> <strong>|</strong>');
                     $count = $count + 1;
                 } 
                 }
@@ -87,7 +90,7 @@ include_once('database/dbCampaigns.php');
                 </div>
             </div>
         <?PHP
-    //}
+    }
     ?>
 
     

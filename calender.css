@@ -86,13 +86,37 @@
     border-radius: 4px;
     background-color: #f7c30d;
     color: #fff;
+    text-decoration: none;
     word-wrap: break-word;
 }
+
+.calendar .days .day_num .event.green a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.calendar .days .day_num .event.green a:hover {
+    color: #ffecec;
+    text-decoration: underline;
+}
+
+.calendar .days .day_num .event.blue a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.calendar .days .day_num .event.blue a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 .calendar .days .day_num .event.green {
     background-color: #EEB800;
+    text-decoration: none;
 }
 .calendar .days .day_num .event.blue {
     background-color: #FFDA5F;
+    text-decoration: none;
 }
 .calendar .days .day_num .event.red {
     background-color: #ce5151;

@@ -78,12 +78,14 @@ class Calender {
                         if(strcmp(' green', $event[3])!=1){
                             $html .= '<div class="event' . $event[3] . '"><a href=eventEdit.php?id='.$event[4].'>';
                             $html .= $event[0];
-                            $html .= '</a></div>';
+                            $html .= '</a></div>
+                                    ';
                         }
                         else{
                             $html .= '<div class="event' . $event[3] . '"><a href=campaignEdit.php?id='.$event[4].'>';
                             $html .= $event[0];
-                            $html .= '</a></div>';
+                            $html .= '</a></div>
+                                    ';
                         }
                     }
                 }
