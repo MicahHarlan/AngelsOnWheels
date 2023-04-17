@@ -66,6 +66,7 @@ if ($id == 'new') {
                 //in this case, the form has not been submitted, so show it
                     include('eventForm.php');
                 elseif($_POST['signup']){
+                    //in ths case the person is signing up to work the event
                         $thisperson = retrieve_person($_SESSION['_id']);
                         $this_person_id = $thisperson->get_id();
                         //echo("====".$this_person_id);
@@ -73,7 +74,7 @@ if ($id == 'new') {
                         //echo($this_person_id);
                         $con = connect();
                         //echo("<p>SIGNUP-". $campId . '-'.$this_person_id);
-                        $query = 'SELECT * FROM dbevents';
+                        $query = 'SELECT * FROM dbevents where id="'.$campId.'"';
                         $result = mysqli_query($con, $query);
                         $list = '';
                         while($row = $result->fetch_assoc()){
@@ -82,6 +83,7 @@ if ($id == 'new') {
                         }
                         //echo("-----".$campId);
                         $list .= $this_person_id . "#";
+                        //$query = 'UPDATE dbevents SET event_working="" WHERE id="'.$campId.'"';
                         $query = 'UPDATE dbevents SET event_working="'.$list.'" WHERE id="'.$campId.'"';
                         mysqli_query($con, $query);
                         include('eventForm.php');
@@ -92,11 +94,12 @@ if ($id == 'new') {
                         mysqli_query($con, $query);*/
                 }
                 elseif($_POST['unsignup']){
+                    //in this case the person is no longer able to work the event
                         $thisperson = retrieve_person($_SESSION['_id']);
                         $this_person_id = $thisperson->get_id();
                         $campId = $_POST['event_id'];
                         $con = connect();
-                        $query = 'SELECT * FROM dbevents';
+                        $query = 'SELECT * FROM dbevents WHERE id="'.$campId.'"';
                         $result = mysqli_query($con, $query);
                         $list = '';
                         while($row = $result->fetch_assoc()){
@@ -115,7 +118,7 @@ if ($id == 'new') {
                     }
                 else {
                     //in this case, the form has been submitted, so validate it
-             //       $errors = validate_form($event);  //step one is validation.
+                    //       $errors = validate_form($event);  //step one is validation.
                     // errors array lists problems on the form submitted
                     if ($errors) {
                         // display the errors and the form to fix

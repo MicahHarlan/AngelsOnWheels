@@ -193,6 +193,28 @@ function get_all_campaigns() {
     }
 }
 
+function checkCampaignWorking($user){
+    $con=connect();
+    $query = "SELECT * FROM dbcampaigns";
+    $resultsCampaign = mysqli_query($con, $query);
+    $theCampaigns = array();
+    $campaignIds = array();
+    $campaignDates = array();
+    while ($row = mysqli_fetch_assoc($resultsCampaign)) {
+        if(str_contains($row['campaign_working'], $user)){
+            if(monthCheckCampaign($row['campaign_start_date'], $row['campaign_end_date'])){
+                if(fix_date($row['campaign_start_date'])){
+                    array_push($theCampaigns, $row['campaign_name']);
+                    array_push($campaignIds, $row['campaign_id']);
+                    array_push($campaignDates, $row['campaign_start_date']);
+                }
+            }
+        }
+    }
+    //echo '<pre>'; print_r($theEvents); echo '</pre>';
+    return [$theCampaigns, $campaignIds, $campaignDates];
+}
+
 
  //Sorts campaign by name ASC or DESC
  function get_campaign_by_name_sort($type) { 

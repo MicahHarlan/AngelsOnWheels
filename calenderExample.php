@@ -84,7 +84,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	 
     <?PHP include('header.php'); ?>
 		<meta charset="utf-8">
-		<title>Event Calender</title>
+		<title>Calender</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link href="calender.css" rel="stylesheet" type="text/css">
 		
@@ -97,8 +97,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	<div class="container_content" id="container_content" >
 		
 	    <div class="title">
-	    	Event Calender
-				
+	    	Calender
 		</div>
 		<div class="calendar">
         <div class="header">

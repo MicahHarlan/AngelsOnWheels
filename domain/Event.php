@@ -25,7 +25,7 @@
 	private $event_name;  // event name as a string
 	private $description;   // description of the event
 	private $event_id;		// the unique id that is attached to each event, is then copied into id, used for editing events
-
+	
 
 	function __construct($en, $v, $sd, $description, $ev) {
 		$this->id = $ev;

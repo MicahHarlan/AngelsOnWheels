@@ -1,6 +1,6 @@
 <p><br/>
 <br/></p>
-<footer style="background-color: #fff; box-shadow: 0 4px 4px rgba(0,0,0,0.1), 0 -4px 4px rgba(0,0,0,0.1); border-radius: 2px; padding: 20px 0; position: fixed; bottom: 0; width: 100%; height: 80px;">
+<footer style="background-color: #fff; box-shadow: 0 4px 4px rgba(0,0,0,0.1), 0 -4px 4px rgba(0,0,0,0.1); border-radius: 2px; position: fixed; padding: 10px 10px; bottom: 0; width: 100%; height: 60px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
