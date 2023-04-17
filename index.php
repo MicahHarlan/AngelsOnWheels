@@ -201,9 +201,11 @@ session_start();
                                 echo('<br clear="all">');
                             }
 
-                            // if an Admin is logged in, they can select to ViewFeedback
+                            // if an Admin is logged in, they can select to ViewFeedback and Reported Schedule Issues
 
                             echo ('<div class="container-fluid" id="feedbackLink"><br><p><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback from Volunteers</a></p><br></div>');
+
+                            echo ('<div class="container-fluid" id="viewIssueLink"><br><p><a href="' . $path . 'viewIssues.php">View Schedule Issues</a></p><br></div>');
                            
                     }
                         //log box used to be Recent Schedule Changes
