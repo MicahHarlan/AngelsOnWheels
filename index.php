@@ -259,12 +259,6 @@ include_once('database/dbCampaigns.php');
                                 echo('<br clear="all">');
                             }
 
-                            // if an Admin is logged in, they can select to ViewFeedback and Reported Schedule Issues
-
-                            echo ('<div class="container-fluid" id="feedbackLink"><br><p><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback from Volunteers</a></p><br></div>');
-
-                            echo ('<div class="container-fluid" id="viewIssueLink"><br><p><a href="' . $path . 'viewIssues.php">View Schedule Issues</a></p><br></div>');
-                           
                     }
                         //log box used to be Recent Schedule Changes
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
@@ -331,7 +325,7 @@ include_once('database/dbCampaigns.php');
 
                         
 
-                        echo ('</tbody></table><br><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a></p><br>');
+                        echo ('</tbody></table><br></p><br>');
                         echo('<div class="fb-page" data-href="https://m.facebook.com/angelsonwheelscharity" data-tabs="timeline" data-width="1200" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://m.facebook.com/angelsonwheelscharity" class="fb-xfbml-parse-ignore"><a href="https://m.facebook.com/angelsonwheelscharity">Angels On Wheels Charity Organization</a></blockquote></div></div>');
                      
                         echo ('</div>');
