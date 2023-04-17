@@ -35,14 +35,14 @@ if ($id == 'new') {
     }
 }
 $evName = $event->get_event_name();
-$evid = $event->get_event_id();
+$evId = $event->get_event_id();
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Report Issue</title>
+    <title>Report Schedule Issue</title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="styling\scheduleIssue.css" type="text/css" />
 </head>
@@ -75,7 +75,7 @@ if(isset($_POST['submit'])) {
     $insertId;
     $con = connect();
 
-    report_issue( $insertId, $name, $issues, $date, $evid);
+    report_issue( $insertId, $name, $issues, $date, $evName, $evId);
 }
 ?>
 
