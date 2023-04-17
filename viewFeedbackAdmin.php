@@ -12,6 +12,8 @@ session_start();
 		
 
 <link type="text/css" rel="stylesheet" href="styling/viewFeedback.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 	</head>
 

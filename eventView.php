@@ -42,6 +42,8 @@ include_once('database/dbPersons.php');
     <title><?PHP echo($event->get_event_name()); ?></title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="styling\eventView.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <?php include('header.php'); ?>
 <body style="background-color: rgb(250, 249, 246);">

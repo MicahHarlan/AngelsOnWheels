@@ -10,6 +10,8 @@ $id = str_replace("_"," ",$_GET["id"]);
         <title>
             Create Campaign
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <?PHP include('header.php');?>

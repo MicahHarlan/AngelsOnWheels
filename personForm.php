@@ -23,6 +23,7 @@ session_start();
 
 echo('<link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>');
 echo('<link rel="stylesheet" href="styling/applicantForm.css" type="text/css"/>');
+echo('<meta name="viewport" content="width=device-width, initial-scale=1">');
 
 if ($_SESSION['access_level'] == 0) {
     echo('<div class="content-container">');

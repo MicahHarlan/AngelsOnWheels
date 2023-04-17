@@ -20,6 +20,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="styling\notification.css" type="text/css" />
+
     <style>
         #appLink:visited {
             color: gray;

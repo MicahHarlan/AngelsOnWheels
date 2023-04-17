@@ -12,6 +12,8 @@ session_cache_expire(30);
         <title>
             Change password
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <style>
         	#appLink:visited {

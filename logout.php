@@ -25,6 +25,8 @@ session_start();
 <html>
     <head>
         <meta HTTP-EQUIV="REFRESH" content="2; url=index.php">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>
             Logged out of RMH Homebase
         </title>

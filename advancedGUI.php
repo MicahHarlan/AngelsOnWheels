@@ -1,6 +1,8 @@
 <html>
 <head>
 <link rel="stylesheet" href="lib/jquery-ui.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="lib/jquery.timepicker.css" />
 <link rel="stylesheet" href="styles.css" type="text/css" />
 <script src="lib/jquery-1.9.1.js"></script>

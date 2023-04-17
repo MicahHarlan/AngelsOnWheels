@@ -23,6 +23,8 @@ session_cache_expire(30);
 <title>Search for data objects</title>
 <link rel="stylesheet" href="styles.css" type="text/css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 </head>
 <body>

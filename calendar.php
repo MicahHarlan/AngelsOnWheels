@@ -20,6 +20,8 @@ session_cache_expire(30);
         <title>
             Calendar viewing
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <link rel="stylesheet" href="calendar.css" type="text/css" />
         <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />

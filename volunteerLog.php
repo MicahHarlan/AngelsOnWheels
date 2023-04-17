@@ -23,6 +23,8 @@ include_once('domain/Person.php');
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
 <script src="lib/jquery.timepicker.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script>
 $(function() {
 	$( "#from" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true});

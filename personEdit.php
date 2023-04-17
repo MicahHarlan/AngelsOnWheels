@@ -49,6 +49,7 @@ if ($id == 'new') {
         <title>
             Editing <?PHP echo($person->get_first_name() . " " . $person->get_last_name()); ?>
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css"/>

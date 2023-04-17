@@ -24,6 +24,8 @@
     </title>
     <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="lib/jquery-ui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script type="text/javascript" src="lib/jquery-1.9.1.js"></script>
     <script src="lib/jquery-ui.js"></script>
     <script>

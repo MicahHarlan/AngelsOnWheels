@@ -24,6 +24,8 @@ include_once("domain/MasterScheduleEntry.php");
     <head>
         <title>Master Schedule</title>
         <!--  Choose a style sheet -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="styles.css" type="text/css"/>
         <link rel="stylesheet" href="calendar.css" type="text/css"/>
         <!-- 	<link rel="stylesheet" href="calendar_newGUI.css" type="text/css"/> -->

@@ -43,6 +43,8 @@
     }
 ?>
     <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <form method="POST">
     <input type="hidden" name="old_id" value=<?PHP echo("\"" . $id . "\""); ?>>
     <link rel="stylesheet" href="styling\eventForm.css" type="text/css" />

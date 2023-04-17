@@ -12,6 +12,8 @@ error_reporting(E_ERROR | E_PARSE);
 
 <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="styling/header.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script src="lib\bootstrap\js\bootstrap.js"></script>
 
 <div class="d-flex justify-content-center" id="navigationLinks">
