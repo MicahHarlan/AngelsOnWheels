@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2023 at 10:55 PM
+-- Generation Time: Apr 17, 2023 at 04:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,10 +40,10 @@ CREATE TABLE `dbcampaigns` (
 -- Dumping data for table `dbcampaigns`
 --
 
-INSERT INTO `dbcampaigns` (`campaign_id`, `description`, `campaign_name`, `campaign_start_date`, `campaign_end_date`) VALUES
-(3, 'Please campaign', 'This is campaign', '23-03-01', '23-03-31'),
-(4, 'seas', 'Past Campaign', '40-03-21', '26-03-17'),
-(5, 'The Real Campaign of ', 'Real Past Campaign', '23-03-08', '01-03-22');
+INSERT INTO `dbcampaigns` (`campaign_id`, `description`, `campaign_name`, `campaign_start_date`, `campaign_end_date`, `campaign_working`) VALUES
+(3, 'Please campaign', 'This is campaign', '23-03-01', '23-03-31', ''),
+(4, 'seas', 'Past Campaign', '40-03-21', '26-03-17', ''),
+(5, 'The Real Campaign of ', 'Real Past Campaign', '23-03-08', '01-03-22', '');
 
 -- --------------------------------------------------------
 
@@ -181,11 +181,11 @@ CREATE TABLE `dbevents` (
 -- Dumping data for table `dbevents`
 --
 
-INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`) VALUES
-('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4'),
-('64244b4ae8e8d', '23-03-31', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d'),
-('64244b69c36c7', '23-04-19', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7'),
-('64244b935a854', '23-08-01', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854');
+INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`, `event_working`) VALUES
+('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4', ''),
+('64244b4ae8e8d', '23-03-31', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d', ''),
+('64244b69c36c7', '23-04-19', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7', ''),
+('64244b935a854', '23-08-01', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854', '');
 
 -- --------------------------------------------------------
 
@@ -223,6 +223,7 @@ CREATE TABLE `dbissues` (
   `name` varchar(30) NOT NULL,
   `issue` text NOT NULL,
   `date` varchar(20) NOT NULL,
+  `event_name` text NOT NULL,
   `event_id` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -230,11 +231,11 @@ CREATE TABLE `dbissues` (
 -- Dumping data for table `dbissues`
 --
 
-INSERT INTO `dbissues` (`id`, `name`, `issue`, `date`, `event_id`) VALUES
-(1, 'Saira', 'I this event conflicts with another!', '2022-04-11', ''),
-(5, 'Charlie', 'This event is too long!', '2023-04-04', '64244b4ae8e8d'),
-(6, 'Lucy', 'I have an issue.', '2023-04-04', '64244b4ae8e8d'),
-(17, 'Drew', 'I dont like the theme of this event.', '2023-04-04', '64244b4ae8e8d');
+INSERT INTO `dbissues` (`id`, `name`, `issue`, `date`, `event_name`, `event_id`) VALUES
+(20, 'Dan', 'I may or may not be able to attend.', '2023-04-17', 'Clothing Drive', '64244b935a854'),
+(21, 'Franklin', 'People might be allergic to some foods. Do we need medical?', '2023-04-17', 'Food Drive', '64244b4ae8e8d'),
+(22, 'Max', 'What is this One Event??', '2023-04-17', 'One Event', '638553e3173c4'),
+(23, 'Tiffany', 'I can only attend the first half of this event.', '2023-04-17', 'Soup Kitchen', '64244b69c36c7');
 
 -- --------------------------------------------------------
 
@@ -258,7 +259,8 @@ INSERT INTO `dblog` (`id`, `time`, `message`, `venue`) VALUES
 (179, '1678126009', '<a href=\"personEdit.php?id=Admin7037806282\">Admin Jones</a>\'s Personnel Edit Form has been changed.', 'portland'),
 (180, '1678726616', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland'),
 (181, '1678727928', '<a href=\"personEdit.php?id=Mciah1234567890\">Mciah applicant</a>\'s Personnel Edit Form has been changed.', 'portland'),
-(182, '1679505092', '<a href=\"personEdit.php?id=Saira7777777777\">Saira Beg</a>\'s Personnel Edit Form has been changed.', 'portland');
+(182, '1679505092', '<a href=\"personEdit.php?id=Saira7777777777\">Saira Beg</a>\'s Personnel Edit Form has been changed.', 'portland'),
+(183, '1681065020', '<a href=\"personEdit.php?id=GuestApplying4564563232\">Admin Jones</a>\'s Personnel Edit Form has been changed.', 'portland');
 
 -- --------------------------------------------------------
 
@@ -760,10 +762,8 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('Carly7039654835', '16-06-28', 'portland', 'Carly', 'Jones', '66 Wells Road', 'Ashburn', 'VA', '20147', '7039654835', 'cell', '', '', '', 'jonesey@yahoo.com', NULL, NULL, '', '', '', '', '', '', '', '', '', 'family', '', 'I am very interested in getting involved with the Ronald McDonald House because I am very passionate about helping others. My background is in social work, as well as fundraising, so in addition to giving back to my community, I am interested in connecting with folks professionally since I am new to the area.', '', 'no', 'volunteer,sub,events', 'active', 'Sat:10-1:portland,Sun:9-12:portland,Sat:1-4:portland,Sun:2-5:portland,Mon:6-9:portland', '', '', 'called on 7/7/16 to set up a time to meet.', '90b2be79aa734a005a9420580a5820a7'),
 ('April7038075431', '16-06-06', 'portland', 'April', 'Jones', '189 Spring St', 'Ashburn', 'VA', '20147', '7038075431', 'cell', '', '', '08-31-73', 'jonesey@yahoo.com', NULL, NULL, '', '', '', '', '', '', 'ASG Risk Management', 'Claims Manager', '16-06-01:1800-2100:3,16-05-27:1200-1500:3,16-06-07:1800-2100:3,16-06-15:1230-1330:1,16-06-21:1800-2100:3,16-06-22:1200-1300:1,16-07-05:1800-2100:3,16-07-15:1700-1800:1,16-07-17:1700-1830:1.5,16-07-19:1800-2030:2.5,16-07-20:1230-1330:1,16-07-27:1630-1800:1.5,16-07-31:1330-1830:5,16-08-02:1800-2100:3,16-08-07:1600-1800:2', 'volunteer', '', '', '', 'no', 'volunteer,sub,mealprep,events', 'active', 'Sat:10-1:portland,Sun:9-12:portland,Sun:2-5:portland,Mon:3-6:portland,Tue:3-6:portland,Fri:3-6:portland,Mon:6-9:portland,Tue:6-9:portland,Fri:6-9:portland,Sun:5-9:portland', ',even:Tue:6-9:portland', '16-06-01:1800-2100:3,16-05-27:1200-1500:3,16-06-07:1800-2100:3,16-06-15:1230-1330:1,16-06-21:1800-2100:3,16-06-22:1200-1300:1,16-07-05:1800-2100:3,16-07-15:1700-1800:1,16-07-17:1700-1830:1.5,16-07-19:1800-2030:2.5,16-07-20:1230-1330:1,16-07-27:1630-1800:1.5,16-07-31:1330-1830:5,16-08-02:1800-2100:3,16-08-07:1600-1800:2', '', '340392d4c35f1399b0056739a63606be'),
 ('GwynethsGiftAdmin4678931290', '', 'portland', 'GwynethsGiftAdmin', 'SiteAdmin', 'Princess Anne St #101', 'Fredericksburg', 'VA', '22401', '4678931290', 'home', '', '', '', 'info@gwynethsgift.org', 'S', 'Yes', 'Yes', 'Yes', '-', '7777777777', 'Relative', '', 'Email', '', '', '', '', '', '', '', 'manager', 'active', 'Mon:9-12:portland,Mon:12-3:portland,Mon:3-6:portland,Mon:6-9:portland', '', '', '', 'e8f7e210dd29cb6729245a99b1b4d32c'),
-('GuestApplying4564563232', '22-12-02', 'portland', 'GuestApplying', 'hi', '56 street', 'Richmond', 'VA', '34567', '4564563232', 'home', '', '', '90-12-14', 'hi@outlook.com', 'S', 'Yes', 'Yes', 'Yes', 'Joe', '3453454545', 'Parent', 'Weekends', 'Email', '', '', 'family', '', '', '', '', 'volunteer', 'applicant', 'Tue:9-12:portland,Wed:9-12:portland,Tue:12-3:portland,Tue:3-6:portland,Tue:6-9:portland', '', '23-03-07:1200-0130:13.5', '', '1a1dc91c907325c69271ddf0c944bc72'),
 ('Admin7037806282', '17-07-26', 'portland', 'Admin', 'Jones', '1 Gum Tree Rd', 'Ashburn', 'VA', '22222', '7037806282', '', '', '', '', 'admin@yahoo.com', 'S', 'No', 'No', 'No', 'Admin', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'manager', 'active', '', '', '', '', 'be6bef2c7a57bead38826deed4077d03'),
 ('ben1234567890', '23-03-13', 'portland', 'ben', 'Harlan', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-13', 'fake@gmail.com', 'XXL', 'No', 'Yes', 'No', 'Ben', '1234567890', 'Spouse', 'Never', '', '', '', 'internet', '', '', 'C', '', 'volunteer', 'active', 'Tue:9-12:portland', '', '', 'Cool', '99b251033723ddfe973774771c4080be'),
-('Mciah1234567890', '23-03-13', 'portland', 'Mciah', 'applicant', '613 Kingston Cir', 'Virginia Beach', 'VA', '23452', '1234567890', '', '', '', '23-03-08', 'mharlan62@gmail.com', 'XXL', 'No', 'Yes', 'No', 'micah harlan', '1234567890', 'Relative', 'sfeeewefweed', 'Email', '', '', 'internet', '', '', 'None', '', 'volunteer', 'active', 'Mon:9-12:portland', '', '', '', '5ea64b432012b05dd978407fe897d41d'),
 ('Saira7777777777', '23-03-22', 'portland', 'Saira', 'Beg', '1 Float way', 'Fredericksburg', 'VA', '22407', '7777777777', '', '', '', '23-03-21', 'Sairabeg@gmail.com', 'S', 'Yes', 'Yes', 'Yes', 'Mom', '7777777777', 'Relative', '', '', '', '', '', '', '', '', '', 'volunteer', 'active', 'Tue:3-6:portland', '', '', '', 'cbe6b0f20918ae80d8e5a37c92447029');
 
 -- --------------------------------------------------------
@@ -1282,13 +1282,13 @@ ALTER TABLE `dbfeedback`
 -- AUTO_INCREMENT for table `dbissues`
 --
 ALTER TABLE `dbissues`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `dblog`
 --
 ALTER TABLE `dblog`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
