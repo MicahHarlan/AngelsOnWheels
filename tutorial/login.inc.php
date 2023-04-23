@@ -19,7 +19,7 @@ session_cache_expire(30);
 			<strong> Signing in and out of the System</strong>
 		</p>
 		
-		<p>Access to Gwyneth's Gift Homebase requires a Username and a Password. The form
+		<p>Access to Angel's On Wheels requires a Username and a Password. The form
 			looks like this:
 		</p>
 		
@@ -83,8 +83,8 @@ session_cache_expire(30);
                 </p>
 		</ul>
 		<p>
-			Remember to <strong>logout</strong> when you are finished using the Gwyneth's Gift
-			Homebase.
+			Remember to <strong>logout</strong> when you are finished using Angel's On Wheels
+			.
         </p>
 </body>
 </html>
