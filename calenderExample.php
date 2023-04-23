@@ -31,7 +31,7 @@ $resultsEvents = mysqli_query($con, $query);
 while ($row = mysqli_fetch_assoc($resultsEvents)) {
     $thisMonthCheck =  $calendar->monthCheck($row['event_date']);
     if($thisMonthCheck){
-        $calendar->add_event($row['event_name'], $row['event_date'], 1, 'green', $row['event_id']);
+        $calendar->add_event($row['event_name'], $row['event_date'], $row['start_time'], $row['end_time'], 1, 'green', $row['event_id']);
     }
 }
 
@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	$thisMonthCheckTwo = $calendar->monthCheck($row['campaign_end_date']);
     if($thisMonthCheckOne or $thisMonthCheckTwo){
         $days_between = dayCheckCampaign($row['campaign_start_date'], $row['campaign_end_date']);
-        $calendar->add_event($row['campaign_name'], $row['campaign_start_date'], $days_between, 'blue', $row['campaign_id']);
+        $calendar->add_event($row['campaign_name'], $row['campaign_start_date'], $row['start_time'], $row['end_time'], $days_between, 'blue', $row['campaign_id']);
     }
 }
 
@@ -84,7 +84,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	 
     <?PHP include('header.php'); ?>
 		<meta charset="utf-8">
-		<title>Calender</title>
+		<title>Calendar</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link href="calender.css" rel="stylesheet" type="text/css">
 		
@@ -97,7 +97,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	<div class="container_content" id="container_content" >
 		
 	    <div class="title">
-	    	Calender
+	    	Calendar
 		</div>
 		<div class="calendar">
         <div class="header">

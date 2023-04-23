@@ -13,9 +13,9 @@ class Calender {
         $this->real_day = date('d');
     }
 
-    public function add_event($txt, $date, $days = 1, $color = '', $id) {
+    public function add_event($txt, $date, $start, $end, $days = 1, $color = '', $id) {
         $color = $color ? ' ' . $color : $color;
-        $this->events[] = [$txt, $date, $days, $color, $id];
+        $this->events[] = [$txt, $date, $start, $end, $days, $color, $id];
     }
 
     public function get_calender_date(){
@@ -76,13 +76,13 @@ class Calender {
                 for ($d = 0; $d <= ($event[2]-1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
                         if(strcmp(' green', $event[3])!=1){
-                            $html .= '<div class="event' . $event[3] . '"><a href=eventEdit.php?id='.$event[4].'>';
+                            $html .= '<div class="event' . $event[0] . '">' . $event[2] .'-' . $event[3] . ' <a href=eventEdit.php?id='.$event[6].'>';
                             $html .= $event[0];
                             $html .= '</a></div>
                                     ';
                         }
                         else{
-                            $html .= '<div class="event' . $event[3] . '"><a href=campaignEdit.php?id='.$event[4].'>';
+                            $html .= '<div class="event' . $event[0] . '"><a href=campaignEdit.php?id='.$event[6].'>';
                             $html .= $event[0];
                             $html .= '</a></div>
                                     ';
