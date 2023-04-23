@@ -26,7 +26,7 @@ session_start();
     <head>
         <meta HTTP-EQUIV="REFRESH" content="2; url=index.php">
         <title>
-            Logged out of RMH Homebase
+            Logged out of AoW Volunteer Page
         </title>
         <link rel="stylesheet" href="styles.css" type="text/css" />
     </head>
@@ -38,7 +38,7 @@ session_start();
                 session_unset();
                 session_write_close();
                 ?>
-                <p>You are now logged out of Homebase.</p>
+                <p>You are now logged out of AoW Volunteer Page.</p>
                 <?PHP include('footer.php'); ?>
             </div>
         </div>

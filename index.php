@@ -105,7 +105,7 @@ include_once('database/dbCampaigns.php');
             //    fix_all_birthdays();
             if ($_SESSION['_id'] != "guest") {
                 $person = retrieve_person($_SESSION['_id']);
-                echo ('<p class="text-center">Welcome, ' . $person->get_first_name() . ', to Homebase!');
+                echo ('<p class="text-center">Welcome, ' . $person->get_first_name() . ', to the Angels On Wheels Volunteer Page! <br/>');
             } else
                 echo "<p>Welcome!";
             echo "   Today is " . date('l F j, Y') . ".<p>";
@@ -261,9 +261,9 @@ include_once('database/dbCampaigns.php');
 
                             // if an Admin is logged in, they can select to ViewFeedback and Reported Schedule Issues
 
-                            echo ('<div class="container-fluid" id="feedbackLink"><br><p><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback from Volunteers</a></p><br></div>');
+                            //echo ('<div class="container-fluid" id="feedbackLink"><br><p><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback from Volunteers</a></p><br></div>');
 
-                            echo ('<div class="container-fluid" id="viewIssueLink"><br><p><a href="' . $path . 'viewIssues.php">View Schedule Issues</a></p><br></div>');
+                            //echo ('<div class="container-fluid" id="viewIssueLink"><br><p><a href="' . $path . 'viewIssues.php">View Schedule Issues</a></p><br></div>');
                            
                     }
                         //log box used to be Recent Schedule Changes

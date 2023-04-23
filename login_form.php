@@ -37,16 +37,22 @@
         echo "<script type=\"text/javascript\">window.location = \"index.php\";</script>";
     }
     if (!array_key_exists('_submit_check', $_POST)) {
-        echo('<p><div align="center"><b>Access to Homebase requires a Username and a Password</b><br><br> ' .
+        echo('
+
+        <p><div align="center"><img src="images\icon_and_text.png" style="height:130px;" alt="Angles on Wheels Icon">
+        <br/><br/>
+        <b>Enter Username and Password</b><br><br>' .
         '<ul>'
         );
-        echo('<div align="left" style="font-size: 14px; padding-right: 32px;"><li>If you are applying for a volunteer position, select the "Create Account" option. ');
+        
+        echo('<div align="left" style="font-size: 12px; padding-right: 32px;"><li>If you are applying for a volunteer position, select the "Create Account" option. ');
         echo('<li>If you are a volunteer logging in for the first time, both your Username and Password is your first name followed by your ten digit phone number. ');
         echo('<li>After you have logged in, you can change your password. ');
         /*echo('<li>(If you are having difficulty logging in or have forgotten your Password, please contact either the
-        		<a href="mailto:allen@npfi.org"><i>Portland House Manager</i></a>
-        		or the <a href="mailto:allen@npfi.org"><i>Bangor House Manager</i></a>.) ');*/
+                <a href="mailto:allen@npfi.org"><i>Portland House Manager</i></a>
+                or the <a href="mailto:allen@npfi.org"><i>Bangor House Manager</i></a>.) ');*/
         echo '</ul>';
+
         echo('<p><table><form method="post"><input type="hidden" name="_submit_check" value="true"><tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Username     </br></pre></td>
         		<td><input type="text" name="user" tabindex="1" style="border: 1px solid black; margin-top: .2in;"></td></tr>
         		<tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Password     </b></pre></br></td><td><input type="password" name="pass" tabindex="2" 
@@ -56,6 +62,8 @@
                 echo ('
                 <input type="submit" name="user" value="Create Account" style="background-color: blue; color: white; 
                 border: none; padding: 8px; border-radius: 5px; width: 296px;"</input></form>');
+
+                
     } else {
         //login as a guest
         if ($_POST['user'] == "Create Account" && $_POST['pass'] == "") {

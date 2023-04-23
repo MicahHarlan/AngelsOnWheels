@@ -11,7 +11,7 @@ error_reporting(E_ERROR | E_PARSE);
 ?>
 
 <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css" type="text/css"/>
-<link rel="stylesheet" type="text/css" href="styling/testheader.css">
+<link rel="stylesheet" type="text/css" href="styling/header.css">
 <script src="lib\bootstrap\js\bootstrap.js"></script>
 
 <!-- Begin Header -->
@@ -160,8 +160,23 @@ error_reporting(E_ERROR | E_PARSE);
                 //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'createCampaign.php?id=new">Add Campaign</a></li>');
                 echo('<a class="navbar-brand" style="padding: 5px; border-right: 1px solid #333;"></a>');
 
+                echo('
+                <li><div class="dropdown">
+                <button class="dropbtn">Reports &#9660;</button>
+                    <div class="dropdown-content">
+                    <a href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">View Reports</a>
+                    <a href="' . $path . 'viewFeedbackAdmin.php">View Feedback</a>
+                    <a href="' . $path . 'viewIssues.php">View Schedule Issues</a>
+                    </div></div></li>');
 
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
+                echo('<a class="navbar-brand" style="padding: 5px; border-right: 1px solid #333;"></a>');
+
+                //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">Reports</a></li>');
+                //echo ('<div class="container-fluid" id="feedbackLink"><br><p><a href="' . $path . 'viewFeedbackAdmin.php">View Feedback from Volunteers</a></p><br></div>');
+                //echo ('<div class="container-fluid" id="viewIssueLink"><br><p><a href="' . $path . 'viewIssues.php">View Schedule Issues</a></p><br></div>');
+               
+
+
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person2->get_id().'">Profile</a></li>');
 	       
                 
