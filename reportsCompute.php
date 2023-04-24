@@ -344,7 +344,7 @@ function civil_time($army_time){
 
 // Improve venue display by using associative array, i.e, turning fam --> "Family Room" 
 function pretty_venue($v){
-	$venue = array('portland' => "Gwyneth's Gift", 'bangor' => "Gwyneth's Gift");
+	$venue = array('portland' => "Angel's On Wheels", 'bangor' => "Angel's On Wheels");
 		return $venue[$v];
 }
 
