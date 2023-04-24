@@ -31,13 +31,15 @@
 	private $event_id;		// the unique id that is attached to each event, is then copied into id, used for editing events
 	
 
-	function __construct($en, $v, $sd, $description, $ev) {
+	function __construct($en, $v, $sd, $description, $ev, $start, $end) {
 		$this->id = $ev;
 		$this->event_date = $sd;
 		$this->venue = $v;
 		$this->event_name = $en;
 		$this->description = $description;
 		$this->event_id = $ev;
+		$this->start_time = $start;
+		$this->end_time = $end;
 	}
 
 	function get_start() {

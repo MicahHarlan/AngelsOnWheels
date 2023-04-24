@@ -73,7 +73,7 @@ class Calender {
             $html .= '<div class="day_num' . $selected . '">';
             $html .= '<span>' . $i . '</span>';
             foreach ($this->events as $event) {
-                for ($d = 0; $d <= ($event[2]-1); $d++) {
+                for ($d = 0; $d <= ($event[4]-1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
                         if(strcmp(' green', $event[3])!=1){
                             $html .= '<div class="event' . $event[0] . '">' . $event[2] .'-' . $event[3] . ' <a href=eventEdit.php?id='.$event[6].'>';
