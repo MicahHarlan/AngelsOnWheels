@@ -39,6 +39,8 @@ function add_event($event) {
         mysqli_query($con,'INSERT INTO dbEvents VALUES("' .
                 $event->get_id() . '","' .
                 $event->get_event_date() . '","' .
+                $event->get_start() . '","' .
+                $event->get_end() . '","' . 
                 $event->get_venue() . '","' .
                 $event->get_event_name() . '","' . 
                 $event->get_description() . '","' .
@@ -110,7 +112,9 @@ function make_an_event($result_row) {
                     $result_row['venue'],                   
                     $result_row['event_date'],
                     $result_row['description'],
-                    $result_row['event_id']);  
+                    $result_row['event_id'],
+                    $result_row['start_time'],
+                    $result_row['end_time']);  
     return $theEvent;
 }
 

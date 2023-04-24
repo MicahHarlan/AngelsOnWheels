@@ -27,7 +27,7 @@ $id = str_replace("_"," ",$_GET["id"]);
 
 if ($id == 'new') {
     $event = new Event('event', $_SESSION['venue'],  
-                    null, null, null, "");
+                    null, null, null, null, null);
 } else {
     $event = retrieve_event($id);
     if (!$event) { // try again by changing blanks to _ in id
@@ -126,7 +126,7 @@ if ($id == 'new') {
                         // display the errors and the form to fix
                         show_errors($errors);
                         $event = new Event($event->get_event_name(), $_POST['location'],   
-                                        $_POST['event_date'], $_POST['description'], $_POST['event_id']);
+                                        $_POST['event_date'], $_POST['description'], $_POST['event_id'], $_POST['start_time'], $_POST['end_time']);
                         include('eventForm.php');
                     }
                     // this was a successful form submission; update the database and exit
@@ -147,6 +147,8 @@ if ($id == 'new') {
                     //location = venue? may be useful for adding to calendar
                     $location = $_POST['location'];
                     $event_date = $_POST['event_date'];
+                    $start = $_POST['start_time'];
+                    $end = $_POST['end_time'];
                     $description = trim(str_replace('\\\'', '\'', htmlentities($_POST['description'])));
                     //$event_id = trim(str_replace('\\\'', '\'', htmlentities($_POST['event_id'])));
                     $event_id = uniqid();
@@ -178,7 +180,7 @@ if ($id == 'new') {
                             echo('<p class="error">Unable to add ' . $event_name . ' to the database. <br>Another event with the same info is already there.');
                         else {
                         	$newevent = new Event($event_name, $location,  
-                                        $event_date, $description, $event_id, "");
+                                        $event_date, $description, $event_id, $start, $end);
                             $result = add_event($newevent);
                             if (!$result)
                                 echo ('<p class="error">Unable to add " .$event_name. " in the database. <br>Please report this error to the Manager.');
@@ -200,7 +202,7 @@ if ($id == 'new') {
                         else {
                             //Pass the old id into the new event instead of event_id, this prevents a new id being created
                             $newevent = new Event($event_name, $location,  
-                                        $event_date, $description, $id);
+                                        $event_date, $description, $id, $start, $end);
                             $result = add_event($newevent);
                             if (!$result)
                                 echo ('<p class="error">Unable to update ' . $event_name . '. <br>Please report this error to the Manager.');

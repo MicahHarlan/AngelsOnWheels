@@ -104,7 +104,9 @@
         
         <?php
         if ($_SESSION['access_level']==2) {
-            echo('&nbsp;&nbsp;&nbsp;&nbspEvent Name <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="event_name" tabindex="2" value="'. $event->get_event_name() . '"');
+            echo('<p>&nbsp;&nbsp;&nbsp;&nbspStart Time <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="start_time" tabindex="2" value="'. $event->get_start() . '"<br>');
+            echo('&nbsp;&nbsp;&nbsp;&nbspEnd Time <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="end_time" tabindex="2" value="'. $event->get_end() . '"<br>');
+            echo('&nbsp;&nbsp;&nbsp;&nbspEvent Name <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="event_name" tabindex="2" value="'. $event->get_event_name() . '"</p>');
         }
         if ($_SESSION['access_level']==1) {
              
