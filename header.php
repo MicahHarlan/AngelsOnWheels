@@ -144,6 +144,7 @@ error_reporting(E_ERROR | E_PARSE);
                     <a href="' . $path . 'personSearch.php">Search Volunteer</a>
                     <a href="personEdit.php?id=' . 'new' . '">Add Volunteer</a>
                     <a  href="viewFeedbackAdmin.php">View Feedback</a>
+                    <a href="recruitInfo.php">Recruit Info</a>
                     </div></div></li>');
                 //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search Volunteer</a></li>
 			    //    <li class="nav-item"><a class="nav-link active" aria-current="page" href="personEdit.php?id=' . 'new' . '">Add Volunteer</a></li>');
