@@ -5,6 +5,7 @@ class Calender {
     private $events = [];
 
     public function __construct($date = null) {
+        date_default_timezone_set('America/New_York');
         $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
         $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
@@ -69,6 +70,7 @@ class Calender {
             $selected = '';
             if ($i == $this->real_day && $this->active_month == $this->real_month && $this->active_year == $this->real_year) {
                 $selected = ' selected';
+                //echo date_default_timezone_get();
             }
             $html .= '<div class="day_num' . $selected . '">';
             $html .= '<span>' . $i . '</span>';
