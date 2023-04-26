@@ -49,6 +49,7 @@
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<!--START Script for saving the page as a PDF image -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
 
 	<script type="text/javascript">
@@ -75,6 +76,7 @@
 
 	});
 	</script>
+<!--END Script for saving the page as a PDF image -->
 
     <input type="hidden" name="_form_submit" value="1">
 

@@ -128,7 +128,6 @@ error_reporting(E_ERROR | E_PARSE);
                     <div class="dropdown-content">
                     <a href="' . $path . 'eventSearch.php">Event search</a>
                     <a href="' . $path . 'eventCreate.php?id=new">Add Event</a>
-                    <a href="' . $path . 'viewIssues.php">View Schedule Issues</a>
                     </div></div></li>');
              
                 //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventCreate.php?id=new">Add Event</a></li>');
@@ -143,7 +142,6 @@ error_reporting(E_ERROR | E_PARSE);
                     <div class="dropdown-content">
                     <a href="' . $path . 'personSearch.php">Search Volunteer</a>
                     <a href="personEdit.php?id=' . 'new' . '">Add Volunteer</a>
-                    <a  href="viewFeedbackAdmin.php">View Feedback</a>
                     <a href="recruitInfo.php">Recruit Info</a>
                     </div></div></li>');
                 //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search Volunteer</a></li>
