@@ -57,9 +57,11 @@
         		<td><input type="text" name="user" tabindex="1" style="border: 1px solid black; margin-top: .2in;"></td></tr>
         		<tr><td style="font-size: 14px; padding-top: 15px;"><pre><b>Password     </b></pre></br></td><td><input type="password" name="pass" tabindex="2" 
                 style="border: 1px solid black"></td></tr></table>');
+
                 echo ('
                 <input type="submit" name="Login" value="Login" style="background-color: green; color: white; 
-                border: none; padding: 8px; border-radius: 5px; width: 296px;"</input></form>');
+                border: none; padding: 8px; border-radius: 5px; width: 296px;"</input>');
+                
                 echo ('
                 <input type="submit" name="user" value="Create Account" style="background-color: blue; color: white; 
                 border: none; padding: 8px; border-radius: 5px; width: 296px;"</input></form>');

@@ -45,7 +45,7 @@ include_once('database/dbCampaigns.php');
 
     <?PHP 
     $person = retrieve_person($_SESSION['_id']);
-    // $personId = $person->get_id();
+    $personId = $person->get_id();
     list($eventWorking, $eventIds, $eventDates) = checkEventWorking($personId);
     list($theCampaigns, $campaignIds, $campDates) = checkCampaignWorking($personId);
     if(count($eventWorking)>0 || count($theCampaigns)>0){
