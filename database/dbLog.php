@@ -106,11 +106,13 @@ function get_full_log() {
 function get_last_log_entries($num) {
     $log = array();
     $l = get_full_log();
+    if($l){
     if ($num > count($l))
         $num = count($l);
     for ($i = 0; $i < $num; $i++) {
         $log[] = $l[$i];
     }
+}
     return $log;
 }
 
