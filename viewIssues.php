@@ -24,6 +24,7 @@ session_start();
 		<link rel="stylesheet" href="lib/jquery-ui.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+        <!--START Script for saving the page as a PDF image -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
 
 	<script type="text/javascript">
@@ -46,6 +47,7 @@ session_start();
 		});
 	});
 	</script>
+    <!--END Script for saving the page as a PDF image -->
     </head>
      
     <body style="background-color: rgb(250, 249, 246);">
