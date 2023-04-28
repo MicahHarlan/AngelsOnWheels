@@ -56,16 +56,17 @@ CREATE TABLE `dbdates` (
 -- Table structure for table `dbevents`
 --
 
-CREATE TABLE `dbevents` (
-  `id` text NOT NULL,
-  `event_date` text DEFAULT NULL,
-  `venue` text DEFAULT NULL,
-  `event_name` text DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `event_id` text DEFAULT NULL,
-  `event_working` text NOT NULL
+CREATE TABLE dbevents (
+  id text NOT NULL,
+  event_date text DEFAULT NULL,
+  start_time int(11) DEFAULT NULL,
+  end_time int(11) DEFAULT NULL,
+  venue text DEFAULT NULL,
+  event_name text DEFAULT NULL,
+  description text DEFAULT NULL,
+  event_id text DEFAULT NULL,
+  event_working text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
 
 -- --------------------------------------------------------
 

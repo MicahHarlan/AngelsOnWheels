@@ -260,8 +260,10 @@ include_once('database/dbCampaigns.php');
                             }
 
                     }
+                    if ($_SESSION['access_level'] == 2) {
+                        //We have a manager authenticated
                         //log box used to be Recent Schedule Changes
-                        echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
+                        echo ('<div class="container-fluid" id="logBox"><p><strong>Profile Changes:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('
                             <theadx>
@@ -281,6 +283,8 @@ include_once('database/dbCampaigns.php');
                                '<td class="searchResults">' . $lo[2] . '</td></tr>');
                         }
                         echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
+                    }
+                    //display upcoming events
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Upcoming Events:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('
