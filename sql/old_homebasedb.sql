@@ -170,6 +170,8 @@ INSERT INTO `dbdates` (`id`, `shifts`, `mgr_notes`) VALUES
 CREATE TABLE `dbevents` (
   `id` text NOT NULL,
   `event_date` text DEFAULT NULL,
+  `start_time` int(11) DEFAULT NULL,
+  `end_time` int(11) DEFAULT NULL,
   `venue` text DEFAULT NULL,
   `event_name` text DEFAULT NULL,
   `description` text DEFAULT NULL,
@@ -181,11 +183,11 @@ CREATE TABLE `dbevents` (
 -- Dumping data for table `dbevents`
 --
 
-INSERT INTO `dbevents` (`id`, `event_date`, `venue`, `event_name`, `description`, `event_id`, `event_working`) VALUES
-('638553e3173c4', '22-11-05', 'portland', 'One Event', 'Does this work?', '638553e3173c4', ''),
-('64244b4ae8e8d', '23-03-31', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d', ''),
-('64244b69c36c7', '23-04-19', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7', ''),
-('64244b935a854', '23-08-01', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854', '');
+INSERT INTO `dbevents` (`id`, `event_date`, `start_time`, `end_time`, `venue`, `event_name`, `description`, `event_id`, `event_working`) VALUES
+('638553e3173c4', '22-11-05', '9', '12', 'portland', 'One Event', 'Does this work?', '638553e3173c4', ''),
+('64244b4ae8e8d', '23-03-31', '12', '3', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d', ''),
+('64244b69c36c7', '23-04-19', '1', '4', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7', ''),
+('64244b935a854', '23-08-01', '12', '3', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854', '');
 
 -- --------------------------------------------------------
 

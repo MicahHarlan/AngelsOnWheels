@@ -71,7 +71,7 @@ session_cache_expire(30);
 
 	</ol>
 	<p>
-		If these help pages don't answer your questions, please contact a Gwyneth's Gift staff member</a>.
+		If these help pages don't answer your questions, please contact an Angel's On Wheels  staff member</a>.
 	</p>
 </body>
 </html>

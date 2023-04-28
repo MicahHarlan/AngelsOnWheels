@@ -21,20 +21,33 @@
  class Event {
 	private $id;         // id (unique key) = event id
 	private $event_date; // format: 99-03-12
+
+	private $start_time;
+	
+	private $end_time;
 	private $venue;      // portland, leftover from the old two calendar system
 	private $event_name;  // event name as a string
 	private $description;   // description of the event
 	private $event_id;		// the unique id that is attached to each event, is then copied into id, used for editing events
 	
 
-	function __construct($en, $v, $sd, $description, $ev) {
+	function __construct($en, $v, $sd, $description, $ev, $start, $end) {
 		$this->id = $ev;
 		$this->event_date = $sd;
 		$this->venue = $v;
 		$this->event_name = $en;
 		$this->description = $description;
 		$this->event_id = $ev;
-		
+		$this->start_time = $start;
+		$this->end_time = $end;
+	}
+
+	function get_start() {
+		return $this->start_time;
+	}
+
+	function get_end() {
+		return $this->end_time;
 	}
 
 	function get_id() {

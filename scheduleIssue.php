@@ -22,7 +22,7 @@ $id = str_replace("_"," ",$_GET["id"]);
 
 if ($id == 'new') {
     $event = new Event('event', $_SESSION['venue'],  
-                    null, null, null, "");
+                    null, null, null, "", "");
 } else {
     $event = retrieve_event($id);
     if (!$event) { // try again by changing blanks to _ in id
