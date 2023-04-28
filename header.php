@@ -59,7 +59,6 @@ error_reporting(E_ERROR | E_PARSE);
        
         
         $person2 = retrieve_person($_SESSION['_id']);
-        $person = retrieve_person($_SESSION['_id']);
 
 
         if($permission_array[$current_page]>$_SESSION['access_level']){
@@ -103,7 +102,7 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<a class="navbar-brand" style="padding: 5px; border-right: 1px solid #333;"></a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" target="_blank" href="' . $path . 'feedback.php">Send Feedback</a></li>');
                 echo('<a class="navbar-brand" style="padding: 5px; border-right: 1px solid #333;"></a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person2->get_id().'">Profile</a></li>');
 
 
 //                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');

@@ -44,10 +44,12 @@ include_once('database/dbCampaigns.php');
 <body style="background-color: rgb(250, 249, 246);">
 
     <?PHP 
+    if($_SESSION['_id'] != 'guest'){
     $person = retrieve_person($_SESSION['_id']);
     $personId = $person->get_id();
     list($eventWorking, $eventIds, $eventDates) = checkEventWorking($personId);
     list($theCampaigns, $campaignIds, $campDates) = checkCampaignWorking($personId);
+    
     if(count($eventWorking)>0 || count($theCampaigns)>0){
         //echo '<pre>'; print_r($eventWorking); echo '</pre>';
         ?>
@@ -91,6 +93,7 @@ include_once('database/dbCampaigns.php');
             </div>
         <?PHP
     }
+}
     ?>
 
     
