@@ -14,6 +14,11 @@ class Calender {
         $this->real_day = date('d');
     }
 
+    public function add_campaign($txt, $date, $days = 1, $color = 'blue', $id) {
+        $color = $color ? ' ' . $color : $color;
+        $this->events[] = [$txt, $date, $days, $color, $id];
+    }
+
     public function add_event($txt, $date, $start, $end, $days = 1, $color = '', $id) {
         $color = $color ? ' ' . $color : $color;
         $this->events[] = [$txt, $date, $start, $end, $days, $color, $id];
@@ -84,7 +89,7 @@ class Calender {
                                     ';
                         }
                         else{
-                            $html .= '<div class="event' . $event[5] . '"><a href=campaignEdit.php?id='.$event[6].'>';
+                            $html .= '<div class="event' . $event[3] . '"><a href=campaignEdit.php?id='.$event[4].'>';
                             $html .= $event[0];
                             $html .= '</a></div>
                                     ';

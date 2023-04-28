@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	$thisMonthCheckTwo = $calendar->monthCheck($row['campaign_end_date']);
     if($thisMonthCheckOne or $thisMonthCheckTwo){
         $days_between = dayCheckCampaign($row['campaign_start_date'], $row['campaign_end_date']);
-        $calendar->add_event($row['campaign_name'], $row['campaign_start_date'], $row['start_time'], $row['end_time'], $days_between, 'blue', $row['campaign_id']);
+        $calendar->add_campaign($row['campaign_name'], $row['campaign_start_date'], $days_between, 'blue', $row['campaign_id']);
     }
 }
 
