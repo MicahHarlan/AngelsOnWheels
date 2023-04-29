@@ -104,8 +104,46 @@
         
         <?php
         if ($_SESSION['access_level']==2) {
-            echo('<p>&nbsp;&nbsp;&nbsp;&nbspStart Time <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="start_time" tabindex="2" value="'. $event->get_start() . '"<br>');
-            echo('&nbsp;&nbsp;&nbsp;&nbspEnd Time <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="end_time" tabindex="2" value="'. $event->get_end() . '"<br>');
+            echo('<p>&nbsp;&nbsp;&nbsp;&nbspStart Time <select name="start_time" tabindex="2" id="start_time"> <span style="font-size:x-small;color:FF0000">*</span>:');
+            echo('<option value="9:00">9:00</option>');
+            echo('<option value="9:30">9:30</option>');
+            echo('<option value="10:00">10:00</option>');
+            echo('<option value="10:30">10:30</option>');
+            echo('<option value="11:00">11:00</option>');
+            echo('<option value="11:30">11:30</option>');
+            echo('<option value="12:00">12:00</option>');
+            echo('<option value="12:30">12:30</option>');
+            echo('<option value="1:00">1:00</option>');
+            echo('<option value="1:30">1:30</option>');
+            echo('<option value="2:00">2:00</option>');
+            echo('<option value="2:30">2:30</option>');
+            echo('<option value="3:00">3:00</option>');
+            echo('<option value="3:30">3:30</option>');
+            echo('<option value="4:00">4:00</option>');
+            echo('<option value="4:30">4:30</option>');
+            echo('<option value="5:00">5:00</option>');
+            echo('<option value="5:30">5:30</option>');
+            echo('<option value="6:00">6:00</option></select>');
+            echo('&nbsp;&nbsp;&nbsp;&nbspEnd Time <select name="end_time" tabindex="2" id="end_time"> <span style="font-size:x-small;color:FF0000">*</span>:');
+            echo('<option value="9:00">9:00</option>');
+            echo('<option value="9:30">9:30</option>');
+            echo('<option value="10:00">10:00</option>');
+            echo('<option value="10:30">10:30</option>');
+            echo('<option value="11:00">11:00</option>');
+            echo('<option value="11:30">11:30</option>');
+            echo('<option value="12:00">12:00</option>');
+            echo('<option value="12:30">12:30</option>');
+            echo('<option value="1:00">1:00</option>');
+            echo('<option value="1:30">1:30</option>');
+            echo('<option value="2:00">2:00</option>');
+            echo('<option value="2:30">2:30</option>');
+            echo('<option value="3:00">3:00</option>');
+            echo('<option value="3:30">3:30</option>');
+            echo('<option value="4:00">4:00</option>');
+            echo('<option value="4:30">4:30</option>');
+            echo('<option value="5:00">5:00</option>');
+            echo('<option value="5:30">5:30</option>');
+            echo('<option value="6:00">6:00</option></select>');
             echo('&nbsp;&nbsp;&nbsp;&nbspEvent Name <span style="font-size:x-small;color:FF0000">*</span>:<input type="text" name="event_name" tabindex="2" value="'. $event->get_event_name() . '"</p>');
         }
         if ($_SESSION['access_level']==1) {
