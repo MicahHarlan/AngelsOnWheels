@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	$thisMonthCheckTwo = $calendar->monthCheck($row['campaign_end_date']);
     if($thisMonthCheckOne or $thisMonthCheckTwo){
         $days_between = dayCheckCampaign($row['campaign_start_date'], $row['campaign_end_date']);
-        $calendar->add_event($row['campaign_name'], $row['campaign_start_date'], $row['start_time'], $row['end_time'], $days_between, 'blue', $row['campaign_id']);
+        $calendar->add_campaign($row['campaign_name'], $row['campaign_start_date'], $days_between, 'blue', $row['campaign_id']);
     }
 }
 
@@ -54,6 +54,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 	<head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+	<!--START Script for saving the page as a PDF image -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
 
 	<script type="text/javascript">
@@ -80,7 +81,7 @@ while ($row = mysqli_fetch_assoc($resultsEvents)) {
 
 	});
 	</script>
-
+<!--END Script for saving the page as a PDF image -->
 	 
     <?PHP include('header.php'); ?>
 		<meta charset="utf-8">

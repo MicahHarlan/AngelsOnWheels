@@ -49,6 +49,8 @@ if ($id == 'new') {
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <script src="lib/jquery-1.9.1.js"></script>
 		<script src="lib/jquery-ui.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<script>
 			$(function(){
 				$( "#start_date" ).datepicker({dateFormat: 'y-mm-dd',changeMonth:true,changeYear:true,yearRange: "1920:+nn"});

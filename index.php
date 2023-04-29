@@ -44,10 +44,12 @@ include_once('database/dbCampaigns.php');
 <body style="background-color: rgb(250, 249, 246);">
 
     <?PHP 
+    if($_SESSION['_id'] != 'guest'){
     $person = retrieve_person($_SESSION['_id']);
     $personId = $person->get_id();
     list($eventWorking, $eventIds, $eventDates) = checkEventWorking($personId);
     list($theCampaigns, $campaignIds, $campDates) = checkCampaignWorking($personId);
+    
     if(count($eventWorking)>0 || count($theCampaigns)>0){
         //echo '<pre>'; print_r($eventWorking); echo '</pre>';
         ?>
@@ -91,6 +93,7 @@ include_once('database/dbCampaigns.php');
             </div>
         <?PHP
     }
+}
     ?>
 
     
@@ -260,8 +263,10 @@ include_once('database/dbCampaigns.php');
                             }
 
                     }
+                    if ($_SESSION['access_level'] == 2) {
+                        //We have a manager authenticated
                         //log box used to be Recent Schedule Changes
-                        echo ('<div class="container-fluid" id="logBox"><p><strong>Notifications:</strong><br/>');
+                        echo ('<div class="container-fluid" id="logBox"><p><strong>Profile Changes:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('
                             <theadx>
@@ -281,6 +286,8 @@ include_once('database/dbCampaigns.php');
                                '<td class="searchResults">' . $lo[2] . '</td></tr>');
                         }
                         echo ('</tbody></table><br><a href="' . $path . 'log.php">View full log</a></p></div><br>');
+                    }
+                    //display upcoming events
                         echo ('<div class="container-fluid" id="logBox"><p><strong>Upcoming Events:</strong><br/>');
                         echo ('<table class="table border table-striped-columns table-hover table-bordered w-auto p-3" id="searchResults">');
                         echo ('

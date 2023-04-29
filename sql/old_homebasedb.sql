@@ -164,31 +164,30 @@ INSERT INTO `dbdates` (`id`, `shifts`, `mgr_notes`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dbevents`
+-- Table structure for table dbevents
 --
 
-CREATE TABLE `dbevents` (
-  `id` text NOT NULL,
-  `event_date` text DEFAULT NULL,
-  `start_time` text DEFAULT NULL,
-  `end_time` text DEFAULT NULL,
-  `venue` text DEFAULT NULL,
-  `event_name` text DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `event_id` text DEFAULT NULL,
-  `event_working` text NOT NULL
+CREATE TABLE dbevents (
+  id text NOT NULL,
+  event_date text DEFAULT NULL,
+  start_time int(11) DEFAULT NULL,
+  end_time int(11) DEFAULT NULL,
+  venue text DEFAULT NULL,
+  event_name text DEFAULT NULL,
+  description text DEFAULT NULL,
+  event_id text DEFAULT NULL,
+  event_working text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `dbevents`
+-- Dumping data for table dbevents
 --
 
-INSERT INTO `dbevents` (`id`, `event_date`, `start_time`, `end_time`, `venue`, `event_name`, `description`, `event_id`, `event_working`) VALUES
-('638553e3173c4', '22-11-05', '9:00', '12:00', 'portland', 'One Event', 'Does this work?', '638553e3173c4', ''),
-('64244b4ae8e8d', '23-03-31', '12:00', '3:00', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d', ''),
-('64244b69c36c7', '23-04-19', '1:00', '4:00', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7', ''),
-('64244b935a854', '23-08-01', '12:00', '3:00', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854', '');
-
+INSERT INTO dbevents (id, event_date, start_time, end_time, venue, event_name, description, event_id, event_working) VALUES
+('638553e3173c4', '22-11-05', '9', '12', 'portland', 'One Event', 'Does this work?', '638553e3173c4', ''),
+('64244b4ae8e8d', '23-03-31', '12', '3', 'portland', 'Food Drive', 'Get donations of food for those who need it.', '64244b4ae8e8d', ''),
+('64244b69c36c7', '23-04-19', '1', '4', 'portland', 'Soup Kitchen', 'Feed the hungry.', '64244b69c36c7', ''),
+('64244b935a854', '23-08-01', '12', '3', 'portland', 'Clothing Drive', 'Receive donated clothing to give to the needy.', '64244b935a854', '');
 -- --------------------------------------------------------
 
 --

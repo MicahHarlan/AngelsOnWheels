@@ -59,7 +59,6 @@ error_reporting(E_ERROR | E_PARSE);
        
         
         $person2 = retrieve_person($_SESSION['_id']);
-        $person = retrieve_person($_SESSION['_id']);
 
 
         if($permission_array[$current_page]>$_SESSION['access_level']){
@@ -103,7 +102,7 @@ error_reporting(E_ERROR | E_PARSE);
                 echo('<a class="navbar-brand" style="padding: 5px; border-right: 1px solid #333;"></a>');
                 echo('<li class="nav-item"><a class="nav-link active" aria-current="page" target="_blank" href="' . $path . 'feedback.php">Send Feedback</a></li>');
                 echo('<a class="navbar-brand" style="padding: 5px; border-right: 1px solid #333;"></a>');
-                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person->get_id().'">Profile</a></li>');
+                echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'profile.php?id='.$person2->get_id().'">Profile</a></li>');
 
 
 //                echo('<a class="navbar-brand" style="padding: 10px; border-right: 1px solid #333;"></a>');
@@ -128,7 +127,6 @@ error_reporting(E_ERROR | E_PARSE);
                     <div class="dropdown-content">
                     <a href="' . $path . 'eventSearch.php">Event search</a>
                     <a href="' . $path . 'eventCreate.php?id=new">Add Event</a>
-                    <a href="' . $path . 'viewIssues.php">View Schedule Issues</a>
                     </div></div></li>');
              
                 //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'eventCreate.php?id=new">Add Event</a></li>');
@@ -143,7 +141,7 @@ error_reporting(E_ERROR | E_PARSE);
                     <div class="dropdown-content">
                     <a href="' . $path . 'personSearch.php">Search Volunteer</a>
                     <a href="personEdit.php?id=' . 'new' . '">Add Volunteer</a>
-                    <a  href="viewFeedbackAdmin.php">View Feedback</a>
+                    <a href="recruitInfo.php">Recruit Info</a>
                     </div></div></li>');
                 //echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="' . $path . 'personSearch.php">Search Volunteer</a></li>
 			    //    <li class="nav-item"><a class="nav-link active" aria-current="page" href="personEdit.php?id=' . 'new' . '">Add Volunteer</a></li>');
