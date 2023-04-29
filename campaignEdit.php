@@ -26,7 +26,7 @@ $id = str_replace("_"," ",$_GET["id"]);
 
 if ($id == 'new') {
     $event = new Event('event', $_SESSION['venue'],  
-                    null, null, null, "", "");
+                    null, null, null, null, null);
 } else {
     $event = retrieve_campaign($id);
     if (!$event) { // try again by changing blanks to _ in id
@@ -135,7 +135,7 @@ if ($id == 'new') {
                         // display the errors and the form to fix
                         show_errors($errors);
                         $event = new Event($event->get_campaign_name(), $_POST['location'],   
-                                        $_POST['event_date'], $_POST['description'], $_POST['event_id'], $_POST['start_time'], $_POST['end_time']);
+                                        $_POST['event_date'], $_POST['description'], $_POST['event_id'], null, null);
                         include('campaignEditForm.php');
                     }
                     // this was a successful form submission; update the database and exit
@@ -188,7 +188,7 @@ if ($id == 'new') {
                             echo('<p class="error">Unable to add ' . $event_name . ' to the database. <br>Another event with the same info is already there.');
                         else {
                         	$newevent = new Event($event_name, $location,  
-                                        $event_date, $description, $event_id, "", "");
+                                        $event_date, $description, $event_id, null, null);
                             $result = add_event($newevent);
                             if (!$result)
                                 echo ('<p class="error">Unable to add " .$event_name. " in the database. <br>Please report this error to the Manager.');
@@ -210,7 +210,7 @@ if ($id == 'new') {
                         else {
                             //Pass the old id into the new event instead of event_id, this prevents a new id being created
                             $newevent = new Event($event_name, $location,  
-                                        $event_date, $description, $id, "", "");
+                                        $event_date, $description, $id, null, null);
                             $result = add_event($newevent);
                             if (!$result)
                                 echo ('<p class="error">Unable to update ' . $event_name . '. <br>Please report this error to the Manager.');
